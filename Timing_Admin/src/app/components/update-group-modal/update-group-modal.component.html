@@ -1,0 +1,33 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <h4 class="Title">Обновить группу:</h4>
+    <ion-button class="BackButton" size="small" color="primary" fill="outline" (click)="goBack()"> Назад </ion-button>
+  </ion-toolbar>
+</ion-header>
+
+  <ion-content>
+    <div class="FormModule">
+      <h5 class="Label">Названия групп не должны дублироваться:</h5>
+        <ion-item lines="full" color="dark" color="light">
+          <ion-label class="Selection" color="dark">Новый курс</ion-label>
+          <ion-select interface="alert" color="dark" [(ngModel)]="course">
+            <ion-select-option> {{courses[0]}} </ion-select-option>
+            <ion-select-option> {{courses[1]}} </ion-select-option>
+            <ion-select-option> {{courses[2]}} </ion-select-option>
+            <ion-select-option> {{courses[3]}} </ion-select-option>
+          </ion-select>
+        </ion-item>
+
+        <ion-label class="Label" lines="none">Новое название группы:</ion-label>
+        <ion-item color="medium" class="Input">
+          <ion-input [(ngModel)]="newName"></ion-input>
+        </ion-item>
+        <ion-button class="Input" size="small" color="success" value="name" (click)="update()"> Обновить </ion-button>
+    </div>
+  </ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-button expand="full" fill="none"> <u (click)="help()"> Нужна помощь? </u> </ion-button>
+  </ion-toolbar>
+</ion-footer>

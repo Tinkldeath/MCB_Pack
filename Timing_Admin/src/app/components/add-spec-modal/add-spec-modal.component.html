@@ -1,0 +1,23 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <h4 class="Title">Добавить специальность:</h4>
+    <ion-button class="BackButton" size="small" color="primary" fill="outline" (click)="goBack()"> Назад </ion-button>
+  </ion-toolbar>
+</ion-header>
+
+  <ion-content>
+    <div class="FormModule">
+      <h5 class="Label">Названия специальностей не должны дублироваться:</h5>
+        <ion-label class="Label" lines="none">Название специальности:</ion-label>
+        <ion-item color="medium" class="Input">
+          <ion-input [(ngModel)]="newSpecName"></ion-input>
+        </ion-item>
+        <ion-button class="Input" size="small" color="success" (click)="addSpecial()"> Добавить </ion-button>
+    </div>
+  </ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-button expand="full" fill="none"> <u (click)="help()"> Нужна помощь? </u> </ion-button>
+  </ion-toolbar>
+</ion-footer>

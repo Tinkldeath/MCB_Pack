@@ -1,0 +1,17 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <h5 class="Title">Изменение специальности:</h5>
+    <ion-button class="BackButton" size="small" color="primary" fill="outline" (click)="goBack()"> Назад </ion-button>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="FormModule">
+    <h6 class="Title">Выбранная специальность: {{this.importedSpecial.specName}}</h6>
+    <p class="Label" lines="none">Новое название специальности:</p>
+    <ion-item color="medium" class="Input">
+      <ion-input [(ngModel)]="newName"></ion-input>
+    </ion-item>
+    <ion-button class="Input" size="small" color="success" value="name" (click)="updateSpecial()"> Обновить </ion-button>
+  </div>
+</ion-content>

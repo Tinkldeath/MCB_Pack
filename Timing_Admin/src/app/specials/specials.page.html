@@ -1,0 +1,42 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-row>
+      <ion-col class="align-self-start">
+        <h2 class="PageTitle"> Специальности: </h2>
+      </ion-col>
+      <ion-col class="ion-align-self-center">
+        <ion-button class="RefreshButton" size="small" icon="refresh" shape="circle" color="dark" (click)="ngOnInit()">↺</ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div>
+    <ion-list>
+      <ion-radio-group *ngFor="let special of specsView" [(ngModel)]="chosenSpecial">
+        <ion-item lines="full">
+          <p class="Special">{{special.specName}}</p>
+          <ion-radio (click)="selectSpecial(special)"></ion-radio>
+        </ion-item>
+      </ion-radio-group>
+    </ion-list>
+  </div>
+
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar class="ToolBar">
+
+    <ion-button class="BlockButton" color="primary" size="small" expand="block" (click)="showGroups()"> Показать группы </ion-button>
+
+    <div class="ButtonBar">
+      <ion-row>
+        <ion-button class="Button" size="small" color="success" (click)="openAddModal()"> Добавить </ion-button>
+        <ion-button class="Button" size="small" color="secondary" (click)="openUpdateModal()"> Измeн. </ion-button>
+        <ion-button class="Button" size="small" color="danger" (click)="showDeleteAlert()"> Удалить </ion-button>
+      </ion-row>
+    </div>
+
+  </ion-toolbar>
+</ion-footer>

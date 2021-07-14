@@ -1,0 +1,126 @@
+<ion-header>
+  <ion-toolbar>
+    <h3 class="Title">Расписания группы: {{this.groupName}} </h3>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+
+    <div class="Container">
+      <h2>Неделя: Числитель</h2>
+
+      <div *ngFor="let pair of pairsChisl" class="Day">
+        <h3> День: {{pair.day}} </h3>
+
+        <div class="Block">
+          <ion-item lines="full">
+            <ion-label> Пара 1: {{pair.pair1}} </ion-label>
+          </ion-item>
+          <ion-item lines="none">
+            <ion-input [(ngModel)]="pair.pair1"></ion-input>
+          </ion-item>
+        </div>
+
+        <div class="Block">
+          <ion-item lines="full">
+            <ion-label> Пара 2: {{pair.pair2}} </ion-label>
+          </ion-item>
+          <ion-item lines="none">
+            <ion-input [(ngModel)]="pair.pair2"></ion-input>
+          </ion-item>
+        </div>
+
+        <div class="Block">
+          <ion-item lines="full">
+            <ion-label> Пара 3: {{pair.pair3}} </ion-label>
+          </ion-item>
+          <ion-item lines="none">
+            <ion-input [(ngModel)]="pair.pair3"></ion-input>
+          </ion-item>
+        </div>
+
+        <div class="Block">
+          <ion-item lines="full">
+            <ion-label> Пара 4: {{pair.pair4}} </ion-label>
+          </ion-item>
+          <ion-item lines="none">
+            <ion-input [(ngModel)]="pair.pair4"></ion-input>
+          </ion-item>
+        </div>
+
+        <div class="Block">
+          <ion-item lines="full">
+            <ion-label> Пара 5: {{pair.pair5}} </ion-label>
+          </ion-item>
+          <ion-item lines="none">
+            <ion-input [(ngModel)]="pair.pair5"></ion-input>
+          </ion-item>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="Container">
+    <h2>Неделя: Знаменатель</h2>
+      <div *ngFor="let pair1 of pairsZnam" class="Day">
+        <h3> День: {{pair1.day}} </h3>
+
+        <div class="Block">
+          <ion-item lines="full">
+            <ion-label> Пара 1: {{pair1.pair1}} </ion-label>
+          </ion-item>
+          <ion-item lines="none">
+            <ion-input [(ngModel)]="pair1.pair1"></ion-input>
+          </ion-item>
+        </div>
+
+        <div class="Block">
+          <ion-item lines="full">
+            <ion-label> Пара 2: {{pair1.pair2}} </ion-label>
+          </ion-item>
+          <ion-item lines="none">
+            <ion-input [(ngModel)]="pair1.pair2"></ion-input>
+          </ion-item>
+        </div>
+
+        <div class="Block">
+          <ion-item lines="full">
+            <ion-label> Пара 3: {{pair1.pair3}} </ion-label>
+          </ion-item>
+          <ion-item lines="none">
+            <ion-input [(ngModel)]="pair1.pair3"></ion-input>
+          </ion-item>
+        </div>
+
+        <div class="Block">
+          <ion-item lines="full">
+            <ion-label> Пара 4: {{pair1.pair4}} </ion-label>
+          </ion-item>
+          <ion-item lines="none">
+            <ion-input [(ngModel)]="pair1.pair4"></ion-input>
+          </ion-item>
+        </div>
+
+        <div class="Block">
+          <ion-item lines="full">
+            <ion-label> Пара 5: {{pair1.pair5}} </ion-label>
+          </ion-item>
+          <ion-item lines="none">
+            <ion-input [(ngModel)]="pair1.pair5"></ion-input>
+          </ion-item>
+        </div>
+
+      </div>
+    </div>
+  </ion-list>
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <div>
+      <ion-button class="Button" size="small" color="success" (click)="updateSchedules()"> Сохранить </ion-button>
+      <ion-button class="Button" size="small" color="dark" (click)="goBack()"> Назад </ion-button>
+    </div>
+  </ion-toolbar>
+</ion-footer>

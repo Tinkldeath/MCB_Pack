@@ -1,0 +1,57 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <h5 class="Title"> Выбранная специальность: </h5>
+    <div>
+      <ion-label class="Title"> {{name}} </ion-label>
+    </div>
+      <ion-col class="align-self-start">
+        <ion-button class="BackButton" size="small" color="dark" (click)="goBack()"> Назад </ion-button>
+      </ion-col>
+      <ion-col>
+        <ion-button class="RefreshButton" size="small" icon="refresh" shape="circle" color="dark" (click)="ngOnInit()">↺</ion-button>
+      </ion-col>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div>
+    <ion-list>
+      <ion-radio-group [(ngModel)]="selectedGroup" *ngFor="let group of showingGroups">
+        <ion-item>
+          <ion-label>{{group.groupName}}, курс: {{group.courseNumber}}</ion-label>
+          <ion-radio (click)="selectGroup(group)"></ion-radio>
+        </ion-item>
+      </ion-radio-group>
+    </ion-list>
+  </div>
+</ion-content>
+
+<ion-footer>
+
+  <ion-toolbar class="ToolBar">
+    <div>
+
+      <ion-button class="SchedulesButton" color="primary" size="small" expand="block" (click)="showScheduleModal()"> Показать расписания </ion-button>
+
+      <div>
+        <ion-grid>
+          <ion-row>
+
+            <ion-col>
+              <ion-button size="small" color="success" (click)="ShowAddModal()"> Добавить </ion-button>
+            </ion-col>
+
+            <ion-col>
+              <ion-button class="ChangeButton" size="small" color="secondary" (click)="showUpdateModal()"> Изм. </ion-button>
+            </ion-col>
+
+            <ion-col>
+              <ion-button size="small" color="danger" (click)="showAlert()"> Удалить </ion-button>
+            </ion-col>
+
+          </ion-row>
+        </ion-grid>
+      </div>
+    </div>
+    </ion-toolbar>
+</ion-footer>
