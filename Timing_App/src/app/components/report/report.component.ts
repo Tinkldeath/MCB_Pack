@@ -32,19 +32,19 @@ export class ReportComponent implements OnInit {
       return this.showMessage('Опишите проблему');
     }
     else{
-      this.emailComposer.getClients().then()
-      let email = {
+      this.emailComposer.getClients().then();
+      const email = {
         to: 'dropdeadit@gmail.com',
         cc: this.mailbox,
         subject: 'Проблема mcb.timing клиент',
         body: this.problem,
-      }
+      };
       this.emailComposer.open(email);
     }
   }
 
   async showMessage(message: string){
-    let alert = await this.alertCtrl.create({
+    const alert = await this.alertCtrl.create({
       header: message,
       buttons: [{
         text:'ОК',
@@ -53,7 +53,7 @@ export class ReportComponent implements OnInit {
           this.alertCtrl.dismiss();
         }
       }]
-    })
+    });
     await alert.present();
   }
 }
