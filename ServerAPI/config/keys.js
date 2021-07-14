@@ -1,3 +1,3 @@
 module.exports = {
-    mongoUrl: 'mongodb+srv://root:root@mcbcluster.fygjr.mongodb.net/test'
+    mongoUrl: 'mongodb+srv://root:root@mcbcluster.fygjr.mongodb.net/MCB'
 }
