@@ -1,0 +1,58 @@
+<ion-list *ngFor="let pair of pairs">
+
+  <ion-card style="margin-top: 5px; padding-top: 0;">
+    <ion-card-header>
+      <ion-card-title>
+        День: {{pair.day}}
+      </ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+      <div class="Container">
+        <ion-item class="Time">
+          <ion-label> 9:00-10:20 </ion-label>
+        </ion-item>
+        <ion-item lines="full">
+          <ion-label> {{pair.pair1}} </ion-label>
+        </ion-item>
+      </div>
+
+      <div class="Container">
+        <ion-item class="Time">
+          <ion-label> 10:35-11:55 </ion-label>
+        </ion-item>
+        <ion-item lines="full">
+          <ion-label> {{pair.pair2}} </ion-label>
+        </ion-item>
+      </div>
+
+      <div class="Container">
+        <ion-item class="Time">
+          <ion-label> 12:25-13:45 </ion-label>
+        </ion-item>
+        <ion-item lines="full">
+          <ion-label> {{pair.pair3}} </ion-label>
+        </ion-item>
+      </div>
+
+      <div class="Container">
+        <ion-item class="Time">
+          <ion-label> 14:00-15:20 </ion-label>
+        </ion-item>
+        <ion-item lines="full">
+          <ion-label> {{pair.pair4}} </ion-label>
+        </ion-item>
+      </div>
+
+      <div class="Container">
+        <ion-item class="Time">
+          <ion-label> 15:50-17:10 </ion-label>
+        </ion-item>
+        <ion-item lines="full">
+          <ion-label> {{pair.pair5}} </ion-label>
+        </ion-item>
+      </div>
+    </ion-card-content>
+  </ion-card>
+
+</ion-list>

@@ -1,0 +1,72 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <h1 class="Title">
+      mcb.timing
+    </h1>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <h2> Привет! </h2>
+  <h5> Выбери специальность и группу: </h5>
+
+  <ion-item lines="none">
+    <ion-label>Сохранять выбор: </ion-label>
+    <ion-toggle (ionChange)="changeStay()"></ion-toggle>
+  </ion-item>
+
+  <div class="Form">
+    <div>
+      <ion-item lines="none" class="Select">
+        <ion-label> Специальность: </ion-label>
+        <ion-select [(ngModel)]="selectedSpecName">
+          <ion-list *ngFor="let spec of specs">
+            <ion-select-option>
+              <ion-item>
+                <ion-label>{{spec.specName}}</ion-label>
+              </ion-item>
+            </ion-select-option>
+          </ion-list>
+        </ion-select>
+      </ion-item>
+
+    <!--
+      <ion-item lines="none" class="Select">
+        <ion-label> Курс: </ion-label>
+        <ion-select [(ngModel)]="selectedCourse">
+          <ion-list *ngFor="let course of courses">
+            <ion-select-option> {{course}} </ion-select-option>
+          </ion-list>
+        </ion-select>
+      </ion-item>
+    -->
+
+      <ion-item lines="none" class="Select" (click)="groupCheck()">
+        <ion-label> Группа: </ion-label>
+        <ion-select [(ngModel)]="selectedGroupName">
+          <ion-list *ngFor="let group of groups">
+            <ion-select-option>
+              <ion-item>
+                <ion-label>{{group.groupName}}</ion-label>
+              </ion-item>
+            </ion-select-option>
+          </ion-list>
+        </ion-select>
+      </ion-item>
+
+      <div class="ForButton" (click)="showSchedule()">
+        <ion-button class="OkButton" expand="block" color="medium"> ОК </ion-button>
+      </div>
+
+    </div>
+  </div>
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <div class="Report">
+      <u (click)="presentModal()"> <a>Сообщить о проблеме</a></u>
+    </div>
+  </ion-toolbar>
+</ion-footer>

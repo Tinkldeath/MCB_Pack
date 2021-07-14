@@ -1,0 +1,7 @@
+{
+  "name": "mcbTiming",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

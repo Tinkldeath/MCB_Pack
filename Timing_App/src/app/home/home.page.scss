@@ -1,0 +1,85 @@
+#container {
+  text-align: center;
+
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+#container strong {
+  font-size: 20px;
+  line-height: 26px;
+}
+
+#container p {
+  font-size: 16px;
+  line-height: 22px;
+
+  color: #8c8c8c;
+
+  margin: 0;
+}
+
+#container a {
+  text-decoration: none;
+}
+
+.Form{
+  margin-top: 5px;
+  margin: 10px;
+  padding: 5px;
+}
+
+h2{
+  margin-top: 10px;
+  padding-top: 0;
+  padding-left: 15px;
+  font-weight: bold;
+  text-align: left;
+}
+
+h5{
+  font-weight: bold;
+  text-align: left;
+  padding-left: 15px;
+}
+
+.Choose{
+  font-weight: bold;
+  text-align: left;
+}
+
+.Title{
+  text-align: center;
+  font-weight: bold;
+  font-size: 30;
+}
+
+ion-select{
+  padding-right: 10px;
+}
+
+.Select{
+  border: 2px #cccc solid;
+  margin-top: 20px;
+}
+
+.OkButton{
+  padding-left: 30%;
+  padding-right: 30%;
+}
+
+.ForButton{
+  padding-top: 5%;
+}
+
+u{
+  color: rgb(47, 47, 230);
+  font-weight: bold;
+}
+
+.Report{
+  text-align: center;
+}

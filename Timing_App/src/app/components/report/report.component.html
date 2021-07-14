@@ -1,0 +1,37 @@
+<ion-header>
+  <ion-toolbar>
+
+    <h3> Сообщить о проблеме: </h3>
+
+    <div>
+      <ion-button color="medium" size="small" expand="block" class="BackButton" (click)="close()"> Назад </ion-button>
+    </div>
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <h4>Пожалуйста, заполните форму и опишите проблему: </h4>
+
+  <div class="Container">
+    <div class="Selection">
+      <ion-item lines="none">
+        <ion-label position="floating"> Ваш email: </ion-label>
+        <ion-input type="text" [(ngModel)]="mailbox"></ion-input>
+      </ion-item>
+    </div>
+
+    <div class="Selection">
+      <ion-item lines="none">
+        <ion-label position="floating"> Опишите проблему: </ion-label>
+        <ion-textarea rows="8" cols="20" [(ngModel)]="problem"></ion-textarea>
+      </ion-item>
+    </div>
+  </div>
+
+  <div>
+    <ion-button class="Ready" expand="block" color="medium" size="small" (click)="sendReport()"> Готово </ion-button>
+  </div>
+
+</ion-content>
