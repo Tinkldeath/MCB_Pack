@@ -25,3 +25,39 @@
 #container a {
   text-decoration: none;
 }
+
+.Title{
+  font-size: 100;
+  font-weight: bold;
+}
+
+.Sup{
+  padding-bottom: 100px;
+  background-color: rgb(64, 169, 255);
+  color: white;
+  padding: 0;
+  padding-left: 10px;
+  padding-right: 10px;
+  border-radius: 30px;
+}
+
+.Input{
+  margin-top: 10px;
+  margin-left: 0;
+}
+
+.Help{
+  margin: 10px;
+  padding-top: 15px;
+}
+
+.EnterButton{
+  font-weight: bold;
+  margin: 10px;
+  padding-top: 15px;
+  padding-left: 15px;
+}
+
+u{
+  font-weight: bold;
+}
