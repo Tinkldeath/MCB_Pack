@@ -11,6 +11,8 @@ const adminsRouter = require('./routes/adminsRouter');
 const specialsRouter = require('./routes/specialsRouter');
 const groupsRouter = require('./routes/groupsRouter');
 const scheduleRouter = require('./routes/scheduleRouter');
+const postRouter = require('./routes/postRouter');
+const fileRouter = require('./routes/fileRouter');
 
 // Cors define
 app.use(cors());
@@ -29,6 +31,8 @@ app.use('/api/admin',adminsRouter);
 app.use('/api/specials',specialsRouter);
 app.use('/api/groups',groupsRouter);
 app.use('/api/schedule',scheduleRouter);
+app.use('/api/post',postRouter);
+app.use('/api/file',fileRouter);
 
 // BodyParser
 app.use(bodyParser.urlencoded({extended:true}));
