@@ -10,7 +10,8 @@
             </ion-label>
           </ion-col>
           <ion-col>
-            <ion-input class="Input" color="dark" placeholder="Поиск по документам"></ion-input>
+            <ion-searchbar color="black" placeholder="Поиск по документам" id="searchbar"></ion-searchbar>
+            <!-- <ion-input class="Input" color="dark" placeholder="Поиск по документам"></ion-input> -->
           </ion-col>
           <ion-col>
               <ion-button fill="clear" size="medium" color="dark" class="Help"> <u>Загрузить</u> </ion-button>
@@ -30,8 +31,28 @@
     </ion-toolbar>
   </ion-header>
 
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
+  <div id="Slide"> 
+      <ion-range dualKnobs="true" min="1993" max="2021" step="1" pin="true" snaps="true"></ion-range>
   </div>
+
+  <div id="Select">
+    <ion-item>
+      <ion-label>Предмет</ion-label>
+      <ion-select interface="popover">Предмет</ion-select>
+
+      <ion-label>Автор</ion-label>
+      <ion-select interface="popover">Автор
+        <ion-select-option value="f">Female</ion-select-option>
+      <ion-select-option value="m">Male</ion-select-option>
+      </ion-select>
+
+      <ion-label>Специальность</ion-label>
+      <ion-select interface="popover">Специальность</ion-select>
+
+      <ion-button>Очистить фильтры</ion-button>
+    </ion-item>
+  </div>
+
+  <div id="container">
+   </div>
 </ion-content>

@@ -1,7 +1,7 @@
 #container {
   text-align: center;
 
-  position: absolute;
+  // position: absolute;
   left: 0;
   right: 0;
   top: 50%;
@@ -61,4 +61,24 @@
 
 u{
   font-weight: bold;
+}
+
+#Slide{
+  text-align: center;
+
+  left: 0;
+  right: 0;
+}
+
+#Select{
+  padding-left: 15px;
+  padding-right: 30px;
+  width: 900px;
+}
+
+#searchbar{
+  margin-top: 8px;
+  margin-left: -240px;
+  width: 700px;
+  text-align: center;
 }
