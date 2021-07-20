@@ -65,7 +65,6 @@ u{
 
 #Slide{
   text-align: center;
-
   left: 0;
   right: 0;
 }
@@ -74,6 +73,24 @@ u{
   padding-left: 15px;
   padding-right: 30px;
   width: 900px;
+}
+
+.SelectItem{
+  margin-right: 10px;
+  margin-left: 10px;
+}
+
+.SelectToggle{
+  margin-left: 340px;
+}
+
+.Toggle{
+  margin-top: 10px;
+  font-weight: bold;
+}
+
+.ClearButton{
+  margin-top: 15px;
 }
 
 #searchbar{

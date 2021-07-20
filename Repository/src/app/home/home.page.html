@@ -10,7 +10,7 @@
             </ion-label>
           </ion-col>
           <ion-col>
-            <ion-searchbar color="black" placeholder="Поиск по документам" id="searchbar"></ion-searchbar>
+            <ion-searchbar color="light" placeholder="Поиск по документам" id="searchbar"></ion-searchbar>
             <!-- <ion-input class="Input" color="dark" placeholder="Поиск по документам"></ion-input> -->
           </ion-col>
           <ion-col>
@@ -21,6 +21,45 @@
         </ion-row>
       </ion-grid>
     </ion-title>
+    <div id="Slide">
+      <ion-range color="dark" dualKnobs="true" min="1993" max="2021" step="1" pin="true" snaps="true"></ion-range>
+  </div>
+
+  <ion-grid>
+      <ion-row>
+        <ion-col class="SelectItem">
+          <ion-item>
+            <ion-label>Предмет</ion-label>
+            <ion-select interface="popover">Предмет</ion-select>
+          </ion-item>
+        </ion-col>
+        <ion-col class="SelectItem">
+          <ion-item>
+            <ion-label>Автор</ion-label>
+            <ion-select interface="popover">Автор
+              <ion-select-option value="f">Female</ion-select-option>
+              <ion-select-option value="m">Male</ion-select-option>
+            </ion-select>
+          </ion-item>
+        </ion-col>
+        <ion-col class="SelectItem">
+          <ion-item>
+            <ion-label>Специальность</ion-label>
+            <ion-select interface="popover">Специальность</ion-select>
+          </ion-item>
+        </ion-col>
+        <ion-col class="SelectItem">
+          <ion-button class="ClearButton" fill="outline" size="small" color="dark"> Очистить фильтры </ion-button>
+        </ion-col>
+        <ion-col class="SelectToggle">
+            <ion-item>
+              <ion-label class="Toggle"> Посик по категориям </ion-label>
+              <ion-toggle></ion-toggle>
+            </ion-item>
+        </ion-col>
+      </ion-row>
+  </ion-grid>
+
   </ion-toolbar>
 </ion-header>
 
@@ -30,29 +69,4 @@
       <ion-title size="large">Blank</ion-title>
     </ion-toolbar>
   </ion-header>
-
-  <div id="Slide"> 
-      <ion-range dualKnobs="true" min="1993" max="2021" step="1" pin="true" snaps="true"></ion-range>
-  </div>
-
-  <div id="Select">
-    <ion-item>
-      <ion-label>Предмет</ion-label>
-      <ion-select interface="popover">Предмет</ion-select>
-
-      <ion-label>Автор</ion-label>
-      <ion-select interface="popover">Автор
-        <ion-select-option value="f">Female</ion-select-option>
-      <ion-select-option value="m">Male</ion-select-option>
-      </ion-select>
-
-      <ion-label>Специальность</ion-label>
-      <ion-select interface="popover">Специальность</ion-select>
-
-      <ion-button>Очистить фильтры</ion-button>
-    </ion-item>
-  </div>
-
-  <div id="container">
-   </div>
 </ion-content>
