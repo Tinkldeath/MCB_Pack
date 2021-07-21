@@ -14,7 +14,19 @@
     border-radius: 35px;
   }
 
-#searchbar{
+  .Help{
+    margin: 10px;
+    padding-top: 15px;
+  }
+  
+  .EnterButton{
+    font-weight: bold;
+    margin: 10px;
+    padding-top: 15px;
+    padding-left: 15px;
+  }
+
+  #searchbar{
     margin-top: 8px;
     margin-left: -240px;
     width: 700px;
@@ -24,7 +36,10 @@
   #rectangle{
     width:550px;
     height:550px;
-    background:rgb(243, 157, 123);
+    border-style: dashed;
+    border-width: 3px;
+    border-radius: 5px;
+    border-color: rgb(243, 157, 123);
     margin-top: 75px;
     margin-left: 75px;
     float:left;
@@ -34,5 +49,30 @@
     width: 450px;
     float: left;
     margin-top: 75px;
-    margin-left: 20px;
+    margin-left: 25px;
 }
+
+.Input{
+  width: 650px;
+  height: 40px;
+  border-style: solid;
+  border-width: 2px;
+  border-color: rgb(243, 157, 123);
+  border-radius: 5px;
+  margin-bottom: 30px;
+}
+
+.Input:hover{
+  width: 650px;
+  height: 40px;
+  border-style: solid;
+  border-width: 2px;
+  border-color: rgb(228, 9, 9);
+  border-radius: 5px;
+  margin-bottom: 30px;
+}
+
+.UploadButton{
+  margin-top: 10px;
+}
+
