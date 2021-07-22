@@ -11,7 +11,9 @@ const postScheme = new Schema({
     year: Number,
     university: String,
     special: String,
-    description: String
+    category: String,
+    description: String,
+    fileUrl: String
 });
 
 module.exports = mongoose.model('Post', postScheme);
