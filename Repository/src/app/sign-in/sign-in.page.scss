@@ -14,3 +14,33 @@
   padding-right: 10px;
   border-radius: 35px;
 }
+
+h1{
+  text-align: center;
+  margin-top: 175px;
+  margin-bottom: 30px;
+}
+
+.EnterInput{
+  width: 300px;
+  border-style: solid;
+  border-width: 2px;
+  border-color: rgb(80, 80, 80);
+  border-radius: 5px;
+  display:block;
+  margin: auto;
+  margin-bottom: 15px;
+}
+
+.EnterButton{
+  display:block;
+  margin: auto;
+  width: 100px;
+}
+
+#Enter{
+  display:block;
+  margin: auto;
+  margin-top: 15px;
+  width: 175px;
+}
