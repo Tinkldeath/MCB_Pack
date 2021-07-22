@@ -1,7 +1,7 @@
 const express = require('express');
 const controller = require('./../controllers/adminsController');
 const router = express.Router();
-const bodyParser = require('body-parser');
+const bodyParser = require('../node_modules/body-parser');
 
 router.use(bodyParser.urlencoded({extended:true}));
 router.use(bodyParser.json());
