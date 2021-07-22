@@ -17,4 +17,4 @@ const postScheme = new Schema({
     fileUrl: String
 });
 
-module.exports = mongoose.model('Post', postScheme);
+module.exports = mongoose.model('Post', postScheme, 'posts');

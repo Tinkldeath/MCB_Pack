@@ -1,0 +1,3 @@
+URL  для подключение к моему кластеру на Mongo Atlas: mongodb+srv://root:root@mcbcluster.fygjr.mongodb.net/test
+
+В директории ServerAPI: npm run server
