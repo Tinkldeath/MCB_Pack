@@ -1,9 +1,27 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>register</ion-title>
+    <ion-title>
+      <ion-grid>
+        <ion-row>
+          <ion-col class="Title">
+            <ion-label class="Title" routerLink="/home">
+              MRTA
+              <sup class="Sup"> ed </sup>
+            </ion-label>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+
+  <h1>Регистрация</h1>
+  <ion-input class="RegisterInput" placeholder="Логин или эл. почта"></ion-input>
+  <ion-input class="RegisterInput" type="Password" placeholder="Пароль"></ion-input>
+  <ion-input class="RegisterInput" type="Password" placeholder="Повторите пароль"></ion-input>
+  <ion-button class="RegisterButton" shape="round" color="dark">Зарегестрироваться</ion-button>
+  <ion-button fill="clear" size="small" color="dark" id="Register" routerLink="/sign-in">Уже есть аккаунт? Войти</ion-button>
 
 </ion-content>
