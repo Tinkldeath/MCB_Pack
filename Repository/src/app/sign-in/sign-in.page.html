@@ -18,9 +18,13 @@
 <ion-content>
 
   <h1>Вход</h1>
-  <ion-input class="EnterInput" placeholder="Логин или эл. почта"></ion-input>
-  <ion-input class="EnterInput" type="Password" placeholder="Пароль"></ion-input>
-  <ion-button class="EnterButton" shape="round" color="dark">Войти</ion-button>
+  <ion-input class="EnterInput" placeholder="Логин или эл. почта" [(ngModel)]="login"></ion-input>
+  <ion-input class="EnterInput" type="Password" placeholder="Пароль" [(ngModel)]="password"></ion-input>
+  <ion-item class="CheckBox">
+    <ion-label>Оставаться в системе</ion-label>
+    <ion-checkbox (click)="ChangeStay()"></ion-checkbox>
+  </ion-item>
+  <ion-button class="EnterButton" shape="round" color="dark" (click)="SignIn()" >Войти</ion-button>
   <ion-button fill="clear" size="small" color="dark" id="Enter" routerLink="/register">Зарегестрироваться</ion-button>
 
 </ion-content>

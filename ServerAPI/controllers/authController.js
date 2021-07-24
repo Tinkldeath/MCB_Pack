@@ -26,16 +26,27 @@ module.exports.login = async function(req,res){
             }, Keys.jwt, {expiresIn: 60*60});
             // Отправляем сгенерированный токен
             res.status(200).json({
-                token: `Bearer ${resToken}`
+                id: found._id,
+                token: `Bearer ${resToken}`,
+                login: found.login,
+                isAdmin: found.isAdmin
             });
         }
         else{
             // Пароли не совпали
-            res.sendStatus(401);
+            res.json({
+                token: '',
+                login: '',
+                isAdmin: null
+            }).status(401);
         }
     }
     else{
-        res.sendStatus(404);
+        res.json({
+            token: 'not found',
+            login: '',
+            isAdmin: null
+        }).status(404);
     }
 }
 
@@ -48,7 +59,9 @@ module.exports.register = async function(req,res){
         }
     });
     if(found){
-        res.sendStatus(409);
+        res.status(409).json({
+            message: 'Conflict'
+        });
     }
     else{
         const salt = Bcrypt.genSaltSync(10);
@@ -62,10 +75,14 @@ module.exports.register = async function(req,res){
             await user.save().then(() => {
                 console.log('User created');
             });
-            res.sendStatus(201);
+            res.status(201).json({
+                message: 'Created'
+            });
         } catch (err) {
             console.log(err);
-            res.sendStatus(500);
+            res.status(500).json({
+                message: 'Server error'
+            });
         }
     }
 }
