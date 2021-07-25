@@ -12,7 +12,7 @@ export class DataService {
 
   constructor() { }
 
-  ChangeMessage(message: UserData){
+  ChangeMessage(message: any){
     this.messageSource.next(message)
   }
 }

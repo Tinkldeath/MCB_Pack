@@ -20,12 +20,7 @@ export class AddItemPage implements OnInit {
   }
 
   ngOnInit() {
-    const token = localStorage.getItem('token');
-    const login = localStorage.getItem('login');
-    const isAdmin = localStorage.getItem('isAdmin');
-    const stay = localStorage.getItem('stay');
-    const id = localStorage.getItem('id');
-    this.userdata = new UserData(login,stay,isAdmin,token,id);
+    this.dataService.currentMessage.subscribe(message => this.userdata = message);
   }
 
   Logout(){

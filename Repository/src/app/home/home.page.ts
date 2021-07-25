@@ -1,4 +1,5 @@
 import { DataService } from './../shared/services/data.service';
+import { Router } from '@angular/router';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Category, UserData } from '../shared/models/models';
 
@@ -28,7 +29,10 @@ export class HomePage implements OnInit, OnDestroy{
 
   userdata: UserData = null;
 
-  constructor(private dataService: DataService) {
+  constructor(
+    private dataService: DataService,
+    private router: Router
+    ) {
     this.dataService.currentMessage.subscribe(message => this.userdata = message);
   }
 
@@ -62,4 +66,13 @@ export class HomePage implements OnInit, OnDestroy{
     }
   }
 
+  GoFavorite(){
+    this.dataService.ChangeMessage(this.userdata);
+    this.router.navigateByUrl('favorite');
+  }
+
+  GoAdd(){
+    this.dataService.ChangeMessage(this.userdata)
+    this.router.navigateByUrl('add-item');
+  }
 }
