@@ -1,4 +1,5 @@
 import { DataService } from './../shared/services/data.service';
+import { RequestsService } from '../shared/services/requests.service';
 import { Router } from '@angular/router';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Category, UserData } from '../shared/models/models';
@@ -10,33 +11,23 @@ import { Category, UserData } from '../shared/models/models';
 })
 export class HomePage implements OnInit, OnDestroy{
 
-  categories: Category[] = [
-    {subject: "Subject", description: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit."},
-    {subject: "Subject", description: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit."},
-    {subject: "Subject", description: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit."},
-    {subject: "Subject", description: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit."},
-    {subject: "Subject", description: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit."},
-    {subject: "Subject", description: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit."},
-    {subject: "Subject", description: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit."},
-    {subject: "Subject", description: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit."},
-    {subject: "Subject", description: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit."},
-    {subject: "Subject", description: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit."},
-    {subject: "Subject", description: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit."},
-    {subject: "Subject", description: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit."},
-    {subject: "Subject", description: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit."},
-    {subject: "Subject", description: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit."},
-  ]
+  categories: Category[] = [];
 
   userdata: UserData = null;
 
   constructor(
     private dataService: DataService,
+    private reqService: RequestsService,
     private router: Router
     ) {
     this.dataService.currentMessage.subscribe(message => this.userdata = message);
   }
 
   ngOnInit(){
+    this.reqService.GetCategories().subscribe((data) => {
+      this.categories = data;
+      console.log(data);
+    });
     this.dataService.currentMessage.subscribe(message => this.userdata = message);
     const token = localStorage.getItem('token');
     const login = localStorage.getItem('login');
@@ -72,7 +63,8 @@ export class HomePage implements OnInit, OnDestroy{
   }
 
   GoAdd(){
-    this.dataService.ChangeMessage(this.userdata)
+    this.dataService.ChangeMessage(this.userdata);
+    this.dataService.ChangeCategory(this.categories);
     this.router.navigateByUrl('add-item');
   }
 }

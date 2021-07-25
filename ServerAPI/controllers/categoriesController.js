@@ -53,7 +53,7 @@ module.exports.addCategory = async function(req,res){
 }
 
 module.exports.removeCategory = async function(req,res){
-    const reqId = req.body.id;
+    const reqId = req.body._id;
     try {
         await Category.findByIdAndDelete(reqId,(err) => {
             if(err){
@@ -80,7 +80,7 @@ module.exports.removeCategory = async function(req,res){
 }
 
 module.exports.updateCategory = async function(req,res){
-    const reqId = req.body.id;
+    const reqId = req.body._id;
     const reqName = req.body.name;
     const reqDescription = req.body.description;
     try {

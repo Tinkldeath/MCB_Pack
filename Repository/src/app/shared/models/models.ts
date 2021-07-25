@@ -10,7 +10,8 @@ export interface Post{
 }
 
 export interface Category{
-    subject: string,
+    _id: string,
+    name: string,
     description: string
 }
 

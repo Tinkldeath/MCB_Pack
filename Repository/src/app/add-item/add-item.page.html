@@ -41,6 +41,11 @@
     <ion-input placeholder="Учебное заведение" class="Input"></ion-input>
     <ion-input placeholder="Специальность" class="Input"></ion-input>
     <ion-input placeholder="Описание" class="Input"></ion-input>
+    <ion-select placeholder="Категория" class="Input">
+      <ion-select-option *ngFor="let category of categories">
+        {{category.name}}
+      </ion-select-option>
+    </ion-select>
     <ion-button fill="solid" class="UploadButton" shape="round" color="dark">Загрузить</ion-button>
   </div>
 
