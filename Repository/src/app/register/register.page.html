@@ -18,10 +18,10 @@
 <ion-content>
 
   <h1>Регистрация</h1>
-  <ion-input class="RegisterInput" placeholder="Логин или эл. почта"></ion-input>
-  <ion-input class="RegisterInput" type="Password" placeholder="Пароль"></ion-input>
-  <ion-input class="RegisterInput" type="Password" placeholder="Повторите пароль"></ion-input>
-  <ion-button class="RegisterButton" shape="round" color="dark">Зарегестрироваться</ion-button>
+  <ion-input [(ngModel)]="login" class="RegisterInput" placeholder="Логин или эл. почта"></ion-input>
+  <ion-input [(ngModel)]="password" class="RegisterInput" type="Password" placeholder="Пароль"></ion-input>
+  <ion-input [(ngModel)]="repeat" class="RegisterInput" type="Password" placeholder="Повторите пароль"></ion-input>
+  <ion-button class="RegisterButton" shape="round" color="dark" (click)="Register()" >Зарегестрироваться</ion-button>
   <ion-button fill="clear" size="small" color="dark" id="Register" routerLink="/sign-in">Уже есть аккаунт? Войти</ion-button>
 
 </ion-content>

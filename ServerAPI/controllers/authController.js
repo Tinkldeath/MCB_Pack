@@ -59,7 +59,7 @@ module.exports.register = async function(req,res){
         }
     });
     if(found){
-        res.status(409).json({
+        res.json({
             message: 'Conflict'
         });
     }
@@ -75,12 +75,12 @@ module.exports.register = async function(req,res){
             await user.save().then(() => {
                 console.log('User created');
             });
-            res.status(201).json({
+            res.json({
                 message: 'Created'
             });
         } catch (err) {
             console.log(err);
-            res.status(500).json({
+            res.json({
                 message: 'Server error'
             });
         }

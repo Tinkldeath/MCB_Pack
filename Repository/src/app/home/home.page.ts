@@ -40,7 +40,6 @@ export class HomePage implements OnInit, OnDestroy{
     const stay = localStorage.getItem('stay');
     const id = localStorage.getItem('id');
     this.userdata = new UserData(login,stay,isAdmin,token,id);
-    console.log(this.userdata);
   }
 
   Logout(){
