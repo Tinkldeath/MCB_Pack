@@ -11,6 +11,8 @@ import { Category, UserData } from '../shared/models/models';
 })
 export class HomePage implements OnInit, OnDestroy{
 
+  searchCategories: boolean = true;
+
   categories: Category[] = [];
 
   userdata: UserData = null;
@@ -71,5 +73,9 @@ export class HomePage implements OnInit, OnDestroy{
   GoProfile(){
     this.dataService.ChangeMessage(this.userdata);
     this.router.navigateByUrl('account');
+  }
+
+  SwitchSearch(){
+    this.searchCategories = !this.searchCategories;
   }
 }
