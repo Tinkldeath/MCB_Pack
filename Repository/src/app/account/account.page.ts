@@ -23,8 +23,7 @@ export class AccountPage implements OnInit {
   }
 
   ngOnInit() {
-    this.dataService.currentMessage.subscribe(message => this.userdata = message);
-    this.dataService.currentCategories.subscribe(message => this.categories = message);
+    console.log(this.userdata);
   }
 
   Logout(){
