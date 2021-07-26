@@ -18,7 +18,7 @@
               <ion-button *ngIf="userdata.login === null" fill="clear" size="medium" color="dark" class="Help" routerLink="/sign-in"> <u>Избранное</u> </ion-button>
               <ion-button *ngIf="userdata.login != null" fill="clear" size="medium" color="dark" class="Help" (click)="GoFavorite()"> <u>Избранное</u> </ion-button>
               <ion-button *ngIf="userdata.login === null" size="medium" color="dark" class="EnterButton" shape="round" fill="outline" routerLink="/sign-in"> Войти </ion-button>
-              <ion-button *ngIf="userdata.login != null" size="medium" color="dark" class="EnterButton" shape="round" fill="outline" routerLink="/account"> <ion-label>{{userdata.login}}</ion-label> </ion-button>
+              <ion-button *ngIf="userdata.login != null" size="medium" color="dark" class="EnterButton" shape="round" fill="outline" (click)="GoProfile()"> <ion-label>{{userdata.login}}</ion-label> </ion-button>
               <ion-button *ngIf="userdata.login != null" fill="clear" size="medium" color="dark" class="Help" (click)="Logout()"> <u>Выйти</u> </ion-button>
           </ion-col>
         </ion-row>
@@ -57,7 +57,7 @@
         <ion-col class="SelectToggle">
             <ion-item>
               <ion-label class="Toggle"> Посик по категориям </ion-label>
-              <ion-toggle></ion-toggle>
+              <ion-toggle (click)="SwitchSearch()" checked="true"></ion-toggle>
             </ion-item>
         </ion-col>
       </ion-row>

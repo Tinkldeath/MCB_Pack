@@ -11,6 +11,8 @@ import { Category, UserData } from '../shared/models/models';
 })
 export class HomePage implements OnInit, OnDestroy{
 
+  searchCategories: boolean = true;
+
   categories: Category[] = [];
 
   userdata: UserData = null;
@@ -66,5 +68,14 @@ export class HomePage implements OnInit, OnDestroy{
     this.dataService.ChangeMessage(this.userdata);
     this.dataService.ChangeCategory(this.categories);
     this.router.navigateByUrl('add-item');
+  }
+
+  GoProfile(){
+    this.dataService.ChangeMessage(this.userdata);
+    this.router.navigateByUrl('account');
+  }
+
+  SwitchSearch(){
+    this.searchCategories = !this.searchCategories;
   }
 }
