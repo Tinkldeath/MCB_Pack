@@ -40,6 +40,9 @@ app.use('/api/categories',categoriesRouter);
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(bodyParser.json());
 
+// For Multer
+app.use('/uploads', express.static('uploads'));
+
 // Mongoose and db
 mongoose.connect(keys.mongoUrl,{ useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false}, function (err){
     if (err)
