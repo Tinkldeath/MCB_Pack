@@ -34,3 +34,53 @@
     width: 700px;
     text-align: center;
   }
+
+  #sidemenu{
+    border-top: 1px solid gray;
+    border-bottom: 1px solid gray;
+    width: 255px;
+    height: 658px;
+    margin: 0;
+    padding: 0;
+  }
+
+  #menulabel{
+    font-weight: bold;
+    text-align: left;
+  }
+
+  ion-button{
+    height: 38px;
+  }
+
+  #col{
+    margin: 0;
+    border: 1px solid;
+    border-color: gray;
+    padding: 0;
+  }
+
+  #grid{
+    margin: 0;
+    padding: 0;
+  }
+
+  h2{
+    font-weight: bold;
+    text-align: center;
+  }
+
+  #header{
+    border-bottom: 1px solid;
+    border-color: gray;
+  }
+
+  #listheader{
+    height: 57px;
+    border-bottom: 1px solid;
+    border-color: gray;
+  }
+
+  ion-list{
+    height: 599px;
+  }

@@ -13,11 +13,8 @@
             <ion-searchbar color="light" placeholder="Поиск по документам" id="searchbar"></ion-searchbar>
           </ion-col>
           <ion-col>
-            <ion-button *ngIf="userdata.login === null" fill="clear" size="medium" color="dark" class="Help" routerLink="/sign-in"> <u>Избранное</u> </ion-button>
-            <ion-button *ngIf="userdata.login != null" fill="clear" size="medium" color="dark" class="Help" routerLink="/favorite"> <u>Избранное</u> </ion-button>
-            <ion-button *ngIf="userdata.login === null" size="medium" color="dark" class="EnterButton" shape="round" fill="outline" routerLink="/sign-in"> Войти </ion-button>
-            <ion-button *ngIf="userdata.login != null" size="medium" color="dark" class="EnterButton" shape="round" fill="outline" routerLink="/account"> <ion-label>{{userdata.login}}</ion-label> </ion-button>
-            <ion-button *ngIf="userdata.login != null" fill="clear" size="medium" color="dark" class="Help" (click)="Logout()"> <u>Выйти</u> </ion-button>
+            <ion-button fill="clear" size="medium" color="dark" class="Help" routerLink="/add-item"> <u>Загрузить</u> </ion-button>
+            <ion-button fill="clear" size="medium" color="dark" class="Help" routerLink="/favorite"> <u>Избранное</u> </ion-button>
           </ion-col>
         </ion-row>
       </ion-grid>
@@ -26,5 +23,78 @@
 </ion-header>
 
 <ion-content>
-  <ion-button routerLink="/home"> Назад </ion-button>
+    <ion-grid *ngIf="userdata.isAdmin === 'true' " id="grid">
+      <ion-row id="grid">
+            <ion-list id="sidemenu">
+              <ion-item id="header">
+                <ion-avatar slot="start">
+                  <img src="https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_1280.png">
+                </ion-avatar>
+                <ion-label id="menulabel">{{userdata.login}}</ion-label>
+              </ion-item>
+                <ion-button fill="clear" size="medium" color="dark" expand="full" id="menulabel">Сменить логин</ion-button>
+                <ion-button fill="clear" size="medium" color="dark" expand="full" id="menulabel">Сменить пароль</ion-button>
+                <ion-button disabled="true" fill="clear" size="medium" color="dark" expand="full" id="menulabel"></ion-button>
+                <ion-button disabled="true" fill="clear" size="medium" color="dark" expand="full" id="menulabel"></ion-button>
+                <ion-button disabled="true" fill="clear" size="medium" color="dark" expand="full" id="menulabel"></ion-button>
+                <ion-button disabled="true" fill="clear" size="medium" color="dark" expand="full" id="menulabel"></ion-button>
+                <ion-button disabled="true" fill="clear" size="medium" color="dark" expand="full" id="menulabel"></ion-button>
+                <ion-button disabled="true" fill="clear" size="medium" color="dark" expand="full" id="menulabel"></ion-button>
+                <ion-button disabled="true" fill="clear" size="medium" color="dark" expand="full" id="menulabel"></ion-button>
+                <ion-button disabled="true" fill="clear" size="medium" color="dark" expand="full" id="menulabel"></ion-button>
+                <ion-button disabled="true" fill="clear" size="medium" color="dark" expand="full" id="menulabel"></ion-button>
+                <ion-button disabled="true" fill="clear" size="medium" color="dark" expand="full" id="menulabel"></ion-button>
+                <ion-button disabled="true" fill="clear" size="medium" color="dark" expand="full" id="menulabel"></ion-button>
+                <ion-button fill="clear" size="medium" color="dark" expand="full" id="menulabel" (click)="Logout()">Выйти</ion-button>
+            </ion-list>
+        <ion-col id="col">
+          <ion-item id="listheader">
+            <h2> Пользователи </h2>
+          </ion-item>
+          <ion-list>
+          </ion-list>
+        </ion-col>
+        <ion-col id="col">
+          <ion-item id="listheader">
+            <h2> Посты </h2>
+          </ion-item>
+          <ion-list>
+          </ion-list>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+    <ion-grid *ngIf="userdata.isAdmin === 'false' " id="grid">
+      <ion-row id="grid">
+            <ion-list id="sidemenu">
+              <ion-item id="header">
+                <ion-avatar slot="start">
+                  <img src="https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_1280.png">
+                </ion-avatar>
+                <ion-label id="menulabel">{{userdata.login}}</ion-label>
+              </ion-item>
+                <ion-button fill="clear" size="medium" color="dark" expand="full" id="menulabel">Сменить логин</ion-button>
+                <ion-button fill="clear" size="medium" color="dark" expand="full" id="menulabel">Сменить пароль</ion-button>
+                <ion-button disabled="true" fill="clear" size="medium" color="dark" expand="full" id="menulabel"></ion-button>
+                <ion-button disabled="true" fill="clear" size="medium" color="dark" expand="full" id="menulabel"></ion-button>
+                <ion-button disabled="true" fill="clear" size="medium" color="dark" expand="full" id="menulabel"></ion-button>
+                <ion-button disabled="true" fill="clear" size="medium" color="dark" expand="full" id="menulabel"></ion-button>
+                <ion-button disabled="true" fill="clear" size="medium" color="dark" expand="full" id="menulabel"></ion-button>
+                <ion-button disabled="true" fill="clear" size="medium" color="dark" expand="full" id="menulabel"></ion-button>
+                <ion-button disabled="true" fill="clear" size="medium" color="dark" expand="full" id="menulabel"></ion-button>
+                <ion-button disabled="true" fill="clear" size="medium" color="dark" expand="full" id="menulabel"></ion-button>
+                <ion-button disabled="true" fill="clear" size="medium" color="dark" expand="full" id="menulabel"></ion-button>
+                <ion-button disabled="true" fill="clear" size="medium" color="dark" expand="full" id="menulabel"></ion-button>
+                <ion-button disabled="true" fill="clear" size="medium" color="dark" expand="full" id="menulabel"></ion-button>
+                <ion-button fill="clear" size="medium" color="dark" expand="full" id="menulabel" (click)="Logout()">Выйти</ion-button>
+            </ion-list>
+        <ion-col id="col">
+          <ion-item id="listheader">
+            <h2> Посты </h2>
+          </ion-item>
+          <ion-list>
+          </ion-list>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
 </ion-content>
