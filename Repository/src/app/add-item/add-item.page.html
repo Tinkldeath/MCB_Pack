@@ -41,7 +41,7 @@
     <ion-input placeholder="Учебное заведение" class="Input"></ion-input>
     <ion-input placeholder="Специальность" class="Input"></ion-input>
     <ion-input placeholder="Описание" class="Input"></ion-input>
-    <ion-select placeholder="Категория" class="Input">
+    <ion-select placeholder="Категория" class="Input" interface="popover">
       <ion-select-option *ngFor="let category of categories">
         {{category.name}}
       </ion-select-option>
