@@ -3,14 +3,26 @@ const Post = require('./../models/postModel');
 
 module.exports.getPost = async function(req,res){
     const reqPostId = req.body.postId
-    await Post.findById(reqPostId, function (err,docs) {
+    try {
+        await Post.findById(reqPostId, function (err,docs) {
+            if(err){
+                console.log(err);
+                return res.json({
+                    message: 'DB error'
+                })
+            }
+            else{
+                return res.send(docs);
+            }
+        });
+    } catch (err) {
         if(err){
-            return res.sendStatus(400);
+            console.log(err);
+            res.json({
+                message: 'Server error'
+            });
         }
-        else{
-            return res.send(docs);
-        }
-    })
+    }
 }
 
 module.exports.addPost = async function(req,res){
@@ -41,14 +53,15 @@ module.exports.addPost = async function(req,res){
         category: reqCategory,
         description: reqDescription,
         fileUrl: reqFileUrl
-    })
+    });
 
     try {
+        // Тут надо отправлять ответ только после отработки промиса
         await post.save().then(() => {
             console.log('Post created');
-        });
-        res.json({
-            message: 'Created'
+            res.json({
+                message: 'Created'
+            });
         });
     } catch (err) {
         console.log(err);
@@ -63,7 +76,8 @@ module.exports.patchPost = async function (req,res) {
     // Логика обновления поста
     const reqPostId = req.body.postId;
     try {
-        await findByIdAndUpdate(reqPostId,{postId: reqPostId,
+        // Забыл обратиться к модели Post, я подправил
+        await Post.findByIdAndUpdate(reqPostId,{postId: reqPostId,
             ownerId: reqOwnerId,
             postName: reqPostName,
             postTheme: reqPostTheme,
@@ -82,13 +96,12 @@ module.exports.patchPost = async function (req,res) {
                     });
                 }
                 else{
-                    console.log(`post ${reqPostId} updated`);
+                    console.log(`Post ${reqPostId} updated`);
                     res.json({
-                        message: 'Post updated'
+                        message: 'Updated'
                     });
                 }
-        })
-        
+        });
     } catch (err) {
         if(err){
             console.log(err);
@@ -97,15 +110,14 @@ module.exports.patchPost = async function (req,res) {
             });
         } 
     }
-
-    
 }
 
 module.exports.deletePost = async function (req,res) {
     // Логика удаления поста
     const reqPostId = req.body.postId;
     try {
-        await findByIdAndDelete(reqPostId,(err)=>{
+        // Тут тоже забыл обратиться к модели Post, я подправил
+        await Post.findByIdAndDelete(reqPostId,(err)=>{
             if(err){
                 console.log(err);
                 res.json({
@@ -114,30 +126,40 @@ module.exports.deletePost = async function (req,res) {
             }
             else{
                 res.json({
-                    message: 'Successfully deleted'
+                    message: 'Deleted'
                 })
             }
         })
     } catch (err) {
         if(err){
-            console.log(err)
+            console.log(err);
             res.json({
                 message: 'server error'
-            })
+            });
         }
     }
 }
 
 module.exports.getAll = async function(req,res){
-    await Post.find({},function(err,docs){
+    try {
+        // Пропустил trycatch для серверных ошибок, и вроде где-то забыл сделать лог в консоли
+        await Post.find({},function(err,docs){
+            if(err){
+                console.log(err);
+                res.json({
+                    message: 'DB error'
+                });
+            }
+            else{
+                res.send(docs);
+            }
+        });
+    } catch (err) {
         if(err){
             console.log(err);
             res.json({
-                message: 'DB error'
+                message: 'Server error'
             });
         }
-        else{
-            res.send(docs);
-        }
-    })
+    }
 }
