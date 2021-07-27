@@ -26,10 +26,8 @@ module.exports.login = async function(req,res){
             }, Keys.jwt, {expiresIn: 60*60});
             // Отправляем сгенерированный токен
             res.status(200).json({
-                id: found._id,
                 token: `Bearer ${resToken}`,
-                login: found.login,
-                isAdmin: found.isAdmin
+                user: found
             });
         }
         else{
@@ -69,7 +67,8 @@ module.exports.register = async function(req,res){
         const user = new User({
             login: req.body.login,
             password: Bcrypt.hashSync(pas,salt),
-            isAdmin: req.body.isAdmin
+            isAdmin: req.body.isAdmin,
+            isModer: req.body.isModer
         });
         try {
             await user.save().then(() => {

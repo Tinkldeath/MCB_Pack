@@ -8,8 +8,9 @@ router.use(bodyParser.urlencoded({extended:true}));
 router.use(bodyParser.json());
 
 router.post('/login',controller.login);
+//localhost:port/api/auth/login
 
 router.post('/register',controller.register);
-
+//localhost:port/api/auth/register
 
 module.exports = router;

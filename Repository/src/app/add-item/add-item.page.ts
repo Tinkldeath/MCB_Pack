@@ -1,8 +1,7 @@
+import { DataService } from './../shared/services/data.service';
+import { ViewService } from '../shared/services/view.service';
 import { Category } from './../shared/models/models';
 import { Component, OnInit } from '@angular/core';
-import { UserData } from '../shared/models/models';
-import { Router } from '@angular/router';
-import { DataService } from '../shared/services/data.service';
 
 @Component({
   selector: 'app-add-item',
@@ -11,29 +10,19 @@ import { DataService } from '../shared/services/data.service';
 })
 export class AddItemPage implements OnInit {
 
-  userdata: UserData = null;
   categories: Category[] = [];
+  login: string = null;
 
   constructor(
-    private router: Router,
-    private dataService: DataService
+    private dataService: DataService,
+    private viewService: ViewService
   ) {
-    this.dataService.currentMessage.subscribe(message => this.userdata = message);
-    this.dataService.currentCategories.subscribe(message => this.categories = message);
+    this.viewService.currentCategories.subscribe(data => {
+      this.categories = data;
+    });
   }
 
   ngOnInit() {
-    this.dataService.currentMessage.subscribe(message => this.userdata = message);
-    this.dataService.currentCategories.subscribe(message => this.categories = message);
-  }
-
-  Logout(){
-    localStorage.clear();
-    this.userdata.login = null;
-    this.userdata.id = null;
-    this.userdata.isAdmin = null;
-    this.userdata.stay = null;
-    this.userdata.token = null;
-    this.router.navigateByUrl('home');
+    this.login = this.dataService.GetLogin();
   }
 }

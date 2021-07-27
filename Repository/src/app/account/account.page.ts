@@ -1,7 +1,7 @@
+import { DataService } from './../shared/services/data.service';
+import { ViewService } from './../shared/services/view.service';
 import { Component, OnInit } from '@angular/core';
-import { UserData } from '../shared/models/models';
 import { Router } from '@angular/router';
-import { DataService } from '../shared/services/data.service';
 import { Category } from './../shared/models/models';
 
 @Component({
@@ -11,28 +11,24 @@ import { Category } from './../shared/models/models';
 })
 export class AccountPage implements OnInit {
 
-  userdata: UserData = null;
+  login: string = null;
+  isAdmin: string = null;
   categories: Category[] = [];
 
   constructor(
     private router: Router,
+    private viewService: ViewService,
     private dataService: DataService
-  ) {
-    this.dataService.currentMessage.subscribe(message => this.userdata = message);
-    this.dataService.currentCategories.subscribe(message => this.categories = message);
-  }
+  ) {}
 
   ngOnInit() {
-    console.log(this.userdata);
+    this.login = this.dataService.GetLogin();
+    this.isAdmin = this.dataService.GetAdmin();
   }
 
   Logout(){
-    localStorage.clear();
-    this.userdata.login = null;
-    this.userdata.id = null;
-    this.userdata.isAdmin = null;
-    this.userdata.stay = null;
-    this.userdata.token = null;
+    this.dataService.DeleteUser();
+    this.viewService.ChangeMessage(this.dataService.GetLogin());
     this.router.navigateByUrl('home');
   }
 

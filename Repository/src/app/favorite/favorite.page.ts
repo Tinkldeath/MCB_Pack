@@ -1,7 +1,6 @@
+import { DataService } from './../shared/services/data.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { DataService } from '../shared/services/data.service';
-import { UserData } from '../shared/models/models';
 
 @Component({
   selector: 'app-favorite',
@@ -10,27 +9,14 @@ import { UserData } from '../shared/models/models';
 })
 export class FavoritePage implements OnInit {
 
-  userdata: UserData = null;
+  login: string = null;
 
   constructor(
-    private router : Router,
-    private dataService : DataService
-  ) {
-    this.dataService.currentMessage.subscribe(message => this.userdata = message);
-  }
+    private dataService: DataService
+  ) {}
 
   ngOnInit() {
-    this.dataService.currentMessage.subscribe(message => this.userdata = message);
-  }
-
-  Logout(){
-    localStorage.clear();
-    this.userdata.login = null;
-    this.userdata.id = null;
-    this.userdata.isAdmin = null;
-    this.userdata.stay = null;
-    this.userdata.token = null;
-    this.router.navigateByUrl('home');
+    this.login = this.dataService.GetLogin();
   }
 
 }

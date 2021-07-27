@@ -14,8 +14,7 @@
           </ion-col>
           <ion-col>
             <ion-button fill="clear" size="medium" color="dark" class="Help" routerLink="/add-item"> <u>Загрузить</u> </ion-button>
-            <ion-button *ngIf="userdata.login === null" size="medium" color="dark" class="EnterButton" shape="round" fill="outline" routerLink="/sign-in"> Войти </ion-button>
-            <ion-button *ngIf="userdata.login != null" size="medium" color="dark" class="EnterButton" shape="round" fill="outline" routerLink="/account"> <ion-label>{{userdata.login}}</ion-label> </ion-button>
+            <ion-button size="medium" color="dark" class="EnterButton" shape="round" fill="outline" routerLink="/account"> <ion-label>{{login}}</ion-label> </ion-button>
           </ion-col>
         </ion-row>
       </ion-grid>

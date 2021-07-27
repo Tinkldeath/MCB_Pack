@@ -1,7 +1,7 @@
 import { DataService } from './../shared/services/data.service';
 import { AuthService } from './../shared/services/auth.service';
+import { ViewService } from '../shared/services/view.service';
 import { Component, OnInit } from '@angular/core';
-import { User, UserData } from './../shared/models/models';
 import { Router } from '@angular/router';
 @Component({
   selector: 'app-sign-in',
@@ -13,21 +13,24 @@ export class SignInPage implements OnInit {
   stay: boolean = false;
   login: string = '';
   password: string = '';
-  object: UserData;
 
   constructor(
     private auth : AuthService,
     private router: Router,
+    private viewService: ViewService,
     private dataService: DataService
   ) {}
 
   ngOnInit() {
-    this.dataService.currentMessage.subscribe(message => this.object = message);
+    this.dataService.DeleteUser();
   }
 
   SignIn(){
     if(this.login != '' && this.password != ''){
-      const user = new User(this.login, this.password, false);
+      const user = {
+        login: this.login,
+        password: this.password
+      };
       this.auth.Login(user).subscribe((data) => {
         if(data.token === ''){
           alert('Неверный логин или пароль, повторите попытку');
@@ -37,15 +40,10 @@ export class SignInPage implements OnInit {
         }
         else{
           alert('Успешный вход');
-          if(this.stay){
-            localStorage.setItem('token',data.token);
-            localStorage.setItem('login',data.login);
-            localStorage.setItem('isAdmin',data.isAdmin.toString());
-            localStorage.setItem('stay',this.stay.toString());
-            localStorage.setItem('id',data.id);
-          }
-          this.object = new UserData(data.login,this.stay.toString(),data.isAdmin.toString(),data.token,data.id);
-          this.dataService.ChangeMessage(this.object);
+          const user = data.user;
+          user.stays = this.stay.toString();
+          this.dataService.SaveUser(user);
+          this.viewService.ChangeMessage(this.login);
           this.router.navigateByUrl('home');
         }
       }, (err) => {

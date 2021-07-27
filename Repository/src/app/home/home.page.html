@@ -13,12 +13,12 @@
             <ion-searchbar color="light" placeholder="Поиск по документам" id="searchbar"></ion-searchbar>
           </ion-col>
           <ion-col>
-              <ion-button *ngIf="userdata.login === null" fill="clear" size="medium" color="dark" class="Help" routerLink="/sign-in"> <u>Загрузить</u> </ion-button>
-              <ion-button *ngIf="userdata.login != null" fill="clear" size="medium" color="dark" class="Help" (click)="GoAdd()"> <u>Загрузить</u> </ion-button>
-              <ion-button *ngIf="userdata.login === null" fill="clear" size="medium" color="dark" class="Help" routerLink="/sign-in"> <u>Избранное</u> </ion-button>
-              <ion-button *ngIf="userdata.login != null" fill="clear" size="medium" color="dark" class="Help" (click)="GoFavorite()"> <u>Избранное</u> </ion-button>
-              <ion-button *ngIf="userdata.login === null" size="medium" color="dark" class="EnterButton" shape="round" fill="outline" routerLink="/sign-in"> Войти </ion-button>
-              <ion-button *ngIf="userdata.login != null" size="medium" color="dark" class="EnterButton" shape="round" fill="outline" (click)="GoProfile()"> <ion-label>{{userdata.login}}</ion-label> </ion-button>
+              <ion-button *ngIf="login === null" fill="clear" size="medium" color="dark" class="Help" routerLink="/sign-in"> <u>Загрузить</u> </ion-button>
+              <ion-button *ngIf="login != null" fill="clear" size="medium" color="dark" class="Help" (click)="GoAdd()"> <u>Загрузить</u> </ion-button>
+              <ion-button *ngIf="login === null" fill="clear" size="medium" color="dark" class="Help" routerLink="/sign-in"> <u>Избранное</u> </ion-button>
+              <ion-button *ngIf="login != null" fill="clear" size="medium" color="dark" class="Help" (click)="GoFavorite()"> <u>Избранное</u> </ion-button>
+              <ion-button *ngIf="login === null" size="medium" color="dark" class="EnterButton" shape="round" fill="outline" routerLink="/sign-in"> Войти </ion-button>
+              <ion-button *ngIf="login != null" size="medium" color="dark" class="EnterButton" shape="round" fill="outline" (click)="GoProfile()"> <ion-label>{{login}}</ion-label> </ion-button>
           </ion-col>
         </ion-row>
       </ion-grid>

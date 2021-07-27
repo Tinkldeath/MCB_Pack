@@ -14,6 +14,7 @@ const scheduleRouter = require('./routes/scheduleRouter');
 const postRouter = require('./routes/postRouter');
 const authRouter = require('./routes/authRouter');
 const categoriesRouter = require('./routes/categoriesRouter');
+const subjectRouter = require('./routes/subjectRouter');
 
 // Cors define
 app.use(cors());
@@ -35,6 +36,7 @@ app.use('/api/schedule',scheduleRouter);
 app.use('/api/post',postRouter);
 app.use('/api/auth',authRouter);
 app.use('/api/categories',categoriesRouter);
+app.use('/api/subject',subjectRouter);
 
 // BodyParser
 app.use(bodyParser.urlencoded({extended:true}));

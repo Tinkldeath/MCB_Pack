@@ -29,7 +29,12 @@ export class RegisterPage implements OnInit {
       return;
     }
     else{
-      const user = new User(this.login,this.password,false);
+      const user = {
+        login: this.login,
+        password: this.password,
+        isAdmin: false,
+        isModer: false
+      };
       this.authService.Register(user).subscribe(data => {
         if(data.message == 'Created'){
           alert('Вы зарегистрированы и можете войти со своими данными');
