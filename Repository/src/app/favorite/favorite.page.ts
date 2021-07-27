@@ -1,6 +1,6 @@
-import { DataService } from './../shared/services/data.service';
+import { User } from './../shared/models/models';
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ViewService } from '../shared/services/view.service';
 
 @Component({
   selector: 'app-favorite',
@@ -9,14 +9,16 @@ import { Router } from '@angular/router';
 })
 export class FavoritePage implements OnInit {
 
-  login: string = null;
+  user: User = null;
 
   constructor(
-    private dataService: DataService
-  ) {}
-
-  ngOnInit() {
-    this.login = this.dataService.GetLogin();
+    private viewService: ViewService
+  ) {
+    this.viewService.currentMessage.subscribe(user => {
+      this.user = user;
+    });
   }
+
+  ngOnInit() {}
 
 }

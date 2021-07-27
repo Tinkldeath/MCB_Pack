@@ -1,4 +1,4 @@
-import { DataService } from './../shared/services/data.service';
+import { User } from './../shared/models/models';
 import { RequestsService } from '../shared/services/requests.service';
 import { ViewService } from '../shared/services/view.service';
 import { Router } from '@angular/router';
@@ -13,18 +13,16 @@ import { Category } from '../shared/models/models';
 export class HomePage implements OnInit, OnDestroy{
 
   searchCategories: boolean = true;
-  login: string = null;
-  stays: string = null;
   categories: Category[] = [];
+  user: User = null;
 
   constructor(
     private reqService: RequestsService,
     private viewService: ViewService,
-    private dataService: DataService,
     private router: Router
     ) {
-      this.viewService.currentMessage.subscribe(login => {
-        this.login = login;
+      this.viewService.currentMessage.subscribe(user => {
+        this.user = user;
       });
   }
 
@@ -32,16 +30,12 @@ export class HomePage implements OnInit, OnDestroy{
     this.reqService.GetCategories().subscribe((data) => {
       this.categories = data;
     });
-    this.stays = this.dataService.GetStays();
-    this.login = this.dataService.GetLogin();
-    console.log(this.stays);
-    console.log(this.login);
+    this.user = JSON.parse(localStorage.getItem('user'));
   }
 
   ngOnDestroy(){
-    if(this.dataService.GetStays() === 'false'){
+    if(this.user.GetStays() === false){
       localStorage.clear();
-      this.viewService.ChangeMessage(null);
     }
   }
 

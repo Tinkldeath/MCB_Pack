@@ -1,4 +1,4 @@
-import { DataService } from './../shared/services/data.service';
+import { User } from './../shared/models/models';
 import { AuthService } from './../shared/services/auth.service';
 import { ViewService } from '../shared/services/view.service';
 import { Component, OnInit } from '@angular/core';
@@ -17,12 +17,11 @@ export class SignInPage implements OnInit {
   constructor(
     private auth : AuthService,
     private router: Router,
-    private viewService: ViewService,
-    private dataService: DataService
+    private viewService: ViewService
   ) {}
 
   ngOnInit() {
-    this.dataService.DeleteUser();
+    localStorage.clear();
   }
 
   SignIn(){
@@ -40,10 +39,10 @@ export class SignInPage implements OnInit {
         }
         else{
           alert('Успешный вход');
-          const user = data.user;
-          user.stays = this.stay.toString();
-          this.dataService.SaveUser(user);
-          this.viewService.ChangeMessage(this.login);
+          const inUser = data.user;
+          const user = new User(inUser._id,data.token,inUser.login,inUser.password,inUser.isAdmin,inUser.isModer,this.stay);
+          this.viewService.ChangeMessage(user);
+          localStorage.setItem('user',JSON.stringify(user));
           this.router.navigateByUrl('home');
         }
       }, (err) => {

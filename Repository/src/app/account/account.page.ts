@@ -1,8 +1,8 @@
-import { DataService } from './../shared/services/data.service';
 import { ViewService } from './../shared/services/view.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Category } from './../shared/models/models';
+import { User } from './../shared/models/models';
 
 @Component({
   selector: 'app-account',
@@ -11,24 +11,24 @@ import { Category } from './../shared/models/models';
 })
 export class AccountPage implements OnInit {
 
-  login: string = null;
-  isAdmin: string = null;
+  user: User = null;
   categories: Category[] = [];
 
   constructor(
     private router: Router,
     private viewService: ViewService,
-    private dataService: DataService
-  ) {}
+  ) {
+    this.viewService.currentMessage.subscribe(user => {
+      this.user = user;
+    });
+  }
 
   ngOnInit() {
-    this.login = this.dataService.GetLogin();
-    this.isAdmin = this.dataService.GetAdmin();
   }
 
   Logout(){
-    this.dataService.DeleteUser();
-    this.viewService.ChangeMessage(this.dataService.GetLogin());
+    this.viewService.ChangeMessage(null);
+    localStorage.clear();
     this.router.navigateByUrl('home');
   }
 
