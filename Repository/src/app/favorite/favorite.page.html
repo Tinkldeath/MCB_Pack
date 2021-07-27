@@ -10,13 +10,12 @@
             </ion-label>
           </ion-col>
           <ion-col>
-            <ion-searchbar color="light" placeholder="Поиск по документам" id="searchbar"></ion-searchbar>
+            <ion-searchbar color="light" placeholder="Поиск по избранному" id="searchbar"></ion-searchbar>
           </ion-col>
           <ion-col>
             <ion-button fill="clear" size="medium" color="dark" class="Help" routerLink="/add-item"> <u>Загрузить</u> </ion-button>
             <ion-button *ngIf="userdata.login === null" size="medium" color="dark" class="EnterButton" shape="round" fill="outline" routerLink="/sign-in"> Войти </ion-button>
             <ion-button *ngIf="userdata.login != null" size="medium" color="dark" class="EnterButton" shape="round" fill="outline" routerLink="/account"> <ion-label>{{userdata.login}}</ion-label> </ion-button>
-            <ion-button *ngIf="userdata.login != null" fill="clear" size="medium" color="dark" class="Help" (click)="Logout()"> <u>Выйти</u> </ion-button>
           </ion-col>
         </ion-row>
       </ion-grid>

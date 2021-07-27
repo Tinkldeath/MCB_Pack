@@ -19,7 +19,6 @@
               <ion-button *ngIf="userdata.login != null" fill="clear" size="medium" color="dark" class="Help" (click)="GoFavorite()"> <u>Избранное</u> </ion-button>
               <ion-button *ngIf="userdata.login === null" size="medium" color="dark" class="EnterButton" shape="round" fill="outline" routerLink="/sign-in"> Войти </ion-button>
               <ion-button *ngIf="userdata.login != null" size="medium" color="dark" class="EnterButton" shape="round" fill="outline" (click)="GoProfile()"> <ion-label>{{userdata.login}}</ion-label> </ion-button>
-              <ion-button *ngIf="userdata.login != null" fill="clear" size="medium" color="dark" class="Help" (click)="Logout()"> <u>Выйти</u> </ion-button>
           </ion-col>
         </ion-row>
       </ion-grid>
@@ -31,27 +30,31 @@
   <ion-grid>
       <ion-row>
         <ion-col class="SelectItem">
-          <ion-item>
-            <ion-label>Предмет</ion-label>
-            <ion-select interface="popover">Предмет</ion-select>
+          <ion-item id="item">
+            <ion-label>Категория</ion-label>
+            <ion-select interface="popover">
+              <ion-select-option *ngFor="let category of categories">
+                {{category.name}}
+              </ion-select-option>
+            </ion-select>
           </ion-item>
         </ion-col>
         <ion-col class="SelectItem">
-          <ion-item>
+          <ion-item id="item">
+            <ion-label>Предмет</ion-label>
+            <ion-select interface="popover"></ion-select>
+          </ion-item>
+        </ion-col>
+        <ion-col class="SelectItem">
+          <ion-item id="item">
             <ion-label>Автор</ion-label>
-            <ion-select interface="popover">Автор
+            <ion-select interface="popover">
               <ion-select-option value="f">Female</ion-select-option>
               <ion-select-option value="m">Male</ion-select-option>
             </ion-select>
           </ion-item>
         </ion-col>
-        <ion-col class="SelectItem">
-          <ion-item>
-            <ion-label>Специальность</ion-label>
-            <ion-select interface="popover">Специальность</ion-select>
-          </ion-item>
-        </ion-col>
-        <ion-col class="SelectItem">
+        <ion-col id="item">
           <ion-button class="ClearButton" fill="outline" size="small" color="dark"> Очистить фильтры </ion-button>
         </ion-col>
         <ion-col class="SelectToggle">
