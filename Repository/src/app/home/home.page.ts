@@ -1,6 +1,8 @@
-import { User } from './../shared/models/models';
+import { Subscription } from 'rxjs';
+import { IUser } from './../shared/models/models';
 import { RequestsService } from '../shared/services/requests.service';
 import { ViewService } from '../shared/services/view.service';
+import { DataService } from '../shared/services/data.service';
 import { Router } from '@angular/router';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Category } from '../shared/models/models';
@@ -12,30 +14,37 @@ import { Category } from '../shared/models/models';
 })
 export class HomePage implements OnInit, OnDestroy{
 
+  user: IUser = null;
   searchCategories: boolean = true;
   categories: Category[] = [];
-  user: User = null;
+  vSub: Subscription = null;
 
   constructor(
     private reqService: RequestsService,
     private viewService: ViewService,
+    private dataService: DataService,
     private router: Router
     ) {
-      this.viewService.currentMessage.subscribe(user => {
+      this.user = this.dataService.DecryptUser();
+      this.vSub = this.viewService.currentUser.subscribe(user => {
         this.user = user;
       });
-  }
+    }
 
   ngOnInit(){
     this.reqService.GetCategories().subscribe((data) => {
       this.categories = data;
     });
-    this.user = JSON.parse(localStorage.getItem('user'));
+    this.user = this.dataService.DecryptUser();
+    this.viewService.ChangeUser(this.user);
+    if(this.user === null){
+      localStorage.clear();
+    }
   }
 
   ngOnDestroy(){
-    if(this.user.GetStays() === false){
-      localStorage.clear();
+    if(this.vSub !== null){
+      this.vSub.unsubscribe();
     }
   }
 

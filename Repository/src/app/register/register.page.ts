@@ -1,6 +1,6 @@
+import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
-import { User, Registered } from './../shared/models/models';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AuthService } from '../shared/services/auth.service';
 
 @Component({
@@ -8,12 +8,12 @@ import { AuthService } from '../shared/services/auth.service';
   templateUrl: './register.page.html',
   styleUrls: ['./register.page.scss'],
 })
-export class RegisterPage implements OnInit {
+export class RegisterPage implements OnInit, OnDestroy {
 
+  aSub: Subscription;
   login: string = '';
   password: string = '';
   repeat: string = '';
-  registered: Registered;
 
   constructor(
     private authService: AuthService,
@@ -21,6 +21,12 @@ export class RegisterPage implements OnInit {
   ) { }
 
   ngOnInit() {
+  }
+
+  ngOnDestroy(){
+    if(this.aSub !== null){
+      this.aSub.unsubscribe();
+    }
   }
 
   Register(){
@@ -35,7 +41,7 @@ export class RegisterPage implements OnInit {
         isAdmin: false,
         isModer: false
       };
-      this.authService.Register(user).subscribe(data => {
+      this.aSub = this.authService.Register(user).subscribe(data => {
         if(data.message == 'Created'){
           alert('Вы зарегистрированы и можете войти со своими данными');
           this.router.navigateByUrl('sign-in');

@@ -1,7 +1,7 @@
+import { IUser } from './../models/models';
 import { Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { LoggedIn, Registered } from '../models/models';
 import { apiUrl } from 'src/assets/keys';
 import { tap } from 'rxjs/operators';
 
@@ -10,22 +10,16 @@ import { tap } from 'rxjs/operators';
 })
 export class AuthService {
 
-  private token: string;
-
   constructor(
     private http : HttpClient,
   ) { }
 
-  Login(user: any) : Observable<LoggedIn>{
-    return this.http.post<LoggedIn>(`${apiUrl}/auth/login`,user);
+  Login(user: any) : Observable<{token: string, user: IUser}>{
+    return this.http.post<{token: string, user: IUser}>(`${apiUrl}/auth/login`,user);
   }
 
-  Register(user: any) :Observable<{token: string}> {
-    return this.http.post<{token: string}>(`${apiUrl}/auth/register`,user).pipe(
-      tap(({token}) => {
-        localStorage.setItem('authToken',token);
-      })
-    )
+  Register(user: any) :Observable<{message: string}> {
+    return this.http.post<{message: string}>(`${apiUrl}/auth/register`,user);
   }
 
 }

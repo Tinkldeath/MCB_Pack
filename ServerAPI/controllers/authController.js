@@ -32,11 +32,10 @@ module.exports.login = async function(req,res){
         }
         else{
             // Пароли не совпали
-            res.json({
-                token: '',
-                login: '',
-                isAdmin: null
-            }).status(401);
+            res.status(401).json({
+                token: null,
+                user: null
+            });
         }
     }
     else{

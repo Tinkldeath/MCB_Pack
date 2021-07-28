@@ -1,51 +1,43 @@
-// import { Injectable } from '@angular/core';
-// import { User } from '../models/models';
+import { IUser } from './../models/models';
+import { Injectable } from '@angular/core';
+import * as crypto from 'crypto-js';
 
-// @Injectable({
-//   providedIn: 'root'
-// })
-// export class DataService {
+@Injectable({
+  providedIn: 'root'
+})
+export class DataService {
 
-//   SaveUser(inUser: User){
-//     localStorage.setItem('id',inUser._id);
-//     localStorage.setItem('token',inUser.token);
-//     localStorage.setItem('login',inUser.login);
-//     localStorage.setItem('isAdmin',inUser.isAdmin);
-//     localStorage.setItem('isModer',inUser.isModer);
-//     localStorage.setItem('stays',inUser.stays);
-//   }
+  private user: IUser = null;
 
-//   DeleteUser(){
-//     localStorage.removeItem('id');
-//     localStorage.removeItem('token');
-//     localStorage.removeItem('login');
-//     localStorage.removeItem('isAdmin');
-//     localStorage.removeItem('isModer');
-//     localStorage.removeItem('stays');
-//   }
+  constructor(){}
 
-//   GetToken(){
-//     return localStorage.getItem('token');
-//   }
+  SetUser(inUser: IUser){
+    this.user = inUser;
+    const encrypted = crypto.AES.encrypt(JSON.stringify(inUser), 'secret key').toString();
+    localStorage.setItem('user',encrypted);
+  }
 
-//   GetLogin(){
-//     return localStorage.getItem('login');
-//   }
+  SetUserSession(inUser: IUser){
+    this.user = inUser;
+    const encrypted = crypto.AES.encrypt(JSON.stringify(inUser), 'secret key').toString();
+    sessionStorage.setItem('user',encrypted);
+  }
 
-//   GetAdmin(){
-//     return localStorage.getItem('isAdmin');
-//   }
+  DecryptUser(){
+    if(localStorage.getItem('user') !== null && !this.user){
+      const bytes  = crypto.AES.decrypt(localStorage.getItem('user'), 'secret key');
+      const decryptedData = JSON.parse(bytes.toString(crypto.enc.Utf8));
+      this.user = decryptedData;
+    }
+    else if(sessionStorage.getItem('user') !== null && !this.user){
+      const bytes  = crypto.AES.decrypt(sessionStorage.getItem('user'), 'secret key');
+      const decryptedData = JSON.parse(bytes.toString(crypto.enc.Utf8));
+      this.user = decryptedData;
+    }
+    return this.user;
+  }
 
-//   GetModer(){
-//     return localStorage.getItem('isModer');
-//   }
-
-//   GetId(){
-//     return localStorage.getItem('id');
-//   }
-
-//   GetStays(){
-//     return localStorage.getItem('stays');
-//   }
-
-// }
+  Clear(){
+    localStorage.clear();
+  }
+}

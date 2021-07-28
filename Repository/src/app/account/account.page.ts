@@ -1,34 +1,49 @@
-import { ViewService } from './../shared/services/view.service';
-import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Category } from './../shared/models/models';
-import { User } from './../shared/models/models';
+import { Subscription } from 'rxjs';
+import { ViewService } from './../shared/services/view.service';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Category, IUser } from './../shared/models/models';
+
 
 @Component({
   selector: 'app-account',
   templateUrl: './account.page.html',
   styleUrls: ['./account.page.scss'],
 })
-export class AccountPage implements OnInit {
+export class AccountPage implements OnInit, OnDestroy {
 
-  user: User = null;
   categories: Category[] = [];
+  user: IUser = null;
+  vSub: Subscription = null;
+  uSub: Subscription = null;
 
   constructor(
-    private router: Router,
     private viewService: ViewService,
-  ) {
-    this.viewService.currentMessage.subscribe(user => {
+    private router: Router
+  ) {}
+
+  ngOnInit() {
+    this.vSub = this.vSub = this.viewService.currentCategories.subscribe(data => {
+      this.categories = data;
+    })
+    this.uSub = this.viewService.currentUser.subscribe(user => {
       this.user = user;
     });
   }
 
-  ngOnInit() {
+  ngOnDestroy(){
+    if(this.vSub !== null){
+      this.vSub.unsubscribe();
+    }
+    if(this.uSub !== null){
+      this.uSub.unsubscribe();
+    }
   }
 
   Logout(){
-    this.viewService.ChangeMessage(null);
     localStorage.clear();
+    sessionStorage.clear();
+    this.viewService.ChangeUser(null);
     this.router.navigateByUrl('home');
   }
 
