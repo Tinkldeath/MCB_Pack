@@ -29,3 +29,8 @@ export interface LoggedIn{
 export interface Registered{
     message: string
 }
+
+export interface ISubject{
+  categoryId: string,
+  name: string
+}

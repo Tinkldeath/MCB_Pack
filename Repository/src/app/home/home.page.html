@@ -75,7 +75,8 @@
       <ion-title size="large">Blank</ion-title>
     </ion-toolbar>
   </ion-header>
-
+  <ion-col id="popup">
+  </ion-col>
   <ion-grid >
     <ion-row no-padding>
       <ion-col *ngFor="let category of categories">
@@ -85,7 +86,7 @@
             {{category.description}}
           </ion-card-content>
         </ion-card>
-    </ion-col>
+      </ion-col>
     </ion-row>
   </ion-grid>
 </ion-content>

@@ -85,6 +85,16 @@ u{
   width: 900px;
 }
 
+#popup{
+  height: 69vh;
+  margin: 20px;
+  width: 30vh;
+  float: right;
+  border: 5px solid brown;
+  background-color: white;
+  margin-left: -5px;
+}
+
 .SelectItem{
   margin-left: 15px;
   margin-right: 0;
@@ -127,6 +137,6 @@ u{
 #searchbar{
   margin-top: 8px;
   margin-left: -240px;
-  width: 700px;
+  width: 47.6388889vw;
   text-align: center;
 }

@@ -25,7 +25,7 @@ export class AddItemPage implements OnInit, OnDestroy {
     });
     this.uSub = this.viewService.currentUser.subscribe(user => {
       this.user = user;
-    })
+    });
   }
 
   ngOnDestroy(){

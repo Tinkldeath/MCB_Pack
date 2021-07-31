@@ -12,6 +12,7 @@ import { Category, IUser } from './../shared/models/models';
 })
 export class AccountPage implements OnInit, OnDestroy {
 
+  selection: string = '';
   categories: Category[] = [];
   user: IUser = null;
   vSub: Subscription = null;
@@ -47,4 +48,7 @@ export class AccountPage implements OnInit, OnDestroy {
     this.router.navigateByUrl('home');
   }
 
+  Change(message: string){
+    this.selection = message;
+  }
 }

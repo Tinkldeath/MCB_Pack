@@ -1,3 +1,5 @@
+import { SubjectsComponent } from './../components/subjects/subjects.component';
+import { CategoriesComponent } from './../components/categories/categories.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -15,6 +17,7 @@ import { AccountPage } from './account.page';
     IonicModule,
     AccountPageRoutingModule
   ],
-  declarations: [AccountPage]
+  entryComponents: [],
+  declarations: [AccountPage,CategoriesComponent,SubjectsComponent]
 })
 export class AccountPageModule {}

@@ -10,7 +10,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AuthService } from './shared/services/auth.service';
 import { HttpClient } from '@angular/common/http';
 import { HttpClientModule } from '@angular/common/http';
-
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],

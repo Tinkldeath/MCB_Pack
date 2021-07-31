@@ -16,8 +16,8 @@
 </ion-header>
 
 <ion-content>
-    <ion-grid *ngIf="this.user.isAdmin === true " id="grid">
-      <ion-row id="grid">
+    <ion-grid *ngIf="this.user.isAdmin === true && this.selection === '' " id="grid">
+        <ion-row id="grid">
             <ion-list id="sidemenu">
               <ion-item id="header">
                 <ion-avatar slot="start">
@@ -27,8 +27,8 @@
               </ion-item>
                 <ion-button fill="clear" size="medium" color="dark" expand="full" id="menulabel">Сменить логин</ion-button>
                 <ion-button fill="clear" size="medium" color="dark" expand="full" id="menulabel">Сменить пароль</ion-button>
-                <ion-button disabled="true" fill="clear" size="medium" color="dark" expand="full" id="menulabel"></ion-button>
-                <ion-button disabled="true" fill="clear" size="medium" color="dark" expand="full" id="menulabel"></ion-button>
+                <ion-button fill="clear" size="medium" color="dark" expand="full" id="menulabel" (click)="Change('categories')"> Ред. категории </ion-button>
+                <ion-button fill="clear" size="medium" color="dark" expand="full" id="menulabel" (click)="Change('subjects')"> Ред. предметы </ion-button>
                 <ion-button disabled="true" fill="clear" size="medium" color="dark" expand="full" id="menulabel"></ion-button>
                 <ion-button disabled="true" fill="clear" size="medium" color="dark" expand="full" id="menulabel"></ion-button>
                 <ion-button disabled="true" fill="clear" size="medium" color="dark" expand="full" id="menulabel"></ion-button>
@@ -56,8 +56,48 @@
         </ion-col>
       </ion-row>
     </ion-grid>
+    <ion-grid *ngIf="this.user.isModer === true && this.user.isAdmin === false && this.selection === '' " id="grid">
+        <ion-row id="grid">
+              <ion-list id="sidemenu">
+                <ion-item id="header">
+                  <ion-avatar slot="start">
+                    <img src="https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_1280.png">
+                  </ion-avatar>
+                  <ion-label id="menulabel">{{user.login}}</ion-label>
+                </ion-item>
+                  <ion-button fill="clear" size="medium" color="dark" expand="full" id="menulabel">Сменить логин</ion-button>
+                  <ion-button fill="clear" size="medium" color="dark" expand="full" id="menulabel">Сменить пароль</ion-button>
+                  <ion-button fill="clear" size="medium" color="dark" expand="full" id="menulabel" (click)="Change('subjects')"> Ред. предметы </ion-button>
+                  <ion-button disabled="true" fill="clear" size="medium" color="dark" expand="full" id="menulabel"></ion-button>
+                  <ion-button disabled="true" fill="clear" size="medium" color="dark" expand="full" id="menulabel"></ion-button>
+                  <ion-button disabled="true" fill="clear" size="medium" color="dark" expand="full" id="menulabel"></ion-button>
+                  <ion-button disabled="true" fill="clear" size="medium" color="dark" expand="full" id="menulabel"></ion-button>
+                  <ion-button disabled="true" fill="clear" size="medium" color="dark" expand="full" id="menulabel"></ion-button>
+                  <ion-button disabled="true" fill="clear" size="medium" color="dark" expand="full" id="menulabel"></ion-button>
+                  <ion-button disabled="true" fill="clear" size="medium" color="dark" expand="full" id="menulabel"></ion-button>
+                  <ion-button disabled="true" fill="clear" size="medium" color="dark" expand="full" id="menulabel"></ion-button>
+                  <ion-button disabled="true" fill="clear" size="medium" color="dark" expand="full" id="menulabel"></ion-button>
+                  <ion-button disabled="true" fill="clear" size="medium" color="dark" expand="full" id="menulabel"></ion-button>
+                  <ion-button fill="clear" size="medium" color="dark" expand="full" id="menulabel" (click)="Logout()">Выйти</ion-button>
+              </ion-list>
+          <ion-col id="col">
+            <ion-item id="listheader">
+              <h2> Пользователи </h2>
+            </ion-item>
+            <ion-list>
+            </ion-list>
+          </ion-col>
+          <ion-col id="col">
+            <ion-item id="listheader">
+              <h2> Посты </h2>
+            </ion-item>
+            <ion-list>
+            </ion-list>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
 
-    <ion-grid *ngIf="user.isAdmin === false " id="grid">
+    <ion-grid *ngIf="user.isAdmin === false && user.isModer === false && this.selection === '' " id="grid">
       <ion-row id="grid">
             <ion-list id="sidemenu">
               <ion-item id="header">
@@ -90,4 +130,97 @@
         </ion-col>
       </ion-row>
     </ion-grid>
+    <ion-grid *ngIf="this.selection === 'categories' " id="grid">
+      <ion-row id="grid">
+            <ion-list id="sidemenu">
+              <ion-item id="header">
+                <ion-avatar slot="start">
+                  <img src="https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_1280.png">
+                </ion-avatar>
+                <ion-label id="menulabel">{{user.login}}</ion-label>
+              </ion-item>
+              <ion-button fill="clear" size="medium" color="dark" expand="full" id="menulabel">Сменить логин</ion-button>
+              <ion-button fill="clear" size="medium" color="dark" expand="full" id="menulabel">Сменить пароль</ion-button>
+              <ion-button fill="clear" size="medium" color="dark" expand="full" id="menulabel" (click)="Change('categories')"> Ред. категории </ion-button>
+              <ion-button fill="clear" size="medium" color="dark" expand="full" id="menulabel" (click)="Change('subjects')"> Ред. предметы </ion-button>
+              <ion-button disabled="true" fill="clear" size="medium" color="dark" expand="full" id="menulabel"></ion-button>
+              <ion-button disabled="true" fill="clear" size="medium" color="dark" expand="full" id="menulabel"></ion-button>
+              <ion-button disabled="true" fill="clear" size="medium" color="dark" expand="full" id="menulabel"></ion-button>
+              <ion-button disabled="true" fill="clear" size="medium" color="dark" expand="full" id="menulabel"></ion-button>
+              <ion-button disabled="true" fill="clear" size="medium" color="dark" expand="full" id="menulabel"></ion-button>
+              <ion-button disabled="true" fill="clear" size="medium" color="dark" expand="full" id="menulabel"></ion-button>
+              <ion-button disabled="true" fill="clear" size="medium" color="dark" expand="full" id="menulabel"></ion-button>
+              <ion-button disabled="true" fill="clear" size="medium" color="dark" expand="full" id="menulabel"></ion-button>
+              <ion-button disabled="true" fill="clear" size="medium" color="dark" expand="full" id="menulabel"></ion-button>
+              <ion-button fill="clear" size="medium" color="dark" expand="full" id="menulabel" (click)="Logout()">Выйти</ion-button>
+            </ion-list>
+        <ion-col id="col">
+          <app-categories></app-categories>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    <ion-grid *ngIf="this.selection === 'subjects' && this.user.isAdmin === true" id="grid">
+      <ion-row id="grid">
+            <ion-list id="sidemenu">
+              <ion-item id="header">
+                <ion-avatar slot="start">
+                  <img src="https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_1280.png">
+                </ion-avatar>
+                <ion-label id="menulabel">{{user.login}}</ion-label>
+              </ion-item>
+                <ion-button fill="clear" size="medium" color="dark" expand="full" id="menulabel">Сменить логин</ion-button>
+                <ion-button fill="clear" size="medium" color="dark" expand="full" id="menulabel">Сменить пароль</ion-button>
+                <ion-button fill="clear" size="medium" color="dark" expand="full" id="menulabel" (click)="Change('categories')"> Ред. категории </ion-button>
+                <ion-button fill="clear" size="medium" color="dark" expand="full" id="menulabel" (click)="Change('subjects')"> Ред. предметы </ion-button>
+                <ion-button disabled="true" fill="clear" size="medium" color="dark" expand="full" id="menulabel"></ion-button>
+                <ion-button disabled="true" fill="clear" size="medium" color="dark" expand="full" id="menulabel"></ion-button>
+                <ion-button disabled="true" fill="clear" size="medium" color="dark" expand="full" id="menulabel"></ion-button>
+                <ion-button disabled="true" fill="clear" size="medium" color="dark" expand="full" id="menulabel"></ion-button>
+                <ion-button disabled="true" fill="clear" size="medium" color="dark" expand="full" id="menulabel"></ion-button>
+                <ion-button disabled="true" fill="clear" size="medium" color="dark" expand="full" id="menulabel"></ion-button>
+                <ion-button disabled="true" fill="clear" size="medium" color="dark" expand="full" id="menulabel"></ion-button>
+                <ion-button disabled="true" fill="clear" size="medium" color="dark" expand="full" id="menulabel"></ion-button>
+                <ion-button disabled="true" fill="clear" size="medium" color="dark" expand="full" id="menulabel"></ion-button>
+                <ion-button fill="clear" size="medium" color="dark" expand="full" id="menulabel" (click)="Logout()">Выйти</ion-button>
+            </ion-list>
+        <ion-col id="col">
+          <app-subjects></app-subjects>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    <ion-grid *ngIf="this.selection === 'subjects' && this.user.isAdmin === false" id="grid">
+      <ion-row id="grid">
+            <ion-list id="sidemenu">
+              <ion-item id="header">
+                <ion-avatar slot="start">
+                  <img src="https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_1280.png">
+                </ion-avatar>
+                <ion-label id="menulabel">{{user.login}}</ion-label>
+              </ion-item>
+                <ion-button fill="clear" size="medium" color="dark" expand="full" id="menulabel">Сменить логин</ion-button>
+                <ion-button fill="clear" size="medium" color="dark" expand="full" id="menulabel">Сменить пароль</ion-button>
+                <ion-button fill="clear" size="medium" color="dark" expand="full" id="menulabel" (click)="Change('subjects')"> Ред. предметы </ion-button>
+                <ion-button disabled="true" fill="clear" size="medium" color="dark" expand="full" id="menulabel"></ion-button>
+                <ion-button disabled="true" fill="clear" size="medium" color="dark" expand="full" id="menulabel"></ion-button>
+                <ion-button disabled="true" fill="clear" size="medium" color="dark" expand="full" id="menulabel"></ion-button>
+                <ion-button disabled="true" fill="clear" size="medium" color="dark" expand="full" id="menulabel"></ion-button>
+                <ion-button disabled="true" fill="clear" size="medium" color="dark" expand="full" id="menulabel"></ion-button>
+                <ion-button disabled="true" fill="clear" size="medium" color="dark" expand="full" id="menulabel"></ion-button>
+                <ion-button disabled="true" fill="clear" size="medium" color="dark" expand="full" id="menulabel"></ion-button>
+                <ion-button disabled="true" fill="clear" size="medium" color="dark" expand="full" id="menulabel"></ion-button>
+                <ion-button disabled="true" fill="clear" size="medium" color="dark" expand="full" id="menulabel"></ion-button>
+                <ion-button disabled="true" fill="clear" size="medium" color="dark" expand="full" id="menulabel"></ion-button>
+                <ion-button fill="clear" size="medium" color="dark" expand="full" id="menulabel" (click)="Logout()">Выйти</ion-button>
+            </ion-list>
+        <ion-col id="col">
+          <app-subjects></app-subjects>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
 </ion-content>
+
+<ion-footer>
+  <div id="popup">
+
+  </div>
+</ion-footer>
