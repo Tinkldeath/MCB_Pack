@@ -51,4 +51,8 @@ export class AccountPage implements OnInit, OnDestroy {
   Change(message: string){
     this.selection = message;
   }
+
+  Reset(){
+    this.selection = '';
+  }
 }
