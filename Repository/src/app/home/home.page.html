@@ -52,7 +52,7 @@
         <ion-col class="SelectItem">
           <ion-item id="item">
             <ion-label>Автор</ion-label>
-            <ion-select interface="popover">
+            <ion-select [(ngModel)]="selectedAuthor" interface="popover">
               <ion-select-option value="f">Female</ion-select-option>
               <ion-select-option value="m">Male</ion-select-option>
             </ion-select>

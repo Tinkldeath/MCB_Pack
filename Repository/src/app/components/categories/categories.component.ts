@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { RequestsService } from 'src/app/shared/services/requests.service';
+import { Category } from 'src/app/shared/models/models';
+import { Subscription } from 'rxjs';
+
 
 @Component({
   selector: 'app-categories',
@@ -7,8 +11,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CategoriesComponent implements OnInit {
 
-  constructor() { }
+  categories: Category[] = [];
+  cSub: Subscription = null;
 
-  ngOnInit() {}
+  constructor(
+    private reqService: RequestsService
+  ) { }
+
+  ngOnInit() {
+    this.cSub = this.reqService.GetCategories().subscribe((data) => {
+      this.categories = data;
+    });
+  }
 
 }

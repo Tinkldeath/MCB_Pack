@@ -18,6 +18,7 @@ export class HomePage implements OnInit, OnDestroy{
   searchCategories: boolean = true;
   selectedCategory: string = null;
   selectedSubject: string = null;
+  selectedAuthor: string = null;
 
 
   categories: Category[] = [];
@@ -83,5 +84,6 @@ export class HomePage implements OnInit, OnDestroy{
   Reset(){
     this.selectedCategory = null;
     this.selectedSubject = null;
+    this.selectedAuthor = null;
   }
 }

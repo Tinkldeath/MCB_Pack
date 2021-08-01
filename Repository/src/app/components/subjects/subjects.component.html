@@ -1,3 +1,19 @@
-<p>
-  subjects works!
-</p>
+<ion-item id="listheader">
+  <h2>Предметы</h2>
+</ion-item>
+
+<ion-grid>
+  <ion-item class="CategoryItem"  *ngFor="let subject of subjects">
+    {{subject.name}}
+    <div id="Place">
+      <ion-button fill="clear" color="dark" class="CategoryButton">Ред.</ion-button>
+      <ion-button fill="clear" color="dark" class="CategoryButton">Удалить</ion-button>
+    </div>
+  </ion-item>
+</ion-grid>
+
+<ion-footer id="foot">
+  <h2>
+    <ion-button fill="clear" color="dark">Добавить</ion-button>
+  </h2>
+</ion-footer>
