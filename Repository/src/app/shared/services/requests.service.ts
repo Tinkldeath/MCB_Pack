@@ -1,4 +1,4 @@
-import { Category } from './../models/models';
+import { Category, ISubject } from './../models/models';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { apiUrl } from 'src/assets/keys';
@@ -15,6 +15,10 @@ export class RequestsService {
 
   GetCategories() : Observable<Category[]>{
     return this.http.get<Category[]>(`${apiUrl}/categories/all`);
+  }
+
+  GetSubjects() : Observable<ISubject[]>{
+    return this.http.get<ISubject[]>(`${apiUrl}/subjects/all`);
   }
 
 }

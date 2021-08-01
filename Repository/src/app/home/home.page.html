@@ -32,7 +32,7 @@
         <ion-col class="SelectItem">
           <ion-item id="item">
             <ion-label>Категория</ion-label>
-            <ion-select interface="popover">
+            <ion-select [(ngModel)]="selectedCategory" interface="popover">
               <ion-select-option *ngFor="let category of categories">
                 {{category.name}}
               </ion-select-option>
@@ -42,7 +42,11 @@
         <ion-col class="SelectItem">
           <ion-item id="item">
             <ion-label>Предмет</ion-label>
-            <ion-select interface="popover"></ion-select>
+            <ion-select [(ngModel)]="selectedSubject" interface="popover">
+              <ion-select-option *ngFor="let subject of subjects">
+                {{subject.name}}
+              </ion-select-option>
+            </ion-select>
           </ion-item>
         </ion-col>
         <ion-col class="SelectItem">
@@ -55,7 +59,7 @@
           </ion-item>
         </ion-col>
         <ion-col id="item">
-          <ion-button class="ClearButton" fill="outline" size="small" color="dark"> Очистить фильтры </ion-button>
+          <ion-button class="ClearButton" fill="outline" size="small" color="dark" (click)="Reset()"> Очистить фильтры </ion-button>
         </ion-col>
         <ion-col class="SelectToggle">
             <ion-item>

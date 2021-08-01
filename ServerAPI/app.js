@@ -36,7 +36,7 @@ app.use('/api/schedule',scheduleRouter);
 app.use('/api/post',postRouter);
 app.use('/api/auth',authRouter);
 app.use('/api/categories',categoriesRouter);
-app.use('/api/subject',subjectRouter);
+app.use('/api/subjects',subjectRouter);
 
 // BodyParser
 app.use(bodyParser.urlencoded({extended:true}));

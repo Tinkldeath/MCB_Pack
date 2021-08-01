@@ -1,5 +1,5 @@
 import { Subscription } from 'rxjs';
-import { IUser } from './../shared/models/models';
+import { IUser, ISubject } from './../shared/models/models';
 import { RequestsService } from '../shared/services/requests.service';
 import { ViewService } from '../shared/services/view.service';
 import { DataService } from '../shared/services/data.service';
@@ -16,8 +16,17 @@ export class HomePage implements OnInit, OnDestroy{
 
   user: IUser = null;
   searchCategories: boolean = true;
+  selectedCategory: string = null;
+  selectedSubject: string = null;
+
+
   categories: Category[] = [];
+  subjects: ISubject[] = [];
+
+
   vSub: Subscription = null;
+  cSub: Subscription = null;
+  sSub: Subscription = null;
 
   constructor(
     private reqService: RequestsService,
@@ -32,8 +41,11 @@ export class HomePage implements OnInit, OnDestroy{
     }
 
   ngOnInit(){
-    this.reqService.GetCategories().subscribe((data) => {
+    this.cSub = this.reqService.GetCategories().subscribe((data) => {
       this.categories = data;
+    });
+    this.sSub = this.reqService.GetSubjects().subscribe((data) => {
+      this.subjects = data;
     });
     this.user = this.dataService.DecryptUser();
     this.viewService.ChangeUser(this.user);
@@ -45,6 +57,9 @@ export class HomePage implements OnInit, OnDestroy{
   ngOnDestroy(){
     if(this.vSub !== null){
       this.vSub.unsubscribe();
+    }
+    if(this.sSub !== null){
+      this.sSub.unsubscribe();
     }
   }
 
@@ -63,5 +78,10 @@ export class HomePage implements OnInit, OnDestroy{
 
   SwitchSearch(){
     this.searchCategories = !this.searchCategories;
+  }
+
+  Reset(){
+    this.selectedCategory = null;
+    this.selectedSubject = null;
   }
 }
