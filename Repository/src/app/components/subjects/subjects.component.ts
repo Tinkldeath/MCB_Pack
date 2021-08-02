@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { RequestsService } from 'src/app/shared/services/requests.service';
 import { Subscription } from 'rxjs';
 import { ISubject } from 'src/app/shared/models/models';
@@ -8,8 +8,8 @@ import { ISubject } from 'src/app/shared/models/models';
   templateUrl: './subjects.component.html',
   styleUrls: ['./subjects.component.scss'],
 })
-export class SubjectsComponent implements OnInit {
-  
+export class SubjectsComponent implements OnInit, OnDestroy {
+
   subjects: ISubject[] = [];
   sSub: Subscription = null;
 
@@ -21,6 +21,12 @@ export class SubjectsComponent implements OnInit {
     this.sSub = this.reqService.GetSubjects().subscribe((data) => {
       this.subjects = data;
     });
+  }
+
+  ngOnDestroy(){
+    if(this.sSub !== null){
+      this.sSub.unsubscribe();
+    }
   }
 
 }

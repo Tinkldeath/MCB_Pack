@@ -15,6 +15,7 @@ const postRouter = require('./routes/postRouter');
 const authRouter = require('./routes/authRouter');
 const categoriesRouter = require('./routes/categoriesRouter');
 const subjectRouter = require('./routes/subjectRouter');
+const usersRouter = require('./routes/usersRouter');
 
 // Cors define
 app.use(cors());
@@ -37,6 +38,7 @@ app.use('/api/post',postRouter);
 app.use('/api/auth',authRouter);
 app.use('/api/categories',categoriesRouter);
 app.use('/api/subjects',subjectRouter);
+app.use('/api/users',usersRouter);
 
 // BodyParser
 app.use(bodyParser.urlencoded({extended:true}));

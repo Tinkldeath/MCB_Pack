@@ -1,11 +1,10 @@
 import { Subscription } from 'rxjs';
-import { IUser, ISubject } from './../shared/models/models';
+import { IUser, ISubject, IPost, ICategory } from './../shared/models/models';
 import { RequestsService } from '../shared/services/requests.service';
 import { ViewService } from '../shared/services/view.service';
 import { DataService } from '../shared/services/data.service';
 import { Router } from '@angular/router';
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Category } from '../shared/models/models';
 
 @Component({
   selector: 'app-home',
@@ -21,13 +20,14 @@ export class HomePage implements OnInit, OnDestroy{
   selectedAuthor: string = null;
 
 
-  categories: Category[] = [];
+  categories: ICategory[] = [];
   subjects: ISubject[] = [];
-
+  posts: IPost[] = [];
 
   vSub: Subscription = null;
   cSub: Subscription = null;
   sSub: Subscription = null;
+  pSub: Subscription = null;
 
   constructor(
     private reqService: RequestsService,
@@ -48,8 +48,14 @@ export class HomePage implements OnInit, OnDestroy{
     this.sSub = this.reqService.GetSubjects().subscribe((data) => {
       this.subjects = data;
     });
+    this.pSub = this.reqService.GetPosts().subscribe((data) => {
+      this.posts = data;
+    });
     this.user = this.dataService.DecryptUser();
     this.viewService.ChangeUser(this.user);
+    this.viewService.ChangeCategory(this.categories);
+    this.viewService.ChangePost(this.posts);
+    this.viewService.ChangeSubject(this.subjects);
     if(this.user === null){
       localStorage.clear();
     }
@@ -69,7 +75,6 @@ export class HomePage implements OnInit, OnDestroy{
   }
 
   GoAdd(){
-    this.viewService.ChangeCategory(this.categories);
     this.router.navigateByUrl('add-item');
   }
 

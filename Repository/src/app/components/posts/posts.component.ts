@@ -1,16 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { RequestsService } from 'src/app/shared/services/requests.service';
 import { Subscription } from 'rxjs';
-import { Post } from 'src/app/shared/models/models';
+import { IPost } from 'src/app/shared/models/models';
 
 @Component({
   selector: 'app-posts',
   templateUrl: './posts.component.html',
   styleUrls: ['./posts.component.scss'],
 })
-export class PostsComponent implements OnInit {
+export class PostsComponent implements OnInit, OnDestroy {
 
-  posts: Post[] = [];
+  posts: IPost[] = [];
   pSub: Subscription = null;
 
   constructor(
@@ -23,4 +23,9 @@ export class PostsComponent implements OnInit {
     });
   }
 
+  ngOnDestroy(){
+    if(this.pSub !== null){
+      this.pSub.unsubscribe();
+    }
+  }
 }

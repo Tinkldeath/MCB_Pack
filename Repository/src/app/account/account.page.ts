@@ -2,7 +2,7 @@ import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { ViewService } from './../shared/services/view.service';
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Category, IUser } from './../shared/models/models';
+import { ICategory, IUser, IPost } from './../shared/models/models';
 
 
 @Component({
@@ -13,7 +13,8 @@ import { Category, IUser } from './../shared/models/models';
 export class AccountPage implements OnInit, OnDestroy {
 
   selection: string = '';
-  categories: Category[] = [];
+  categories: ICategory[] = [];
+  posts: IPost[] = [];
   user: IUser = null;
   vSub: Subscription = null;
   uSub: Subscription = null;

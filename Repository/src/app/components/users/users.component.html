@@ -1,0 +1,15 @@
+<ion-list>
+  <ion-item class="CategoryItem"  *ngFor="let user of users">
+    <ion-label id="login"> {{user.login}} </ion-label>
+    <ion-item>
+      <ion-label> Админ: {{user.isAdmin.toString()}} </ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label> Модератор: {{user.isModer.toString()}} </ion-label>
+    </ion-item>
+    <div id="Place">
+      <ion-button fill="clear" color="dark" class="CategoryButton">Ред.</ion-button>
+      <ion-button fill="clear" color="dark" class="CategoryButton">Удалить</ion-button>
+    </div>
+  </ion-item>
+</ion-list>

@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { RequestsService } from 'src/app/shared/services/requests.service';
-import { Category } from 'src/app/shared/models/models';
+import { ICategory } from 'src/app/shared/models/models';
 import { Subscription } from 'rxjs';
 
 
@@ -9,9 +9,9 @@ import { Subscription } from 'rxjs';
   templateUrl: './categories.component.html',
   styleUrls: ['./categories.component.scss'],
 })
-export class CategoriesComponent implements OnInit {
+export class CategoriesComponent implements OnInit, OnDestroy {
 
-  categories: Category[] = [];
+  categories: ICategory[] = [];
   cSub: Subscription = null;
 
   constructor(
@@ -24,4 +24,9 @@ export class CategoriesComponent implements OnInit {
     });
   }
 
+  ngOnDestroy(){
+    if(this.cSub !== null){
+      this.cSub.unsubscribe();
+    }
+  }
 }

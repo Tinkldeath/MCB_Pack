@@ -1,19 +1,9 @@
-<ion-item id="listheader">
-  <h2>Посты</h2>
-</ion-item>
-
-<ion-grid>
+<ion-list>
   <ion-item class="CategoryItem"  *ngFor="let post of posts">
-    {{post.name}}
+    {{post.postName}}
     <div id="Place">
       <ion-button fill="clear" color="dark" class="CategoryButton">Ред.</ion-button>
       <ion-button fill="clear" color="dark" class="CategoryButton">Удалить</ion-button>
     </div>
   </ion-item>
-</ion-grid>
-
-<ion-footer id="foot">
-  <h2>
-    <ion-button fill="clear" color="dark">Добавить</ion-button>
-  </h2>
-</ion-footer>
+</ion-list>

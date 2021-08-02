@@ -1,15 +1,19 @@
-export interface Post{
-    title: string,
-    subject: string,
-    course: number,
+export interface IPost{
+    _id: string,
+    ownerId: string,
+    postName: string,
+    postTheme: string,
+    courseNumber: number,
     author: string,
     year: number,
     university: string,
     special: string,
-    description: string
+    category: string,
+    description: string,
+    fileUrl: string
 }
 
-export interface Category{
+export interface ICategory{
     _id: string,
     name: string,
     description: string

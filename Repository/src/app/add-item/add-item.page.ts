@@ -1,6 +1,6 @@
 import { Subscription } from 'rxjs';
 import { ViewService } from '../shared/services/view.service';
-import { Category, IUser } from './../shared/models/models';
+import { ICategory, IUser } from './../shared/models/models';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 
 @Component({
@@ -10,7 +10,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 })
 export class AddItemPage implements OnInit, OnDestroy {
 
-  categories: Category[] = [];
+  categories: ICategory[] = [];
   user: IUser = null;
   vSub: Subscription = null;
   uSub: Subscription = null;

@@ -1,3 +1,5 @@
+import { UsersComponent } from './../components/users/users.component';
+import { PostsComponent } from './../components/posts/posts.component';
 import { SubjectsComponent } from './../components/subjects/subjects.component';
 import { CategoriesComponent } from './../components/categories/categories.component';
 import { NgModule } from '@angular/core';
@@ -18,6 +20,6 @@ import { AccountPage } from './account.page';
     AccountPageRoutingModule
   ],
   entryComponents: [],
-  declarations: [AccountPage,CategoriesComponent,SubjectsComponent]
+  declarations: [AccountPage,CategoriesComponent,SubjectsComponent, PostsComponent, UsersComponent]
 })
 export class AccountPageModule {}
