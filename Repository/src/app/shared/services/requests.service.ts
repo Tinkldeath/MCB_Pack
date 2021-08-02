@@ -24,7 +24,7 @@ export class RequestsService {
   }
 
   GetPosts() : Observable<Post[]>{
-    return this.http.get<Post[]>(`${apiUrl}/posts/all`);
+    return this.http.get<Post[]>(`${apiUrl}/post/all`);
   }
 
   GetUsers() : Observable<IUser[]>{
