@@ -25,8 +25,10 @@
                 </ion-avatar>
                 <ion-label id="menulabel">{{user.login}}</ion-label>
               </ion-item>
-                <ion-button fill="clear" size="medium" color="dark" expand="full" id="menulabel">Сменить логин</ion-button>
-                <ion-button fill="clear" size="medium" color="dark" expand="full" id="menulabel" (click)="Change('changePassword')">Сменить пароль</ion-button>
+                <ion-button fill="clear" size="medium" color="dark" expand="full" id="menulabel" (click)="Change('change-login')">Сменить логин</ion-button>
+                <ion-button fill="clear" size="medium" color="dark" expand="full" id="menulabel" (click)="Change('change-password')">Сменить пароль</ion-button>
+                <ion-button fill="clear" size="medium" color="dark" expand="full" id="menulabel" (click)="Change('add-category')">Add category</ion-button>
+                <ion-button fill="clear" size="medium" color="dark" expand="full" id="menulabel" (click)="Change('add-subject')">Add subject</ion-button>
                 <ion-button *ngIf="this.user.isAdmin === true" fill="clear" size="medium" color="dark" expand="full" id="menulabel" (click)="Change('categories')"> Ред. категории </ion-button>
                 <ion-button *ngIf="this.user.isModer === true || this.user.isAdmin === true" fill="clear" size="medium" color="dark" expand="full" id="menulabel" (click)="Change('subjects')"> Ред. предметы </ion-button>
                 <ion-button *ngIf="this.user.isAdmin === true" fill="clear" size="medium" color="dark" expand="full" id="menulabel" (click)="Change('users')"> Ред. пользователей </ion-button>
@@ -59,11 +61,29 @@
           </ion-item>
           <app-subjects></app-subjects>
         </ion-col>
-        <ion-col class="Component" id="col" *ngIf="this.selection === 'changePassword' ">
+        <ion-col class="Component" id="col" *ngIf="this.selection === 'change-password' ">
           <ion-item id="listheader">
             <h2> Сменить пароль </h2>
           </ion-item>
           <app-change-password></app-change-password>
+        </ion-col>
+        <ion-col class="Component" id="col" *ngIf="this.selection === 'change-login' ">
+          <ion-item id="listheader">
+            <h2> Сменить логин </h2>
+          </ion-item>
+          <app-change-login></app-change-login>
+        </ion-col>
+        <ion-col class="Component" id="col" *ngIf="this.selection === 'add-category' ">
+          <ion-item id="listheader">
+            <h2> Add category </h2>
+          </ion-item>
+          <app-add-category></app-add-category>
+        </ion-col>
+        <ion-col class="Component" id="col" *ngIf="this.selection === 'add-subject' ">
+          <ion-item id="listheader">
+            <h2> Add subject </h2>
+          </ion-item>
+          <app-add-subject></app-add-subject>
         </ion-col>
         <ion-col id="col" class="Component" *ngIf="this.selection === '' ">
           <ion-item id="listheader">

@@ -13,6 +13,7 @@ export class CategoriesComponent implements OnInit, OnDestroy {
 
   categories: ICategory[] = [];
   cSub: Subscription = null;
+  selection: string = '';
 
   constructor(
     private reqService: RequestsService
@@ -28,5 +29,9 @@ export class CategoriesComponent implements OnInit, OnDestroy {
     if(this.cSub !== null){
       this.cSub.unsubscribe();
     }
+  }
+
+  Change(message: string){
+    this.selection = message;
   }
 }

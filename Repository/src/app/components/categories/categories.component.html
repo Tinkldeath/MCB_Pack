@@ -7,6 +7,9 @@
         </div>
       </ion-item>
       <h2>
-        <ion-button fill="clear" color="dark">Добавить</ion-button>
+        <ion-button fill="clear" color="dark" (click)="Change('add-category')">Добавить</ion-button>
       </h2>
+      <div *ngIf="this.selection === 'add-category' ">
+        <app-add-caregory></app-add-caregory>
+      </div>
     </ion-list>
