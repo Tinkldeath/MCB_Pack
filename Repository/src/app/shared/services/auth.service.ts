@@ -22,4 +22,8 @@ export class AuthService {
     return this.http.post<{message: string}>(`${apiUrl}/auth/register`,user);
   }
 
+  ChangePassword(user: any) : Observable<{login: string, token:string}>{
+    return this.http.post<{login: string, token: string}>(`${apiUrl}/auth/changePassword`,user);
+  }
+
 }

@@ -11,14 +11,23 @@
     border-width: 2px;
     border-color: rgb(80, 80, 80);
     border-radius: 5px;
-    display:block;
+    display: block;
     margin: auto;
     margin-bottom: 15px;
 }
 
 .ChangeButton{
-    display:block;
+    display: block;
     margin: auto;
     width: 185px;
 }
 
+#popup{
+    height: 69vh;
+    margin: 20px;
+    width: 30vh;
+    float: right;
+    border: 5px solid brown;
+    background-color: white;
+    margin-left: -5px;
+  }

@@ -84,3 +84,88 @@ module.exports.register = async function(req,res){
         }
     }
 }
+
+//логика обновления пароля
+module.exports.changePassword = async function(req,res){
+    const salt = Bcrypt.genSaltSync(10);
+    const reqLogin = req.body.login;
+    const reqNewPassword = req.body.password;
+    
+    try {
+        await User.findOneAndUpdate(
+            {login: reqLogin},
+            {$set: {password: Bcrypt.hashSync(reqNewPassword,salt)}},
+            function(err){
+                if(err){
+                    console.log(err);
+                    res.json({
+                        message: 'DB error'
+                    });
+                }
+                else{
+                    console.log("Password updated.");
+                    res.json({
+                        message: 'Password updated.'
+                    });
+                }
+            }
+        );
+        
+    } catch (err) {
+        if(err){
+            console.log(err);
+            res.json({
+                message: 'Server error.'
+            });
+        }
+    }
+
+}
+
+//логика обновления логина
+module.exports.changeLogin = async function(req,res){
+    
+    const reqId = req.body._id;
+    const reqLogin = req.body.login;
+    const found = await User.findOne({login: reqLogin},function(err){
+        if(err){
+            console.log(err);
+            return;
+        }
+    });
+    if(found){
+        res.json({
+            message: 'Conflict'
+        });
+    }
+    else{
+        try {
+            await User.UpdateOne(
+                {_id: reqId},
+                {$set: { login: reqLogin}},
+                function(err){
+                    if(err){
+                        console.log(err);
+                        res.json({
+                            message: 'DB error'
+                        });
+                    }
+                    else{
+                        console.log("Login updated.");
+                        res.json({
+                            message: 'Login updated.'
+                        });
+                    }
+                }
+            );
+            
+        } catch (err) {
+            if(err){
+                console.log(err);
+                res.json({
+                    message: 'Server error.'
+                });
+            }
+        }
+    }
+}
