@@ -2,6 +2,7 @@ import { ICategory } from './../../shared/models/models';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { RequestsService } from 'src/app/shared/services/requests.service';
 import { Subscription } from 'rxjs';
+import { ViewService } from 'src/app/shared/services/view.service';
 
 
 @Component({
@@ -16,7 +17,8 @@ export class CategoriesComponent implements OnInit, OnDestroy {
   selection: string = '';
 
   constructor(
-    private reqService: RequestsService
+    private reqService: RequestsService,
+    private viewServise: ViewService
   ) { }
 
   ngOnInit() {
@@ -41,5 +43,25 @@ export class CategoriesComponent implements OnInit, OnDestroy {
         alert('Ошибка на стороне серера, попробуйте позже');
       }
     });
+  }
+
+  ChangeCategory(category: ICategory){
+    this.reqService.ChangeCategory(category).subscribe((data) => {
+      if(data.message === 'Updated'){
+        alert('Категория изменена');
+        this.ngOnInit();
+      }
+      else{
+        alert('Ошибка на стороне серера, попробуйте позже');
+      }
+    });
+  }
+
+  SelectCategory(category: ICategory){
+    this.selection = 'true';   
+  }
+
+  Change(message: string){
+    this.selection = message;
   }
 }

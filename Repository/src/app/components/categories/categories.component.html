@@ -2,8 +2,13 @@
       <ion-item class="CategoryItem"  *ngFor="let category of categories">
         {{category.name}}
         <div id="Place">
-          <ion-button fill="clear" color="dark" class="CategoryButton">Ред.</ion-button>
+          <ion-button fill="clear" color="dark" class="CategoryButton" (click)="SelectCategory(category)">Ред.</ion-button>
           <ion-button fill="clear" color="dark" class="CategoryButton" (click)="DeleteCategory(category)" >Удалить</ion-button>
         </div>
       </ion-item>
+      <div id="Edit" *ngIf="this.selection === 'true' ">
+        <ion-input placeholder="Наименование категории"></ion-input>
+        <ion-input placeholder="Описание категории"></ion-input>
+        <ion-button shape="round" color="dark" (click)="Change('false')">Отменить</ion-button><ion-button shape="round" color="dark" (click)="Change('false')">Сохрнаить</ion-button>
+      </div>
     </ion-list>

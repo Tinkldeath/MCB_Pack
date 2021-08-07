@@ -2,7 +2,7 @@
   <ion-item class="CategoryItem"  *ngFor="let subject of subjects">
     {{subject.name}}
     <div id="Place">
-      <ion-button fill="clear" color="dark" class="CategoryButton">Ред.</ion-button>
+      <ion-button fill="clear" color="dark" class="CategoryButton" >Ред.</ion-button>
       <ion-button fill="clear" color="dark" class="CategoryButton" (click)="DeleteSubject(subject)" >Удалить</ion-button>
     </div>
   </ion-item>

@@ -12,6 +12,7 @@ export class SubjectsComponent implements OnInit, OnDestroy {
 
   subjects: ISubject[] = [];
   sSub: Subscription = null;
+  selection: string = '';
 
   constructor(
     private reqService: RequestsService
@@ -36,6 +37,18 @@ export class SubjectsComponent implements OnInit, OnDestroy {
     this.reqService.DeleteSubject(delSubject).subscribe((data) => {
       if(data.message === 'Deleted'){
         alert('Предмет удалён');
+        this.ngOnInit();
+      }
+      else{
+        alert('Ошибка на стороне серера, попробуйте позже');
+      }
+    });
+  }
+
+  ChangeSubject(subject: ISubject){
+    this.reqService.ChangeSubject(subject).subscribe((data) => {
+      if(data.message === 'Updated'){
+        alert('Предмет изменён');
         this.ngOnInit();
       }
       else{

@@ -27,10 +27,10 @@
               </ion-item>
                 <ion-button fill="clear" size="medium" color="dark" expand="full" id="menulabel" (click)="Change('change-login')">Сменить логин</ion-button>
                 <ion-button fill="clear" size="medium" color="dark" expand="full" id="menulabel" (click)="Change('change-password')">Сменить пароль</ion-button>
-                <ion-button *ngIf="this.user.isAdmin === true" fill="clear" size="medium" color="dark" expand="full" id="menulabel" (click)="Change('add-category')">Доб. категории</ion-button>
-                <ion-button *ngIf="this.user.isAdmin === true || this.user.isModer === true" fill="clear" size="medium" color="dark" expand="full" id="menulabel" (click)="Change('add-subject')">Доб. предметы</ion-button>
                 <ion-button *ngIf="this.user.isAdmin === true" fill="clear" size="medium" color="dark" expand="full" id="menulabel" (click)="Change('categories')"> Ред. категории </ion-button>
                 <ion-button *ngIf="this.user.isModer === true || this.user.isAdmin === true" fill="clear" size="medium" color="dark" expand="full" id="menulabel" (click)="Change('subjects')"> Ред. предметы </ion-button>
+                <ion-button *ngIf="this.user.isAdmin === true" fill="clear" size="medium" color="dark" expand="full" id="menulabel" (click)="Change('add-category')">Доб. категории</ion-button>
+                <ion-button *ngIf="this.user.isAdmin === true || this.user.isModer === true" fill="clear" size="medium" color="dark" expand="full" id="menulabel" (click)="Change('add-subject')">Доб. предметы</ion-button>
                 <ion-button *ngIf="this.user.isAdmin === true" fill="clear" size="medium" color="dark" expand="full" id="menulabel" (click)="Change('users')"> Ред. пользователей </ion-button>
                 <ion-button *ngIf="this.user.isAdmin === false" disabled="true" fill="clear" size="medium" color="dark" expand="full" id="menulabel"></ion-button>
                 <ion-button *ngIf="this.user.isAdmin === false" disabled="true" fill="clear" size="medium" color="dark" expand="full" id="menulabel"></ion-button>

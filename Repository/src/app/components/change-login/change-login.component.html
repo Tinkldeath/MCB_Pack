@@ -1,6 +1,6 @@
 <div class="CategoryItem">
-  <ion-input class="ChangeInput" placeholder="Введите новый логин"></ion-input>
-  <ion-input class="ChangeInput" placeholder="Введите пароль"></ion-input>
-  <ion-button class="ChangeButton" shape="round" color="dark" >Сохранить</ion-button>
+  <ion-input [(ngModel)]="login" class="ChangeInput" placeholder="Введите новый логин"></ion-input>
+  <ion-input [(ngModel)]="password" class="ChangeInput" type="Password" placeholder="Введите пароль"></ion-input>
+  <ion-button class="ChangeButton" shape="round" color="dark" (click)="Change()" >Сохранить</ion-button>
 </div>
 

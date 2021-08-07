@@ -45,6 +45,12 @@ export class RequestsService {
 
 
   //============================================================== Patch requests
+  ChangeCategory(category: {_id: string}) : Observable<{message: string}>{
+    return this.http.patch<{message: string}>(`${apiUrl}/categories/update/${category._id}`, category);
+  }
+  ChangeSubject(subject: {_id: string}) : Observable<{message: string}>{
+    return this.http.patch<{message: string}>(`${apiUrl}/subjects/update/${subject._id}`, subject);
+  }
   //==============================================================
 
 
