@@ -38,6 +38,7 @@ export class DataService {
   }
 
   Clear(){
+    this.user = null;
     localStorage.clear();
   }
 }

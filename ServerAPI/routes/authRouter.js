@@ -13,10 +13,10 @@ router.post('/login',controller.login);
 router.post('/register',controller.register);
 //localhost:port/api/auth/register
 
-router.post('/changePassword',controller.changePassword);
+router.patch('/changePassword',controller.changePassword);
 //localhost:port/api/auth/changePassword
 
-router.post('/changeLogin',controller.changeLogin);
+router.patch('/changeLogin',controller.changeLogin);
 //localhost:port/api/auth/changeLogin
 
 module.exports = router;

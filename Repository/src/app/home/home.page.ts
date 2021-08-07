@@ -75,10 +75,14 @@ export class HomePage implements OnInit, OnDestroy{
   }
 
   GoAdd(){
+    this.viewService.ChangeCategory(this.categories);
     this.router.navigateByUrl('add-item');
   }
 
   GoProfile(){
+    this.viewService.ChangeCategory(this.categories);
+    this.viewService.ChangeSubject(this.subjects);
+    this.viewService.ChangePost(this.posts);
     this.router.navigateByUrl('account');
   }
 

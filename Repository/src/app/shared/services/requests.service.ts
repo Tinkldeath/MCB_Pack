@@ -13,6 +13,8 @@ export class RequestsService {
     private http: HttpClient
   ) { }
 
+
+  //============================================================== Get requests
   GetCategories() : Observable<ICategory[]>{
     return this.http.get<ICategory[]>(`${apiUrl}/categories/all`);
   }
@@ -28,5 +30,30 @@ export class RequestsService {
   GetUsers() : Observable<IUser[]>{
     return this.http.get<IUser[]>(`${apiUrl}/users/all`);
   }
+  //==============================================================
 
+
+  //============================================================== Post requests
+  AddCategory(newCategory: {name: string, description: string}) : Observable<{message: string}>{
+    return this.http.post<{message: string}>(`${apiUrl}/categories/add`,newCategory);
+  }
+
+  AddSubject(newSubject: {categoryId: string, name: string}) : Observable<{message: string}>{
+    return this.http.post<{message: string}>(`${apiUrl}/subjects/add`,newSubject);
+  }
+  //==============================================================
+
+
+  //============================================================== Patch requests
+  //==============================================================
+
+
+  //============================================================== Delete requests
+  DeleteCategory(category: {_id: string}) : Observable<{message: string}>{
+    return this.http.delete<{message: string}>(`${apiUrl}/categories/delete/${category._id}`);
+  }
+  DeleteSubject(subject: {_id: string}) : Observable<{message: string}>{
+    return this.http.delete<{message: string}>(`${apiUrl}/subjects/delete/${subject._id}`);
+  }
+  //==============================================================
 }

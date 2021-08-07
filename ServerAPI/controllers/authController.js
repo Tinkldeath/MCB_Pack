@@ -92,9 +92,11 @@ module.exports.changePassword = async function(req,res){
     const reqNewPassword = req.body.password;
     
     try {
+        // $set: было лишним, поэтому апдейт пароля падал, это вроде старый синтаксис
+        // по новому можно просто вторым параметром передавать объект с заменяемым полем
         await User.findOneAndUpdate(
             {login: reqLogin},
-            {$set: {password: Bcrypt.hashSync(reqNewPassword,salt)}},
+            {password: Bcrypt.hashSync(reqNewPassword,salt)},
             function(err){
                 if(err){
                     console.log(err);
@@ -103,9 +105,9 @@ module.exports.changePassword = async function(req,res){
                     });
                 }
                 else{
-                    console.log("Password updated.");
+                    console.log(`Password of user ${reqLogin} updated`);
                     res.json({
-                        message: 'Password updated.'
+                        message: 'Password updated'
                     });
                 }
             }
@@ -139,10 +141,9 @@ module.exports.changeLogin = async function(req,res){
         });
     }
     else{
+        // А здесь ты вызывал несуществующий метод у mongoose, я добавил существующий
         try {
-            await User.UpdateOne(
-                {_id: reqId},
-                {$set: { login: reqLogin}},
+            await User.findByIdAndUpdate(reqId,{login: reqLogin},
                 function(err){
                     if(err){
                         console.log(err);

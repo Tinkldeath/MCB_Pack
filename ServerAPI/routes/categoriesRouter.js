@@ -14,7 +14,7 @@ router.get('/all',controller.getAll);
 router.post('/add',controller.addCategory);
 
 //localhost:4000/api/categories/remove
-router.delete('/remove',controller.removeCategory);
+router.delete('/delete/:id',controller.removeCategory);
 
 //localhost:4000/api/categories/update
 router.patch('/update',controller.updateCategory);

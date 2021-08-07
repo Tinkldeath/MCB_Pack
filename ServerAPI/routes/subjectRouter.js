@@ -8,19 +8,19 @@ router.use(bodyParser.urlencoded({extended:true}));
 router.use(bodyParser.json());
 
 router.get('/all',controller.GetAll);
-//localhost:port/api/subject/all
+//localhost:port/api/subjects/all
 
 router.get('/',controller.GetById);
-//localhost:port/api/subject/
+//localhost:port/api/subjects/
 
-router.post('/create',controller.Create);
-//localhost:port/api/subject/create
+router.post('/add',controller.Create);
+//localhost:port/api/subjects/create
 
 router.patch('/update',controller.Update);
-//localhost:port/api/subject/update
+//localhost:port/api/subjects/update
 
-router.delete('/delete',controller.Delete);
-//localhost:port/api/subject/delete
+router.delete('/delete/:id',controller.Delete);
+//localhost:port/api/subjects/delete
 
 
 module.exports = router;

@@ -3,13 +3,7 @@
         {{category.name}}
         <div id="Place">
           <ion-button fill="clear" color="dark" class="CategoryButton">Ред.</ion-button>
-          <ion-button fill="clear" color="dark" class="CategoryButton">Удалить</ion-button>
+          <ion-button fill="clear" color="dark" class="CategoryButton" (click)="DeleteCategory(category)" >Удалить</ion-button>
         </div>
       </ion-item>
-      <h2>
-        <ion-button fill="clear" color="dark" (click)="Change('add-category')">Добавить</ion-button>
-      </h2>
-      <div *ngIf="this.selection === 'add-category' ">
-        <app-add-caregory></app-add-caregory>
-      </div>
     </ion-list>

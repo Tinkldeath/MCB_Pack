@@ -53,7 +53,7 @@ module.exports.addCategory = async function(req,res){
 }
 
 module.exports.removeCategory = async function(req,res){
-    const reqId = req.body._id;
+    const reqId = req.params.id;
     try {
         await Category.findByIdAndDelete(reqId,(err) => {
             if(err){
@@ -63,7 +63,7 @@ module.exports.removeCategory = async function(req,res){
                 });
             }
             else{
-                console.log('Category deleted');
+                console.log(`Category ${reqId} deleted`);
                 res.json({
                     message: 'Deleted'
                 });

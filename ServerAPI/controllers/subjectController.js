@@ -45,7 +45,7 @@ module.exports.Create = async function(req,res){
     const subject = new Subject({
         categoryId: reqSubjectId,
         name: reqName
-    })
+    });
 
     try {
         const found = await Subject.findOne({categoryId: reqSubjectId,postName: reqName},(err) => {
@@ -109,7 +109,7 @@ module.exports.Update = async function(req,res){
 }
 
 module.exports.Delete = async function(req,res){
-    const reqSubjectId = req.body.categoryId;  
+    const reqSubjectId = req.params.id;  
     try {
         await Subject.findByIdAndDelete(reqSubjectId,(err)=>{
             if(err){
@@ -119,8 +119,9 @@ module.exports.Delete = async function(req,res){
                 });
             }
             else{
+                console.log(`Subject ${reqSubjectId} deleted`);
                 res.json({
-                    message: `Subject ${reqSubjectId} deleted`
+                    message: `Deleted`
                 })
             }
         });
@@ -128,10 +129,8 @@ module.exports.Delete = async function(req,res){
         if(err){
             console.log(err);
             res.json({
-                message: 'server error'
+                message: 'Server error'
             });
         }
     }
 }
-
-//610066c3f027ba1a787dac97
