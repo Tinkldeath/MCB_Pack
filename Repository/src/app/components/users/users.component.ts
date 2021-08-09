@@ -29,4 +29,16 @@ export class UsersComponent implements OnInit, OnDestroy {
     }
   }
 
+  DeleteUser(user: IUser){
+    this.uSub = this.reqService.DeleteUser(user).subscribe((data) =>{
+      if(data.message === 'Deleted'){
+        alert('Пользователь удален');
+        this.ngOnInit();
+      }
+      else{
+        alert('Ошибка на стороне серера, попробуйте позже');
+      }
+    });
+  }
+
 }

@@ -61,5 +61,9 @@ export class RequestsService {
   DeleteSubject(subject: {_id: string}) : Observable<{message: string}>{
     return this.http.delete<{message: string}>(`${apiUrl}/subjects/delete/${subject._id}`);
   }
+  //Не могу разобраться, в чем ошибка. Пытался писать и через айди. Запрос к базе данных из контроллера работает корректно.
+  DeleteUser(user: IUser) : Observable<{message: string}>{
+    return this.http.delete<{message: string}>(`${apiUrl}/users/delete`);
+  }
   //==============================================================
 }

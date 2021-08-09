@@ -10,5 +10,8 @@ router.use(bodyParser.json());
 router.get('/all',controller.GetAll);
 //localhost:port/api/users/all
 
+router.delete('/delete',controller.Delete);
+//localhost:port/api/users/delete
+
 
 module.exports = router;
