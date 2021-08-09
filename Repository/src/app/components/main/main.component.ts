@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { RequestsService } from 'src/app/shared/services/requests.service';
+import { Subscription } from 'rxjs';
+import { ViewService } from 'src/app/shared/services/view.service';
+import { ICategory } from 'src/app/shared/models/models';
 
 @Component({
   selector: 'app-main',
@@ -7,8 +11,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MainComponent implements OnInit {
 
-  constructor() { }
+  categories: ICategory[] = [];
+  cSub: Subscription = null;
+  selection: string = '';
 
-  ngOnInit() {}
+  constructor(
+    private reqService: RequestsService,
+    private viewServise: ViewService
+  ) { }
+
+  ngOnInit() {
+    this.cSub = this.reqService.GetCategories().subscribe((data) => {
+      this.categories = data;
+    });
+  }
 
 }
