@@ -23,8 +23,8 @@ module.exports.GetAll = async function(req,res){
 
 module.exports.Delete = async function(req,res){
     try {
-        const reqLogin = req.body.login;
-                await User.findOneAndDelete({login: reqLogin}, (err) => {
+        const reqId = req.params.id;
+                await User.findByIdAndDelete(reqId, (err) => {
                     if(err){
                         console.log(err);
                         res.json({
@@ -32,7 +32,7 @@ module.exports.Delete = async function(req,res){
                         });
                     }
                     else{
-                        console.log(`The user ${reqLogin} deleted`);
+                        console.log(`The user ${reqId} deleted`);
                         res.json({
                             message: 'Deleted'
                         });

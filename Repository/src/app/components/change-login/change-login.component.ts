@@ -51,11 +51,11 @@ export class ChangeLoginComponent implements OnInit {
       }
       this.authService.Login(user).subscribe((data) => {
         if(data.token !== null){
-          const newUser = {
-            login: this.login,
-            password: this.user.password
-          }
-            this.vSub = this.authService.ChangeLogin(user).subscribe(data => {
+            /*
+              Ошибка была при вызове метода у сервиса, бэкенд принимает айди, а в объекте user его не было,
+              теперь смена логина тоже работает
+            */
+            this.authService.ChangeLogin({_id: this.user._id, login: this.login}).subscribe(data => {
               if(data.message === 'Login updated.'){
                 alert('Логин успешно обновлен, войдите повторно.');
                 localStorage.clear();

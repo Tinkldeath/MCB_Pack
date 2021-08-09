@@ -70,13 +70,13 @@ export class ChangePasswordComponent implements OnInit, OnDestroy {
         password: this.oldPassword
       }
       // Через сервис авторизации проверяем, правильно ли введён старый пароль
-      this.authService.Login(user).subscribe((data) => {
+      this.authService.Login(user).subscribe(data => {
         if(data.token !== null){
           const newUser = {
             login: this.user.login,
             password: this.newPassword
           }
-          this.authService.ChangePassword(newUser).subscribe((data) => {
+          this.authService.ChangePassword(newUser).subscribe(data => {
             /*
               Как я и говорил, мы ожидаем объект с полем message, и уже в зависимости от
               сообщения будем действовать дальше.

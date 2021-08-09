@@ -1,4 +1,4 @@
-import { ISubject } from './../../shared/models/models';
+import { ISubject, ICategory } from './../../shared/models/models';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { RequestsService } from 'src/app/shared/services/requests.service';
 import { Subscription } from 'rxjs';
@@ -11,8 +11,13 @@ import { Subscription } from 'rxjs';
 export class SubjectsComponent implements OnInit, OnDestroy {
 
   subjects: ISubject[] = [];
+  categories: ICategory[] = [];
+  categoryName: string = '';
+  subjectToEdit: ISubject = null;
   sSub: Subscription = null;
-  selection: string = '';
+  cSub: Subscription = null;
+
+  newName: string = '';
 
   constructor(
     private reqService: RequestsService
@@ -22,17 +27,33 @@ export class SubjectsComponent implements OnInit, OnDestroy {
     this.sSub = this.reqService.GetSubjects().subscribe((data) => {
       this.subjects = data;
     });
+    this.cSub = this.reqService.GetCategories().subscribe((data) => {
+      this.categories = data;
+    });
   }
 
   ngOnDestroy(){
     if(this.sSub !== null){
       this.sSub.unsubscribe();
     }
+    if(this.cSub !== null){
+      this.cSub.unsubscribe();
+    }
+  }
+
+  SelectSubject(subject: ISubject){
+    this.subjectToEdit = subject;
+    if(this.subjectToEdit !== null){
+      this.newName = this.subjectToEdit.name;
+      this.categoryName = this.subjectToEdit.categoryName;
+    }
   }
 
   DeleteSubject(subject: ISubject){
     const delSubject = {
-      _id: subject._id
+      _id: subject._id,
+      categoryName: subject.categoryName,
+      name: subject.name
     }
     this.reqService.DeleteSubject(delSubject).subscribe((data) => {
       if(data.message === 'Deleted'){
@@ -45,10 +66,25 @@ export class SubjectsComponent implements OnInit, OnDestroy {
     });
   }
 
-  ChangeSubject(subject: ISubject){
+  ChangeSubject(){
+    if(this.newName === ''){
+      alert('Некорректный ввод!');
+      return;
+    }
+    else if(this.newName === this.subjectToEdit.name && this.categoryName === this.subjectToEdit.categoryName){
+      alert('Вы ничего не изменили!');
+      return
+    }
+    const subject = {
+      _id: this.subjectToEdit._id,
+      categoryName: this.categoryName,
+      name: this.newName
+    };
     this.reqService.ChangeSubject(subject).subscribe((data) => {
       if(data.message === 'Updated'){
         alert('Предмет изменён');
+        this.subjectToEdit = null;
+        this.newName = '';
         this.ngOnInit();
       }
       else{

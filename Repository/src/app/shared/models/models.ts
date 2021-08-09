@@ -36,6 +36,6 @@ export interface Registered{
 
 export interface ISubject{
   _id: string,
-  categoryId: string,
+  categoryName: string,
   name: string
 }

@@ -38,18 +38,18 @@ export class RequestsService {
     return this.http.post<{message: string}>(`${apiUrl}/categories/add`,newCategory);
   }
 
-  AddSubject(newSubject: {categoryId: string, name: string}) : Observable<{message: string}>{
+  AddSubject(newSubject: {categoryName: string, name: string}) : Observable<{message: string}>{
     return this.http.post<{message: string}>(`${apiUrl}/subjects/add`,newSubject);
   }
   //==============================================================
 
 
   //============================================================== Patch requests
-  ChangeCategory(category: {_id: string}) : Observable<{message: string}>{
-    return this.http.patch<{message: string}>(`${apiUrl}/categories/update/${category._id}`, category);
+  ChangeCategory(category: ICategory) : Observable<{message: string}>{
+    return this.http.patch<{message: string}>(`${apiUrl}/categories/update`, category);
   }
-  ChangeSubject(subject: {_id: string}) : Observable<{message: string}>{
-    return this.http.patch<{message: string}>(`${apiUrl}/subjects/update/${subject._id}`, subject);
+  ChangeSubject(subject: ISubject) : Observable<{message: string}>{
+    return this.http.patch<{message: string}>(`${apiUrl}/subjects/update`, subject);
   }
   //==============================================================
 
@@ -63,7 +63,7 @@ export class RequestsService {
   }
   //Не могу разобраться, в чем ошибка. Пытался писать и через айди. Запрос к базе данных из контроллера работает корректно.
   DeleteUser(user: IUser) : Observable<{message: string}>{
-    return this.http.delete<{message: string}>(`${apiUrl}/users/delete`);
+    return this.http.delete<{message: string}>(`${apiUrl}/users/delete/${user._id}`);
   }
   //==============================================================
 }

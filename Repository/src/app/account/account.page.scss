@@ -28,13 +28,6 @@
     padding-left: 15px;
   }
 
-  #popup{
-    background-color: white;
-    border: 2px solid brown;
-    width: 100vw;
-    height: 10vh;
-  }
-
   #searchbar{
     margin-top: 8px;
     margin-left: -240px;
@@ -45,8 +38,8 @@
   #sidemenu{
     border-top: 1px solid gray;
     border-bottom: 1px solid gray;
-    width: 255px;
-    height: 80vh;
+    width: 17.7vw;
+    height: 90vh;
     margin: 0;
     padding: 0;
   }
@@ -58,6 +51,7 @@
 
   ion-button{
     height: 38px;
+    font-weight: normal;
   }
 
   #col{

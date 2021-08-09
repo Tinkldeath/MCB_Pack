@@ -18,7 +18,7 @@ export class AuthService {
   }
 
   Register(user: any) :Observable<{message: string}> {
-    return this.http.patch<{message: string}>(`${apiUrl}/auth/register`,user);
+    return this.http.post<{message: string}>(`${apiUrl}/auth/register`,user);
   }
 
   ChangePassword(user: any) : Observable<{message: string}>{

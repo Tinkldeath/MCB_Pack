@@ -13,8 +13,11 @@ import { ViewService } from 'src/app/shared/services/view.service';
 export class CategoriesComponent implements OnInit, OnDestroy {
 
   categories: ICategory[] = [];
+  categoryToEdit: ICategory = null;
   cSub: Subscription = null;
-  selection: string = '';
+
+  newName: string = null;
+  newDescription: string = null;
 
   constructor(
     private reqService: RequestsService,
@@ -33,8 +36,16 @@ export class CategoriesComponent implements OnInit, OnDestroy {
     }
   }
 
+  EditCategory(category: ICategory){
+    this.categoryToEdit = category;
+    if(this.categoryToEdit !== null){
+      this.newName = this.categoryToEdit.name;
+      this.newDescription = this.categoryToEdit.description;
+    }
+  }
+
   DeleteCategory(category: ICategory){
-    this.reqService.DeleteCategory(category).subscribe((data) => {
+    this.reqService.DeleteCategory(category).subscribe(data => {
       if(data.message === 'Deleted'){
         alert('Категория удалена');
         this.ngOnInit();
@@ -45,23 +56,29 @@ export class CategoriesComponent implements OnInit, OnDestroy {
     });
   }
 
-  ChangeCategory(category: ICategory){
+  ChangeCategory(){
+    if(this.newName === '' || this.newDescription === ''){
+      alert('Заполните все поля корректно!');
+      return;
+    }
+    else if(this.categoryToEdit.name === this.newName && this.categoryToEdit.description === this.newDescription){
+      alert('Вы ничего не изменили!');
+      return;
+    }
+    const category ={
+      _id: this.categoryToEdit._id,
+      name: this.newName,
+      description: this.newDescription
+    }
     this.reqService.ChangeCategory(category).subscribe((data) => {
       if(data.message === 'Updated'){
         alert('Категория изменена');
+        this.categoryToEdit = null;
         this.ngOnInit();
       }
       else{
         alert('Ошибка на стороне серера, попробуйте позже');
       }
     });
-  }
-
-  SelectCategory(category: ICategory){
-    this.selection = 'true';   
-  }
-
-  Change(message: string){
-    this.selection = message;
   }
 }

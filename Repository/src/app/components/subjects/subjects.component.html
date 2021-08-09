@@ -1,10 +1,17 @@
-<ion-list>
+<ion-list *ngIf="subjectToEdit === null">
   <ion-item class="CategoryItem"  *ngFor="let subject of subjects">
     {{subject.name}}
     <div id="Place">
-      <ion-button fill="clear" color="dark" class="CategoryButton" >Ред.</ion-button>
+      <ion-button fill="clear" color="dark" class="CategoryButton" (click)="SelectSubject(subject)" >Ред.</ion-button>
       <ion-button fill="clear" color="dark" class="CategoryButton" (click)="DeleteSubject(subject)" >Удалить</ion-button>
     </div>
   </ion-item>
 </ion-list>
 
+<div *ngIf="subjectToEdit !== null">
+  <ion-select [(ngModel)]="categoryName" class="ChangeInput" placeholder="Категория">
+    <ion-select-option *ngFor="let category of categories"> {{category.name}} </ion-select-option>
+  </ion-select>
+  <ion-input [(ngModel)]="newName" class="ChangeInput" placeholder="Наименование предмета"></ion-input>
+  <ion-button shape="round" color="dark" (click)="subjectToEdit = null">Отменить</ion-button><ion-button shape="round" color="dark" (click)="ChangeSubject()">Сохрнаить</ion-button>
+</div>

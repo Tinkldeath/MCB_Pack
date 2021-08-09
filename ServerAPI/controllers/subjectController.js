@@ -39,16 +39,16 @@ module.exports.GetById = async function(req,res){
 }
 
 module.exports.Create = async function(req,res){
-    const reqSubjectId = req.body.categoryId;
+    const reqCategoryName = req.body.categoryName;
     const reqName = req.body.name;
 
     const subject = new Subject({
-        categoryId: reqSubjectId,
+        categoryName: reqCategoryName,
         name: reqName
     });
 
     try {
-        const found = await Subject.findOne({categoryId: reqSubjectId,postName: reqName},(err) => {
+        const found = await Subject.findOne({categoryName: reqCategoryName,name: reqName},(err) => {
             if(err){
                 console.log(err);
                 res.json({
@@ -79,11 +79,12 @@ module.exports.Create = async function(req,res){
 }
 
 module.exports.Update = async function(req,res){
-    const reqSubjectId = req.body.categoryId;
+    const reqId = req.body._id;
+    const reqCategoryName = req.body.categoryName;
     const reqName = req.body.name;
     try{
-        await Subject.findByIdAndUpdate(reqSubjectId,{
-            categoryId: reqSubjectId,
+        await Subject.findByIdAndUpdate(reqId,{
+            categoryName: reqCategoryName,
             name: reqName}, (err) => {
                 if(err){
                     console.log(err);
@@ -92,9 +93,9 @@ module.exports.Update = async function(req,res){
                     });
                 }
                 else{
-                    console.log(`Subject ${reqSubjectId} updated`);
+                    console.log(`Subject ${reqId} updated`);
                     res.json({
-                        message: 'Subject updated'
+                        message: 'Updated'
                     });
                 }
         });

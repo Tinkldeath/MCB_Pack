@@ -18,7 +18,7 @@ export class UsersComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit() {
-    this.uSub = this.reqService.GetUsers().subscribe((data) => {
+    this.reqService.GetUsers().subscribe((data) => {
       this.users = data;
     });
   }
@@ -30,7 +30,7 @@ export class UsersComponent implements OnInit, OnDestroy {
   }
 
   DeleteUser(user: IUser){
-    this.uSub = this.reqService.DeleteUser(user).subscribe((data) =>{
+    this.reqService.DeleteUser(user).subscribe((data) =>{
       if(data.message === 'Deleted'){
         alert('Пользователь удален');
         this.ngOnInit();

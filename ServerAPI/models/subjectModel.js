@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 
 // Scheme setup
 const subjectScheme = new Schema({
-    categoryId: Schema.Types.ObjectId,
+    categoryName: String,
     name: String
 });
 

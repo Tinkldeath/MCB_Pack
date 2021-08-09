@@ -11,7 +11,7 @@ export class AddSubjectComponent implements OnInit {
 
   name: string = null;
   categories: ICategory[] = [];
-  selectedCategory: ICategory = null;
+  selectedCategory: string = null;
 
   constructor(
     private reqService: RequestsService
@@ -28,10 +28,10 @@ export class AddSubjectComponent implements OnInit {
       alert('Заполните все поля!');
     }
     const newSubject = {
-      categoryId: this.selectedCategory._id,
+      categoryName: this.selectedCategory,
       name: this.name
     };
-    this.reqService.AddSubject(newSubject).subscribe((data) => {
+    this.reqService.AddSubject(newSubject).subscribe(data => {
       if(data.message === 'Created'){
         alert('Предмет добавлен');
       }
