@@ -51,6 +51,9 @@ export class RequestsService {
   ChangeSubject(subject: ISubject) : Observable<{message: string}>{
     return this.http.patch<{message: string}>(`${apiUrl}/subjects/update`, subject);
   }
+  ChangePost(post: IPost) : Observable<{message: string}>{
+    return this.http.patch<{message: string}>(`${apiUrl}/post/update`, post);
+  }
   //==============================================================
 
 

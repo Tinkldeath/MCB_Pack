@@ -1,7 +1,8 @@
 import { Subscription } from 'rxjs';
 import { ViewService } from '../shared/services/view.service';
-import { ICategory, IUser } from './../shared/models/models';
+import { ICategory, ISubject, IUser } from './../shared/models/models';
 import { Component, OnInit, OnDestroy } from '@angular/core';
+import { RequestsService } from '../shared/services/requests.service';
 
 @Component({
   selector: 'app-add-item',
@@ -11,17 +12,23 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 export class AddItemPage implements OnInit, OnDestroy {
 
   categories: ICategory[] = [];
+  subjects: ISubject[] = [];
   user: IUser = null;
   vSub: Subscription = null;
   uSub: Subscription = null;
+  sSub: Subscription = null;
 
   constructor(
-    private viewService: ViewService
+    private viewService: ViewService,
+    private reqServise: RequestsService
   ) {}
 
   ngOnInit() {
     this.vSub = this.viewService.currentCategories.subscribe(data => {
       this.categories = data;
+    });
+    this.sSub = this.reqServise.GetSubjects().subscribe(data => {
+      this.subjects = data;
     });
     this.uSub = this.viewService.currentUser.subscribe(user => {
       this.user = user;
@@ -34,6 +41,9 @@ export class AddItemPage implements OnInit, OnDestroy {
     }
     if(this.uSub !== null){
       this.uSub.unsubscribe();
+    }
+    if(this.sSub !== null){
+      this.sSub.unsubscribe();
     }
   }
 }

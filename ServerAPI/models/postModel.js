@@ -10,7 +10,7 @@ const postScheme = new Schema({
     author: String,
     year: Number,
     university: String,
-    special: String,
+    subjectName: String,
     category: String,
     description: String,
     fileUrl: String

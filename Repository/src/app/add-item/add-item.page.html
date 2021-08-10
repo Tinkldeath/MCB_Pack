@@ -36,7 +36,11 @@
         {{category.name}}
       </ion-select-option>
     </ion-select>
-    <ion-input placeholder="Предмет" class="Input"></ion-input>
+    <ion-select placeholder="Предмет" class="Input" interface="popover">
+      <ion-select-option *ngFor="let subject of subjects">
+        {{subject.name}}
+      </ion-select-option>
+    </ion-select>
     <ion-input placeholder="Курс/Класс" class="Input"></ion-input>
     <ion-input placeholder="Автор" class="Input"></ion-input>
     <ion-input placeholder="Год" class="Input"></ion-input>

@@ -7,7 +7,7 @@ export interface IPost{
     author: string,
     year: number,
     university: string,
-    special: string,
+    subjectName: string,
     category: string,
     description: string,
     fileUrl: string

@@ -34,7 +34,7 @@ module.exports.addPost = async function(req,res){
     const reqAuthor = req.body.author;
     const reqYear = req.body.year;
     const reqUniversity = req.body.university;
-    const reqSpecial = req.body.special;
+    const reqSubjectName = req.body.subjectName;
     const reqCategory = req.body.category;
     const reqDescription = req.body.description;
     const reqFile = req.file;
@@ -47,7 +47,7 @@ module.exports.addPost = async function(req,res){
         author: reqAuthor,
         year: reqYear,
         university: reqUniversity,
-        special: reqSpecial,
+        subjectName: reqSubjectName,
         category: reqCategory,
         description: reqDescription,
         fileUrl: reqFile.path
@@ -95,7 +95,7 @@ module.exports.patchPost = async function (req,res) {
     const reqAuthor = req.body.author;
     const reqYear = req.body.year;
     const reqUniversity = req.body.university;
-    const reqSpecial = req.body.special;
+    const reqSubjectName = req.body.subjectName;
     const reqCategory = req.body.category;
     const reqDescription = req.body.description;
     const reqFile = req.file;
@@ -127,7 +127,7 @@ module.exports.patchPost = async function (req,res) {
             author: reqAuthor,
             year: reqYear,
             university: reqUniversity,
-            special: reqSpecial,
+            subjectName: reqSubjectName,
             category: reqCategory,
             description: reqDescription,
             fileUrl: reqFile.path}, (err) => {
