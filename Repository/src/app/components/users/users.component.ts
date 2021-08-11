@@ -52,11 +52,18 @@ export class UsersComponent implements OnInit, OnDestroy {
     this.newIsModer = this.userToEdit.isModer;
   }
 
+  ChangeAdmin(){
+    this.newIsAdmin = !this.newIsAdmin;
+  }
+
+  ChangeModer(){
+    this.newIsModer = !this.newIsModer;
+  }
+
   ChangeUser(){
 
     const user = {
-      login: this.userToEdit.login,
-      password: this.userToEdit.password,
+      _id: this.userToEdit._id,
       isAdmin: this.newIsAdmin,
       isModer: this.newIsModer
     }
@@ -65,10 +72,10 @@ export class UsersComponent implements OnInit, OnDestroy {
       alert('Вы ничего не изменили');
       return;
     }
-    else if(this.newIsAdmin === true){
-      this.authServise.AddAdmin(user).subscribe((data) => {
-        if(data.message === 'Added'){
-          alert('Пользователь теперь админ.');
+    else{
+      this.reqService.ChangeUser(user).subscribe((data) => {
+        if(data.message === 'Updated'){
+          alert('Пользователь обновлён');
           this.userToEdit = null;
           this.ngOnInit();
         }

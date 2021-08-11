@@ -58,6 +58,10 @@ export class RequestsService {
   ChangePost(post: FormData) : Observable<{message: string}>{
     return this.http.patch<{message: string}>(`${apiUrl}/post/update`, post);
   }
+
+  ChangeUser(user: any) : Observable<{message:string}>{
+    return this.http.patch<{message: string}>(`${apiUrl}/users/update`,user);
+  }
   //==============================================================
 
 

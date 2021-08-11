@@ -21,6 +21,31 @@ module.exports.GetAll = async function(req,res){
     }
 }
 
+module.exports.Update = async function(req,res){
+    try {
+        const reqId = req.body._id;
+        const newAdmin = req.body.isAdmin;
+        const newModer = req.body.isModer;
+        await User.findByIdAndUpdate(reqId,{isAdmin: newAdmin, isModer: newModer},(err) => {
+            if(err){
+                console.log(err);
+                res.json({
+                    message: 'DB error'
+                });
+            }
+            else{
+                res.json({
+                    message: 'Updated'
+                });
+            }
+        });
+    } catch (err) {
+        res.json({
+            message: 'Server error'
+        });
+    }
+}
+
 module.exports.Delete = async function(req,res){
     try {
         const reqId = req.params.id;

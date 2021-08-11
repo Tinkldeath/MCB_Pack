@@ -18,14 +18,15 @@
   <h2 id="SelectedUser">
     {{userToEdit.login}}
   </h2>
-  <ion-label>
-    <ion-checkbox [(ngModel)]="newIsAdmin"></ion-checkbox>Админ 
-  </ion-label>
-  <br>
-  <br>
-  <ion-label>
-    <ion-checkbox [(ngModel)]="newIsModer"></ion-checkbox>Модератор 
-  </ion-label>
-  <br>
+  <ion-item class="ChangeInput">
+    <ion-label>Админ:</ion-label>
+    <ion-toggle *ngIf="this.newIsAdmin === true" checked="true" (click)="ChangeAdmin()"></ion-toggle>
+    <ion-toggle *ngIf="this.newIsAdmin === false" checked="false" (click)="ChangeAdmin()"></ion-toggle>
+  </ion-item>
+  <ion-item class="ChangeInput">
+    <ion-label>Модератор:</ion-label>
+    <ion-toggle *ngIf="this.newIsModer === true" checked="true" (click)="ChangeModer()"></ion-toggle>
+    <ion-toggle *ngIf="this.newIsModer === false" checked="false" (click)="ChangeModer()"></ion-toggle>
+  </ion-item>
   <ion-button shape="round" color="dark" id="ChangeButton" (click)="userToEdit = null">Отменить</ion-button><ion-button shape="round" color="dark" id="ChangeButton" (click)="ChangeUser()">Сохранить</ion-button>
 </div>
