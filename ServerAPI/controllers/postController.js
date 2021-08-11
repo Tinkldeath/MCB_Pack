@@ -99,7 +99,6 @@ module.exports.patchPost = async function (req,res) {
     const reqCategory = req.body.category;
     const reqDescription = req.body.description;
     const reqFile = req.file;
-
     try {
         await Post.findOne({_id: reqPostId},(err,doc) => {
             if(err){
@@ -109,27 +108,30 @@ module.exports.patchPost = async function (req,res) {
                 });
             }
             else{
-                const filepath = doc.fileUrl;
-                fs.unlink(filepath, (err) => {
-                    if (err) {
-                      console.error(err)
-                      return
-                    }
-                });
+                if(reqFile !== undefined){
+                    const filepath = doc.fileUrl;
+                    fs.unlink(filepath, (err) => {
+                        if (err) {
+                        console.error(err)
+                        return
+                        }
+                    });
+                }
             }
         });
         // Забыл обратиться к модели Post, я подправил
-        await Post.findByIdAndUpdate(reqPostId,{
-            name: reqPostName,
-            theme: reqPostTheme,
-            courseNumber: reqCourseNumber,
-            author: reqAuthor,
-            year: reqYear,
-            university: reqUniversity,
-            subject: reqSubjectName,
-            category: reqCategory,
-            description: reqDescription,
-            fileUrl: reqFile.path}, (err) => {
+        if(reqFile === undefined){
+            await Post.findByIdAndUpdate(reqPostId,{
+                name: reqPostName,
+                theme: reqPostTheme,
+                courseNumber: reqCourseNumber,
+                author: reqAuthor,
+                year: reqYear,
+                university: reqUniversity,
+                subject: reqSubjectName,
+                category: reqCategory,
+                description: reqDescription
+            }, (err) => {
                 if(err){
                     console.log(err);
                     res.json({
@@ -142,7 +144,34 @@ module.exports.patchPost = async function (req,res) {
                         message: 'Updated'
                     });
                 }
-        });
+            });
+        }
+        else{
+            await Post.findByIdAndUpdate(reqPostId,{
+                name: reqPostName,
+                theme: reqPostTheme,
+                courseNumber: reqCourseNumber,
+                author: reqAuthor,
+                year: reqYear,
+                university: reqUniversity,
+                subject: reqSubjectName,
+                category: reqCategory,
+                description: reqDescription,
+                fileUrl: reqFile.path}, (err) => {
+                    if(err){
+                        console.log(err);
+                        res.json({
+                            message: 'DB error'
+                        });
+                    }
+                    else{
+                        console.log(`Post ${reqPostId} updated`);
+                        res.json({
+                            message: 'Updated'
+                        });
+                    }
+            });
+        }
     } catch (err) {
         if(err){
             console.log(err);

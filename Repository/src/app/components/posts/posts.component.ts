@@ -92,7 +92,12 @@ export class PostsComponent implements OnInit, OnDestroy {
     let formData: FormData = new FormData();
     formData.append('_id',this.postToEdit._id);
     formData.append('ownerId',this.postToEdit.ownerId);
-    formData.append('file',this.newFile,this.newFile.name);
+    if(this.newFile !== null){
+      formData.append('file',this.newFile,this.newFile.name);
+    }
+    else{
+      formData.append('file',null);
+    }
     formData.append('ownerId',this.postToEdit.ownerId);
     formData.append('name',this.newName);
     formData.append('theme',this.newTheme);
