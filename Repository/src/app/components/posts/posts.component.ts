@@ -98,7 +98,7 @@ export class PostsComponent implements OnInit, OnDestroy {
       alert('Заполните все поля корректно!');
       return;
     }
-    else if(this.postToEdit.name === this.newName && this.postToEdit.category === this.newCategory && this.postToEdit.subject === this.newSubject
+    else if(this.postToEdit.name === this.newName && this.postToEdit.theme === this.newTheme && this.postToEdit.category === this.newCategory && this.postToEdit.subject === this.newSubject
       && this.postToEdit.year === this.newYear && this.postToEdit.courseNumber === this.newCourseNumber && this.postToEdit.author === this.newAuthor
       && this.postToEdit.university === this.newUniversity && this.postToEdit.description === this.newDescription && this.newFile === null){
       alert('Вы ничего не изменили!');
