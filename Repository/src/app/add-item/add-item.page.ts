@@ -64,10 +64,20 @@ export class AddItemPage implements OnInit, OnDestroy {
   }
 
   AddPost(){
+    if(this.name === '' || this.theme === '' || this.year === null || this.courseNumber === null || this.subject === '' ||
+      this.category === '' || this.description === ''){
+        alert('Заполните все поля!');
+        return;
+    }
+    else if(this.file === null){
+      alert('Выберите файл!');
+      return;
+    }
     let formData: FormData = new FormData();
     formData.append('file',this.file,this.file.name);
     formData.append('name',this.name);
     formData.append('theme',this.theme);
+    formData.append('ownerId',this.user._id);
     formData.append('category',this.category);
     formData.append('subject',this.subject);
     formData.append('courseNumber',this.courseNumber.toString());
