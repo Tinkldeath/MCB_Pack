@@ -184,7 +184,7 @@ module.exports.patchPost = async function (req,res) {
 
 module.exports.deletePost = async function (req,res) {
     // Логика удаления поста
-    const reqPostId = req.body._id;
+    const reqPostId = req.params.id;
     try {
         await Post.findById(reqPostId,(err,doc) => {
             if(err){
@@ -213,7 +213,7 @@ module.exports.deletePost = async function (req,res) {
             else{
                 res.json({
                     message: 'Deleted'
-                })
+                });
             }
         });
     } catch (err) {

@@ -24,7 +24,7 @@ export class RequestsService {
   }
 
   GetPosts() : Observable<IPost[]>{
-    return this.http.get<IPost[]>(`${apiUrl}/post/all`);
+    return this.http.get<IPost[]>(`${apiUrl}/posts/all`);
   }
 
   GetUsers() : Observable<IUser[]>{
@@ -43,7 +43,7 @@ export class RequestsService {
   }
 
   AddPost(post: any) : Observable<{message: string}>{
-    return this.http.post<{message: string}>(`${apiUrl}/post/add`,post);
+    return this.http.post<{message: string}>(`${apiUrl}/posts/add`,post);
   }
   //==============================================================
 
@@ -56,7 +56,7 @@ export class RequestsService {
     return this.http.patch<{message: string}>(`${apiUrl}/subjects/update`, subject);
   }
   ChangePost(post: FormData) : Observable<{message: string}>{
-    return this.http.patch<{message: string}>(`${apiUrl}/post/update`, post);
+    return this.http.patch<{message: string}>(`${apiUrl}/posts/update`, post);
   }
 
   ChangeUser(user: any) : Observable<{message:string}>{
@@ -74,6 +74,9 @@ export class RequestsService {
   }
   DeleteUser(user: IUser) : Observable<{message: string}>{
     return this.http.delete<{message: string}>(`${apiUrl}/users/delete/${user._id}`);
+  }
+  DeletePost(id: string) : Observable<{message: string}>{
+    return this.http.delete<{message: string}>(`${apiUrl}/posts/delete/${id}`);
   }
   //==============================================================
 }

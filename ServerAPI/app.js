@@ -34,7 +34,7 @@ app.use('/api/admin',adminsRouter);
 app.use('/api/specials',specialsRouter);
 app.use('/api/groups',groupsRouter);
 app.use('/api/schedule',scheduleRouter);
-app.use('/api/post',postRouter);
+app.use('/api/posts',postRouter);
 app.use('/api/auth',authRouter);
 app.use('/api/categories',categoriesRouter);
 app.use('/api/subjects',subjectRouter);

@@ -77,6 +77,21 @@ export class PostsComponent implements OnInit, OnDestroy {
     }
   }
 
+  DeletePost(post: IPost){
+    this.reqService.DeletePost(post._id).subscribe((data) => {
+      if(data.message === 'Deleted'){
+        alert('Пост успешно удалён');
+        this.postToEdit = null;
+        this.ngOnInit();
+      }
+      else{
+        alert('Ошибка на стороне сервера');
+        this.postToEdit = null;
+        this.ngOnInit();
+      }
+    });
+  }
+
   ChangePost(){
     if(this.newName === '' || this.newCategory === '' || this.newSubject === '' || this.newYear === null ||
      this.newCourseNumber === null || this.newAuthor === '' || this.newUniversity === '' || this.newDescription === ''){
