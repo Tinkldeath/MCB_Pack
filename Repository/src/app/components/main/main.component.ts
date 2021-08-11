@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { RequestsService } from 'src/app/shared/services/requests.service';
 import { Subscription } from 'rxjs';
 import { ViewService } from 'src/app/shared/services/view.service';
-import { ICategory } from 'src/app/shared/models/models';
+import { IPost } from 'src/app/shared/models/models';
 
 @Component({
   selector: 'app-main',
@@ -11,8 +11,8 @@ import { ICategory } from 'src/app/shared/models/models';
 })
 export class MainComponent implements OnInit {
 
-  categories: ICategory[] = [];
-  cSub: Subscription = null;
+  posts: IPost[] = [];
+  pSub: Subscription = null;
   selection: string = '';
 
   constructor(
@@ -21,8 +21,8 @@ export class MainComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.cSub = this.reqService.GetCategories().subscribe((data) => {
-      this.categories = data;
+    this.pSub = this.reqService.GetPosts().subscribe((data) => {
+      this.posts = data;
     });
   }
 

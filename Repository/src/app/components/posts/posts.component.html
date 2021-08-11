@@ -8,7 +8,7 @@
   </ion-item>
 </ion-list>
 
-<div *ngIf="postToEdit !== null">
+<div id="Edit" *ngIf="postToEdit !== null">
   <ion-input [(ngModel)]="newName" placeholder="Название" class="ChangeInput"></ion-input>
     <ion-select [(ngModel)]="newCategory" placeholder="Категория" class="ChangeInput" interface="popover">
       <ion-select-option *ngFor="let category of categories">

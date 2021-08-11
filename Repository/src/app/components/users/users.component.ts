@@ -2,6 +2,7 @@ import { Subscription } from 'rxjs';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { IUser } from 'src/app/shared/models/models';
 import { RequestsService } from 'src/app/shared/services/requests.service';
+import { AuthService } from 'src/app/shared/services/auth.service';
 
 @Component({
   selector: 'app-users',
@@ -12,9 +13,13 @@ export class UsersComponent implements OnInit, OnDestroy {
 
   users: IUser[] = [];
   uSub: Subscription = null;
+  newIsAdmin: boolean = null;
+  newIsModer: boolean = null;
+  userToEdit: IUser = null;
 
   constructor(
-    private reqService: RequestsService
+    private reqService: RequestsService,
+    private authServise: AuthService
   ) { }
 
   ngOnInit() {
@@ -39,6 +44,39 @@ export class UsersComponent implements OnInit, OnDestroy {
         alert('Ошибка на стороне серера, попробуйте позже');
       }
     });
+  }
+
+  SelectUser(user: IUser){
+    this.userToEdit = user;
+    this.newIsAdmin = this.userToEdit.isAdmin;
+    this.newIsModer = this.userToEdit.isModer;
+  }
+
+  ChangeUser(){
+
+    const user = {
+      login: this.userToEdit.login,
+      password: this.userToEdit.password,
+      isAdmin: this.newIsAdmin,
+      isModer: this.newIsModer
+    }
+
+    if(this.userToEdit.isAdmin === this.newIsAdmin && this.userToEdit.isModer === this.newIsModer){
+      alert('Вы ничего не изменили');
+      return;
+    }
+    else if(this.newIsAdmin === true){
+      this.authServise.AddAdmin(user).subscribe((data) => {
+        if(data.message === 'Added'){
+          alert('Пользователь теперь админ.');
+          this.userToEdit = null;
+          this.ngOnInit();
+        }
+        else{
+          alert('Ошибка на стороне серера, попробуйте позже');
+        }
+      });
+    }
   }
 
 }

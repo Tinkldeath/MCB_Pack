@@ -29,6 +29,10 @@ export class AuthService {
     return this.http.patch<{message: string}>(`${apiUrl}/auth/changeLogin`,user);
   }
 
+  AddAdmin(user: any) : Observable<{message: string}>{
+    return this.http.post<{message: string}>(`${apiUrl}/admin/add`,user);
+  }
+
   /*
     Давай по порядку, начнём с Observable, Observable это тип данных, изменеие которого мы будем
     отслеживать и сразу же обрабатывать. В нашем случае изменение Observable у методов для запросов

@@ -1,4 +1,4 @@
-<ion-list>
+<ion-list *ngIf="userToEdit === null">
   <ion-item class="CategoryItem"  *ngFor="let user of users">
     <ion-label id="login"> {{user.login}} </ion-label>
     <ion-item>
@@ -8,8 +8,24 @@
       <ion-label> Модератор: {{user.isModer.toString()}} </ion-label>
     </ion-item>
     <div id="Place">
-      <ion-button fill="clear" color="dark" class="CategoryButton">Ред.</ion-button>
+      <ion-button fill="clear" color="dark" class="CategoryButton" (click)="SelectUser(user)">Ред.</ion-button>
       <ion-button fill="clear" color="dark" class="CategoryButton" (click)="DeleteUser(user)">Удалить</ion-button>
     </div>
   </ion-item>
 </ion-list>
+
+<div *ngIf="userToEdit !== null" id="ChangeUser">
+  <h2 id="SelectedUser">
+    {{userToEdit.login}}
+  </h2>
+  <ion-label>
+    <ion-checkbox [(ngModel)]="newIsAdmin"></ion-checkbox>Админ 
+  </ion-label>
+  <br>
+  <br>
+  <ion-label>
+    <ion-checkbox [(ngModel)]="newIsModer"></ion-checkbox>Модератор 
+  </ion-label>
+  <br>
+  <ion-button shape="round" color="dark" id="ChangeButton" (click)="userToEdit = null">Отменить</ion-button><ion-button shape="round" color="dark" id="ChangeButton" (click)="ChangeUser()">Сохранить</ion-button>
+</div>
