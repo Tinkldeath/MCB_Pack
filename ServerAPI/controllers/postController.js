@@ -2,7 +2,7 @@ const Post = require('./../models/postModel');
 const fs = require('fs');
 
 module.exports.getPost = async function(req,res){
-    const reqPostId = req.body.postId
+    const reqPostId = req.body._id
     try {
         await Post.findById(reqPostId, function (err,docs) {
             if(err){
@@ -28,33 +28,33 @@ module.exports.getPost = async function(req,res){
 module.exports.addPost = async function(req,res){
     // Логика добавления поста
     const reqOwnerId = req.body.ownerId;
-    const reqPostName = req.body.postName;
-    const reqPostTheme = req.body.postTheme;
+    const reqPostName = req.body.name;
+    const reqPostTheme = req.body.theme;
     const reqCourseNumber = req.body.courseNumber;
     const reqAuthor = req.body.author;
     const reqYear = req.body.year;
     const reqUniversity = req.body.university;
-    const reqSubjectName = req.body.subjectName;
+    const reqSubjectName = req.body.subject;
     const reqCategory = req.body.category;
     const reqDescription = req.body.description;
     const reqFile = req.file;
 
     const post = new Post({
         ownerId: reqOwnerId,
-        postName: reqPostName,
-        postTheme: reqPostTheme,
+        name: reqPostName,
+        theme: reqPostTheme,
         courseNumber: reqCourseNumber,
         author: reqAuthor,
         year: reqYear,
         university: reqUniversity,
-        subjectName: reqSubjectName,
+        subject: reqSubjectName,
         category: reqCategory,
         description: reqDescription,
         fileUrl: reqFile.path
     });
 
     try {
-        const found = await Post.findOne({ownerId: reqOwnerId,postName: reqPostName},(err) => {
+        const found = await Post.findOne({ownerId: reqOwnerId,name: reqPostName},(err) => {
             if(err){
                 console.log(err);
                 res.json({
@@ -66,6 +66,7 @@ module.exports.addPost = async function(req,res){
             res.json({
                 message: 'Conflict',
             });
+            return;
         }
         else{
             await post.save().then(() => {
@@ -87,15 +88,14 @@ module.exports.addPost = async function(req,res){
 
 module.exports.patchPost = async function (req,res) {
     // Логика обновления поста
-    const reqPostId = req.body.postId;
-    const reqOwnerId = req.body.ownerId;
-    const reqPostName = req.body.postName;
-    const reqPostTheme = req.body.postTheme;
+    const reqPostId = req.body._id;
+    const reqPostName = req.body.name;
+    const reqPostTheme = req.body.theme;
     const reqCourseNumber = req.body.courseNumber;
     const reqAuthor = req.body.author;
     const reqYear = req.body.year;
     const reqUniversity = req.body.university;
-    const reqSubjectName = req.body.subjectName;
+    const reqSubjectName = req.body.subject;
     const reqCategory = req.body.category;
     const reqDescription = req.body.description;
     const reqFile = req.file;
@@ -120,14 +120,13 @@ module.exports.patchPost = async function (req,res) {
         });
         // Забыл обратиться к модели Post, я подправил
         await Post.findByIdAndUpdate(reqPostId,{
-            ownerId: reqOwnerId,
-            postName: reqPostName,
-            postTheme: reqPostTheme,
+            name: reqPostName,
+            theme: reqPostTheme,
             courseNumber: reqCourseNumber,
             author: reqAuthor,
             year: reqYear,
             university: reqUniversity,
-            subjectName: reqSubjectName,
+            subject: reqSubjectName,
             category: reqCategory,
             description: reqDescription,
             fileUrl: reqFile.path}, (err) => {
@@ -156,7 +155,7 @@ module.exports.patchPost = async function (req,res) {
 
 module.exports.deletePost = async function (req,res) {
     // Логика удаления поста
-    const reqPostId = req.body.postId;
+    const reqPostId = req.body._id;
     try {
         await Post.findById(reqPostId,(err,doc) => {
             if(err){

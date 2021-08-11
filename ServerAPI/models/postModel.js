@@ -4,14 +4,14 @@ const Schema = mongoose.Schema;
 // Scheme setup
 const postScheme = new Schema({
     ownerId: Schema.Types.ObjectId,
-    postName: String,
-    postTheme: String,
+    name: String,
+    theme: String,
     courseNumber: Number,
     author: String,
     year: Number,
     university: String,
-    subjectName: String,
     category: String,
+    subject: String,
     description: String,
     fileUrl: String
 });

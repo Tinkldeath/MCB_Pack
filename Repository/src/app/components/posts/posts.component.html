@@ -1,6 +1,6 @@
 <ion-list *ngIf="postToEdit === null">
   <ion-item class="CategoryItem" id="listitem"  *ngFor="let post of posts">
-    {{post.postName}}
+    {{post.name}}
     <div id="Place">
       <ion-button fill="clear" color="dark" class="CategoryButton" (click)="EditPost(post)">Ред.</ion-button>
       <ion-button fill="clear" color="dark" class="CategoryButton">Удалить</ion-button>
@@ -10,20 +10,22 @@
 
 <div id="Edit" *ngIf="postToEdit !== null">
   <ion-input [(ngModel)]="newName" placeholder="Название" class="ChangeInput"></ion-input>
+  <ion-input [(ngModel)]="newTheme" placeholder="Тема" class="ChangeInput"></ion-input>
     <ion-select [(ngModel)]="newCategory" placeholder="Категория" class="ChangeInput" interface="popover">
       <ion-select-option *ngFor="let category of categories">
         {{category.name}}
       </ion-select-option>
     </ion-select>
-  <!-- <ion-select [(ngModel)]="newSubject" placeholder="Предмет" class="ChangeInput" interface="popover">
+  <ion-select [(ngModel)]="newSubject" placeholder="Предмет" class="ChangeInput" interface="popover">
     <ion-select-option *ngFor="let subject of subjects">
       {{subject.name}}
     </ion-select-option>
-  </ion-select> -->
+  </ion-select>
   <ion-input [(ngModel)]="newCourseNumber" placeholder="Курс/Класс" class="ChangeInput"></ion-input>
   <ion-input [(ngModel)]="newAuthor" placeholder="Автор" class="ChangeInput"></ion-input>
   <ion-input [(ngModel)]="newYear" placeholder="Год" class="ChangeInput"></ion-input>
   <ion-input [(ngModel)]="newUniversity" placeholder="Учебное заведение" class="ChangeInput"></ion-input>
   <ion-input [(ngModel)]="newDescription" placeholder="Описание" class="ChangeInput"></ion-input>
+  <ion-input type="file" placeholder="Новый файл" class="ChangeInput" (change)="onFileChange($event)"></ion-input>
   <ion-button shape="round" color="dark" (click)="postToEdit = null">Отменить</ion-button><ion-button shape="round" color="dark" (click)="ChangePost()">Сохранить</ion-button>
 </div>
