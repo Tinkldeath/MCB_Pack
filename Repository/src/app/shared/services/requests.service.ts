@@ -41,6 +41,10 @@ export class RequestsService {
   AddSubject(newSubject: {categoryName: string, name: string}) : Observable<{message: string}>{
     return this.http.post<{message: string}>(`${apiUrl}/subjects/add`,newSubject);
   }
+
+  AddPost(post: any) : Observable<{message: string}>{
+    return this.http.post<{message: string}>(`${apiUrl}/post/add`,post);
+  }
   //==============================================================
 
 
@@ -51,7 +55,7 @@ export class RequestsService {
   ChangeSubject(subject: ISubject) : Observable<{message: string}>{
     return this.http.patch<{message: string}>(`${apiUrl}/subjects/update`, subject);
   }
-  ChangePost(post: IPost) : Observable<{message: string}>{
+  ChangePost(post: FormData) : Observable<{message: string}>{
     return this.http.patch<{message: string}>(`${apiUrl}/post/update`, post);
   }
   //==============================================================

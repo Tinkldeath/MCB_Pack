@@ -19,6 +19,7 @@ export class PostsComponent implements OnInit, OnDestroy {
   postToEdit: IPost = null;
 
   newName: string = null;
+  newTheme: string = null;
   newCategory: string = null;
   newSubject: string = null;
   newYear: number = null;
@@ -26,6 +27,7 @@ export class PostsComponent implements OnInit, OnDestroy {
   newAuthor: string = null;
   newUniversity: string = null;
   newDescription: string = null;
+  newFile: File = null;
 
   constructor(
     private reqService: RequestsService
@@ -56,18 +58,23 @@ export class PostsComponent implements OnInit, OnDestroy {
     }
   }
 
+  onFileChange(fileChangeEvent){
+    this.newFile = fileChangeEvent.target.files[0];
+  }
+
   EditPost(post: IPost){
     this.postToEdit = post;
     if(this.postToEdit != null){
-      this.newName = this.postToEdit.postName;
+      this.newName = this.postToEdit.name;
+      this.newTheme = this.postToEdit.theme;
       this.newCategory = this.postToEdit.category;
-      this.newSubject = this.postToEdit.subjectName;
+      this.newSubject = this.postToEdit.subject;
       this.newYear = this.postToEdit.year;
       this.newCourseNumber = this.postToEdit.courseNumber;
       this.newAuthor = this.postToEdit.author;
       this.newUniversity = this.postToEdit.university;
       this.newDescription = this.postToEdit.description;
-    } 
+    }
   }
 
   ChangePost(){
@@ -76,29 +83,27 @@ export class PostsComponent implements OnInit, OnDestroy {
       alert('Заполните все поля корректно!');
       return;
     }
-    else if(this.postToEdit.postName === this.newName && this.postToEdit.category === this.newCategory && this.postToEdit.subjectName === this.newSubject
+    else if(this.postToEdit.name === this.newName && this.postToEdit.category === this.newCategory && this.postToEdit.subject === this.newSubject
       && this.postToEdit.year === this.newYear && this.postToEdit.courseNumber === this.newCourseNumber && this.postToEdit.author === this.newAuthor
-      && this.postToEdit.university === this.newUniversity && this.postToEdit.description === this.newDescription){
+      && this.postToEdit.university === this.newUniversity && this.postToEdit.description === this.newDescription && this.newFile === null){
       alert('Вы ничего не изменили!');
       return;
-    } 
-    
-    const post = {
-      ownerId: this.postToEdit.ownerId,
-      postTheme: this.postToEdit.postTheme,
-      fileUrl: this.postToEdit.fileUrl,
-      _id: this.postToEdit._id,
-      postName: this.newName,
-      category: this.newCategory,
-      subjectName: this.newSubject,
-      year: this.newYear,
-      courseNumber: this.newCourseNumber,
-      author: this.newAuthor,
-      university: this.newUniversity,
-      description: this.newDescription
     }
-
-    this.reqService.ChangePost(post).subscribe((data) => {
+    let formData: FormData = new FormData();
+    formData.append('_id',this.postToEdit._id);
+    formData.append('ownerId',this.postToEdit.ownerId);
+    formData.append('file',this.newFile,this.newFile.name);
+    formData.append('ownerId',this.postToEdit.ownerId);
+    formData.append('name',this.newName);
+    formData.append('theme',this.newTheme);
+    formData.append('courseNumber',this.newCourseNumber.toString());
+    formData.append('category',this.newCategory);
+    formData.append('subject',this.newSubject);
+    formData.append('year',this.newYear.toString());
+    formData.append('author',this.newAuthor);
+    formData.append('university',this.newUniversity);
+    formData.append('description',this.newDescription);
+    this.reqService.ChangePost(formData).subscribe((data) => {
       if(data.message === 'Updated'){
         alert('Публикация изменена');
         this.postToEdit = null;

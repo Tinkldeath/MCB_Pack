@@ -22,31 +22,31 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content enctype="multipart/form-data">
 
   <div id="rectangle">
-    Перетащите файл сюда
+    <ion-input id="fileInput" type="file" (change)="onFileChange($event)"></ion-input>
   </div>
 
   <div id="Input">
-
-    <ion-input placeholder="Название" class="Input"></ion-input>
-    <ion-select placeholder="Категория" class="Input" interface="popover">
+    <ion-input [(ngModel)]="name" placeholder="Название" class="Input"></ion-input>
+    <ion-input [(ngModel)]="theme" placeholder="Тема" class="Input"></ion-input>
+    <ion-select [(ngModel)]="category" placeholder="Категория" class="Input" interface="popover">
       <ion-select-option *ngFor="let category of categories">
         {{category.name}}
       </ion-select-option>
     </ion-select>
-    <ion-select placeholder="Предмет" class="Input" interface="popover">
+    <ion-select [(ngModel)]="subject" placeholder="Предмет" class="Input" interface="popover">
       <ion-select-option *ngFor="let subject of subjects">
         {{subject.name}}
       </ion-select-option>
     </ion-select>
-    <ion-input placeholder="Курс/Класс" class="Input"></ion-input>
-    <ion-input placeholder="Автор" class="Input"></ion-input>
-    <ion-input placeholder="Год" class="Input"></ion-input>
-    <ion-input placeholder="Учебное заведение" class="Input"></ion-input>
-    <ion-input placeholder="Описание" class="Input"></ion-input>
-    <ion-button fill="solid" class="UploadButton" shape="round" color="dark">Загрузить</ion-button>
+    <ion-input [(ngModel)]="courseNumber" placeholder="Курс/Класс" class="Input"></ion-input>
+    <ion-input [(ngModel)]="author" placeholder="Автор" class="Input"></ion-input>
+    <ion-input [(ngModel)]="year" placeholder="Год" class="Input"></ion-input>
+    <ion-input [(ngModel)]="university" placeholder="Учебное заведение" class="Input"></ion-input>
+    <ion-input [(ngModel)]="description" placeholder="Описание" class="Input"></ion-input>
+    <ion-button fill="solid" class="UploadButton" shape="round" color="dark" (click)="AddPost()">Загрузить</ion-button>
   </div>
 
 </ion-content>

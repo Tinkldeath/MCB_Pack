@@ -1,13 +1,13 @@
 export interface IPost{
     _id: string,
     ownerId: string,
-    postName: string,
-    postTheme: string,
+    name: string,
+    theme: string,
     courseNumber: number,
     author: string,
     year: number,
     university: string,
-    subjectName: string,
+    subject: string,
     category: string,
     description: string,
     fileUrl: string
