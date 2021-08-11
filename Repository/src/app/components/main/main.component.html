@@ -1,7 +1,11 @@
-<ion-item *ngFor="let post of posts" id="Item">
-  {{post.category}} | {{post.subjectName}} | {{post.year}}
-  <br>
-  {{post.name}}
-  <br>
+<div *ngFor="let post of posts" id="Item">
+<ion-row id="Place">
+  <ion-col id="left">{{post.category}} </ion-col><ion-col>|</ion-col><ion-col id="center"> {{post.theme}} </ion-col><ion-col>|</ion-col><ion-col id="right"> {{post.year}}</ion-col>
+</ion-row>
+<ion-row id="name">
+   {{post.name}}
+</ion-row>
+<ion-row id="description">
   {{post.description}}
-</ion-item>
+</ion-row>
+</div>

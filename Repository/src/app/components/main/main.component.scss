@@ -1,4 +1,43 @@
 #Item{
+    width: 80vw;
     margin-left: 15px;
-    margin-right: 15px;
+    margin-top: 20px;
+    // margin-right: 15px;
+    float: left;
+    background-color:rgb(31, 31, 31);
+    border-radius: 2px;
+    border-color: rgb(80, 80, 80);
+    border-width: 2px;
+    border-style: solid;
+}
+
+#left{
+    margin-right: auto;
+}
+
+#center{
+    margin: auto;
+}
+
+#right{
+    float: right;
+    margin-left: auto;
+}
+
+#Place{
+    border-bottom-color: rgb(80, 80, 80);
+    border-bottom-width: 2px;
+    border-bottom-style: solid;
+}
+
+#name{
+    font-size: large;
+    margin-left: 10px;
+    margin-top: 7px;
+}
+
+#description{
+    margin-top: 10px;
+    margin-left: 10px;
+    color: rgb(187, 185, 185);
 }
