@@ -30,33 +30,13 @@
   <ion-grid>
       <ion-row>
         <ion-col class="SelectItem">
-          <ion-item id="item">
-            <ion-label>Категория</ion-label>
-            <ion-select [(ngModel)]="selectedCategory" interface="popover">
-              <ion-select-option *ngFor="let category of categories">
-                {{category.name}}
-              </ion-select-option>
-            </ion-select>
-          </ion-item>
+          <app-view-categories></app-view-categories>
         </ion-col>
         <ion-col class="SelectItem">
-          <ion-item id="item">
-            <ion-label>Предмет</ion-label>
-            <ion-select [(ngModel)]="selectedSubject" interface="popover">
-              <ion-select-option *ngFor="let subject of subjects">
-                {{subject.name}}
-              </ion-select-option>
-            </ion-select>
-          </ion-item>
+          <app-view-subjects></app-view-subjects>
         </ion-col>
         <ion-col class="SelectItem">
-          <ion-item id="item">
-            <ion-label>Автор</ion-label>
-            <ion-select [(ngModel)]="selectedAuthor" interface="popover">
-              <ion-select-option value="f">Female</ion-select-option>
-              <ion-select-option value="m">Male</ion-select-option>
-            </ion-select>
-          </ion-item>
+          <app-view-authors></app-view-authors>
         </ion-col>
         <ion-col id="item">
           <ion-button class="ClearButton" fill="outline" size="small" color="dark" (click)="Reset()"> Очистить фильтры </ion-button>
@@ -74,18 +54,18 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <app-main *ngIf="searchCategories === false" ></app-main>
+  <ion-col id="popup">
+  </ion-col>
+  <app-main *ngIf="showPosts === true || this.searchCategories === false" ></app-main>
   <ion-header collapse="condense">
     <ion-toolbar>
       <ion-title size="large">Blank</ion-title>
     </ion-toolbar>
   </ion-header>
-  <ion-col id="popup">
-  </ion-col>
-  <ion-grid *ngIf="searchCategories === true">
+  <ion-grid *ngIf="searchCategories === true && showPosts === false">
     <ion-row no-padding >
       <ion-col *ngFor="let category of categories">
-        <ion-card id="category">
+        <ion-card id="category" (click)="SelectCategory(category)">
           <ion-card-title id="category-name"> {{category.name}} </ion-card-title>
           <ion-card-content>
             {{category.description}}

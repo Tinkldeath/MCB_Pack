@@ -1,0 +1,6 @@
+<ion-item id="item">
+  <ion-label>Предмет</ion-label>
+  <ion-select [(ngModel)]="selectedSubject" (ionChange)="SelectSubject()" interface="popover">
+    <ion-select-option *ngFor="let subject of viewSubjects">{{subject.name}}</ion-select-option>
+  </ion-select>
+</ion-item>

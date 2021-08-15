@@ -13,21 +13,24 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 })
 export class HomePage implements OnInit, OnDestroy{
 
+  // User model
   user: IUser = null;
+
+  // Ng models
   searchCategories: boolean = true;
-  selectedCategory: string = null;
-  selectedSubject: string = null;
-  selectedAuthor: string = null;
+  showPosts: boolean = false;
 
-
+  // All data fields
   categories: ICategory[] = [];
   subjects: ISubject[] = [];
   posts: IPost[] = [];
 
+  // Service subs
   vSub: Subscription = null;
   cSub: Subscription = null;
   sSub: Subscription = null;
   pSub: Subscription = null;
+
 
   constructor(
     private reqService: RequestsService,
@@ -44,18 +47,21 @@ export class HomePage implements OnInit, OnDestroy{
   ngOnInit(){
     this.cSub = this.reqService.GetCategories().subscribe((data) => {
       this.categories = data;
+      this.viewService.ChangeCategories(data);
+      this.viewService.SetAllCategories(data);
     });
     this.sSub = this.reqService.GetSubjects().subscribe((data) => {
       this.subjects = data;
+      this.viewService.ChangeSubjects(data);
+      this.viewService.SetAllSubjects(data);
     });
     this.pSub = this.reqService.GetPosts().subscribe((data) => {
       this.posts = data;
+      this.viewService.ChangePosts(data);
+      this.viewService.SetAllPosts(data);
     });
     this.user = this.dataService.DecryptUser();
     this.viewService.ChangeUser(this.user);
-    this.viewService.ChangeCategory(this.categories);
-    this.viewService.ChangePost(this.posts);
-    this.viewService.ChangeSubject(this.subjects);
     if(this.user === null){
       localStorage.clear();
     }
@@ -68,6 +74,12 @@ export class HomePage implements OnInit, OnDestroy{
     if(this.sSub !== null){
       this.sSub.unsubscribe();
     }
+    if(this.pSub !== null){
+      this.pSub.unsubscribe();
+    }
+    if(this.cSub !== null){
+      this.cSub.unsubscribe();
+    }
   }
 
   GoFavorite(){
@@ -75,24 +87,51 @@ export class HomePage implements OnInit, OnDestroy{
   }
 
   GoAdd(){
-    this.viewService.ChangeCategory(this.categories);
+    this.viewService.ChangeCategories(this.categories);
     this.router.navigateByUrl('add-item');
   }
 
   GoProfile(){
-    this.viewService.ChangeCategory(this.categories);
-    this.viewService.ChangeSubject(this.subjects);
-    this.viewService.ChangePost(this.posts);
+    this.viewService.ChangeCategories(this.categories);
+    this.viewService.ChangeSubjects(this.subjects);
+    this.viewService.ChangePosts(this.posts);
     this.router.navigateByUrl('account');
   }
 
   SwitchSearch(){
     this.searchCategories = !this.searchCategories;
+    if(this.searchCategories === false){
+      this.showPosts = true;
+    }
+    else{
+      this.showPosts = false;
+    }
   }
 
   Reset(){
-    this.selectedCategory = null;
-    this.selectedSubject = null;
-    this.selectedAuthor = null;
+    // Тут я добавил отдельную переменную для хранения постов, ибо так немного проще.
+    // searchCategories теперь влияет только на кнопку
+    if(this.searchCategories === true){
+      this.showPosts = false;
+    }
+    else{
+      this.showPosts = true;
+    }
+    // Тут мы сбрасываем критерии поиска
+    this.viewService.ChangeViewCategory(null);
+    this.viewService.ChangeViewSubject(null);
+    this.viewService.ChangeViewAuthor(null);
+
+    // А тут возвращаем отображение, т.к. отображение постов на компоненте зависит от этих методов
+    this.viewService.ChangeCategories(this.categories);
+    this.viewService.ChangePosts(this.posts);
+    this.viewService.ChangeSubjects(this.subjects);
   }
+
+  SelectCategory(category: ICategory){
+    // Вместо кучи кода просто вызываем метод у сервиса, а компонент постов сделает всё сам
+    this.viewService.ChangeViewCategory(category);
+    this.showPosts = true;
+  }
+
 }

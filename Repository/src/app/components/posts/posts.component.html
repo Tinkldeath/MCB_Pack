@@ -1,25 +1,23 @@
-<ion-list class="CategoryItem" *ngIf="postToEdit === null">
-  <ion-item class="CategoryItem" id="listitem"  *ngFor="let post of posts">
-    {{post.name}}
-    <div id="Place">
-      <ion-button fill="clear" color="dark" class="CategoryButton" (click)="EditPost(post)">Ред.</ion-button>
-      <ion-button fill="clear" color="dark" class="CategoryButton" (click)="DeletePost(post)">Удалить</ion-button>
-    </div>
-  </ion-item>
-</ion-list>
+<div *ngIf="postToEdit === null">
+  <ion-list class="CategoryItem" *ngFor="let post of posts">
+    <ion-item class="CategoryItem" id="listitem">
+      {{post.name}}
+      <div id="Place">
+        <ion-button fill="clear" color="dark" class="CategoryButton" (click)="EditPost(post)">Ред.</ion-button>
+        <ion-button fill="clear" color="dark" class="CategoryButton" (click)="DeletePost(post)">Удалить</ion-button>
+      </div>
+    </ion-item>
+  </ion-list>
+</div>
 
 <div id="Edit" *ngIf="postToEdit !== null">
   <ion-input [(ngModel)]="newName" placeholder="Название" class="ChangeInput"></ion-input>
   <ion-input [(ngModel)]="newTheme" placeholder="Тема" class="ChangeInput"></ion-input>
     <ion-select [(ngModel)]="newCategory" placeholder="Категория" class="ChangeInput" interface="popover">
-      <ion-select-option *ngFor="let category of categories">
-        {{category.name}}
-      </ion-select-option>
+      <ion-select-option *ngFor="let category of categories">{{category.name}}</ion-select-option>
     </ion-select>
   <ion-select [(ngModel)]="newSubject" placeholder="Предмет" class="ChangeInput" interface="popover">
-    <ion-select-option *ngFor="let subject of subjects">
-      {{subject.name}}
-    </ion-select-option>
+    <ion-select-option *ngFor="let subject of subjects">{{subject.name}}</ion-select-option>
   </ion-select>
   <ion-input [(ngModel)]="newCourseNumber" placeholder="Курс/Класс" class="ChangeInput"></ion-input>
   <ion-input [(ngModel)]="newAuthor" placeholder="Автор" class="ChangeInput"></ion-input>

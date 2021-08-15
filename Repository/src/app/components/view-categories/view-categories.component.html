@@ -1,0 +1,6 @@
+<ion-item id="item">
+  <ion-label>Категория</ion-label>
+  <ion-select [(ngModel)]="selectedCategory" (ionChange)="SelectCategory()" interface="popover">
+    <ion-select-option *ngFor="let category of categories">{{category.name}}</ion-select-option>
+  </ion-select>
+</ion-item>

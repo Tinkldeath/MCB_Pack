@@ -1,3 +1,5 @@
-<ion-input [(ngModel)]="name" class="ChangeInput" placeholder="Наименование категории"></ion-input>
-<ion-input [(ngModel)]="description" class="ChangeInput" placeholder="Описание категории"></ion-input>
-<ion-button (click)="AddCategory()" shape="round" color="dark" class="AddButton"> Добавить </ion-button>
+<div class="CategoryItem">
+  <ion-input [(ngModel)]="name" class="ChangeInput" placeholder="Наименование категории"></ion-input>
+  <ion-input [(ngModel)]="description" class="ChangeInput" placeholder="Описание категории"></ion-input>
+  <ion-button (click)="AddCategory()" shape="round" color="dark" class="AddButton"> Добавить </ion-button>
+</div>

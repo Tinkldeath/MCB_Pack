@@ -42,7 +42,6 @@ export class PostsComponent implements OnInit, OnDestroy {
     });
     this.sSub = this.reqService.GetSubjects().subscribe((data) => {
       this.subjects = data;
-      console.log(data);
     });
   }
 
