@@ -10,6 +10,8 @@ import { MainComponent } from '../components/main/main.component';
 
 import { HomePageRoutingModule } from './home-routing.module';
 
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
+
 
 @NgModule({
   imports: [
@@ -17,6 +19,7 @@ import { HomePageRoutingModule } from './home-routing.module';
     FormsModule,
     IonicModule,
     HomePageRoutingModule,
+    Ng2SearchPipeModule
   ],
   declarations: [HomePage, MainComponent, ViewCategoriesComponent, ViewAuthorsComponent,ViewSubjectsComponent],
   entryComponents: []

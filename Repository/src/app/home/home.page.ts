@@ -19,6 +19,7 @@ export class HomePage implements OnInit, OnDestroy{
   // Ng models
   searchCategories: boolean = true;
   showPosts: boolean = false;
+  searchbar: string = '';
 
   // All data fields
   categories: ICategory[] = [];
@@ -132,6 +133,28 @@ export class HomePage implements OnInit, OnDestroy{
     // Вместо кучи кода просто вызываем метод у сервиса, а компонент постов сделает всё сам
     this.viewService.ChangeViewCategory(category);
     this.showPosts = true;
+  }
+
+  Searchbar(){
+    for(let post of this.posts){
+      if(this.searchbar === post.author){
+        this.viewService.ChangeViewAuthor(this.searchbar);
+      }
+      else if( this.searchbar === post.subject){
+        for(let subject of this.subjects){
+          if(this.searchbar === subject.name){
+            this.viewService.ChangeViewSubject(subject);
+          }
+        }
+      } 
+      else if(this.searchbar === post.category){
+        for(let category of this.categories){
+          if(this.searchbar === category.name){
+            this.viewService.ChangeViewCategory(category);
+          }
+        }
+      }
+    }
   }
 
 }

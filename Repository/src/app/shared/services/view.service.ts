@@ -28,6 +28,7 @@ export class ViewService {
   private userSource = new BehaviorSubject(null);
   private postSource = new BehaviorSubject(null);
   private categoryToEditSource = new BehaviorSubject(null);
+  private searchTermSource = new BehaviorSubject(null);
 
   // view sources
   /*
@@ -53,6 +54,7 @@ export class ViewService {
   currentSubject = this.subjectSource.asObservable();
   currentPost = this.postSource.asObservable();
   categoryToChange = this.categoryToEditSource.asObservable();
+  searchTermChange = this.searchTermSource.asObservable();
 
   // view observables
   selectedAuthor = this.viewAuthorSource.asObservable();
@@ -105,6 +107,10 @@ export class ViewService {
 
   ChangeCategoryToEdit(message: ICategory){
     this.categoryToEditSource.next(message);
+  }
+
+  ChangeSearchTerm(message: string){
+    this.searchTermSource.next(message);
   }
   //=====================================================================================
 
