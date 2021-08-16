@@ -136,23 +136,16 @@ export class HomePage implements OnInit, OnDestroy{
   }
 
   Searchbar(){
-    for(let post of this.posts){
-      if(this.searchbar === post.author){
-        this.viewService.ChangeViewAuthor(this.searchbar);
+    this.viewService.ChangeSearchTerm(this.searchbar);
+    if(this.searchbar !== ''){
+      this.showPosts = true;
+    }
+    else{
+      if(this.searchCategories === true){
+        this.showPosts = false;
       }
-      else if( this.searchbar === post.subject){
-        for(let subject of this.subjects){
-          if(this.searchbar === subject.name){
-            this.viewService.ChangeViewSubject(subject);
-          }
-        }
-      } 
-      else if(this.searchbar === post.category){
-        for(let category of this.categories){
-          if(this.searchbar === category.name){
-            this.viewService.ChangeViewCategory(category);
-          }
-        }
+      else{
+        this.showPosts = true;
       }
     }
   }

@@ -2,7 +2,6 @@ import { Subscription } from 'rxjs';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { IUser } from 'src/app/shared/models/models';
 import { RequestsService } from 'src/app/shared/services/requests.service';
-import { AuthService } from 'src/app/shared/services/auth.service';
 
 @Component({
   selector: 'app-users',
@@ -12,14 +11,16 @@ import { AuthService } from 'src/app/shared/services/auth.service';
 export class UsersComponent implements OnInit, OnDestroy {
 
   users: IUser[] = [];
-  uSub: Subscription = null;
   newIsAdmin: boolean = null;
   newIsModer: boolean = null;
   userToEdit: IUser = null;
 
+  uSub: Subscription = null;
+  dSub: Subscription = null;
+  rSub: Subscription = null;
+
   constructor(
     private reqService: RequestsService,
-    private authServise: AuthService
   ) { }
 
   ngOnInit() {
@@ -32,10 +33,16 @@ export class UsersComponent implements OnInit, OnDestroy {
     if(this.uSub !== null){
       this.uSub.unsubscribe();
     }
+    if(this.dSub !== null){
+      this.dSub.unsubscribe();
+    }
+    if(this.rSub !== null){
+      this.rSub.unsubscribe();
+    }
   }
 
   DeleteUser(user: IUser){
-    this.reqService.DeleteUser(user).subscribe((data) =>{
+    this.dSub = this.reqService.DeleteUser(user).subscribe((data) =>{
       if(data.message === 'Deleted'){
         alert('Пользователь удален');
         this.ngOnInit();
@@ -73,7 +80,7 @@ export class UsersComponent implements OnInit, OnDestroy {
       return;
     }
     else{
-      this.reqService.ChangeUser(user).subscribe((data) => {
+      this.rSub = this.reqService.ChangeUser(user).subscribe((data) => {
         if(data.message === 'Updated'){
           alert('Пользователь обновлён');
           this.userToEdit = null;

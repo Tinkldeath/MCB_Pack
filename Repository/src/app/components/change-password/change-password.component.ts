@@ -16,6 +16,8 @@ import { Subscription } from 'rxjs';
 export class ChangePasswordComponent implements OnInit, OnDestroy {
 
   vSub: Subscription = null;
+  rSub: Subscription = null;
+  aSub: Subscription = null;
   /*
     Эти переменные нужны для работы атрибута [(ngModel)] который написан возле инпутов в html.
     ngModel работает следующим образом: любые изменения в инпутах будут изменять переменные ниже,
@@ -48,6 +50,12 @@ export class ChangePasswordComponent implements OnInit, OnDestroy {
     if(this.vSub !== null){
       this.vSub.unsubscribe();
     }
+    if(this.rSub !== null){
+      this.rSub.unsubscribe();
+    }
+    if(this.aSub !== null){
+      this.aSub.unsubscribe();
+    }
   }
 
   Change(){
@@ -70,13 +78,13 @@ export class ChangePasswordComponent implements OnInit, OnDestroy {
         password: this.oldPassword
       }
       // Через сервис авторизации проверяем, правильно ли введён старый пароль
-      this.authService.Login(user).subscribe(data => {
+      this.aSub = this.authService.Login(user).subscribe(data => {
         if(data.token !== null){
           const newUser = {
             login: this.user.login,
             password: this.newPassword
           }
-          this.authService.ChangePassword(newUser).subscribe(data => {
+          this.rSub = this.authService.ChangePassword(newUser).subscribe(data => {
             /*
               Как я и говорил, мы ожидаем объект с полем message, и уже в зависимости от
               сообщения будем действовать дальше.

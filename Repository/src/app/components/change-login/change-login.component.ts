@@ -11,11 +11,14 @@ import { Subscription } from 'rxjs';
   templateUrl: './change-login.component.html',
   styleUrls: ['./change-login.component.scss'],
 })
-export class ChangeLoginComponent implements OnInit {
+export class ChangeLoginComponent implements OnInit, OnDestroy {
 
-  vSub: Subscription = null;
   login: string = null;
   password: string = null;
+
+  vSub: Subscription = null;
+  rSub: Subscription = null;
+  aSub: Subscription = null;
 
   private user: IUser = null;
 
@@ -36,6 +39,12 @@ export class ChangeLoginComponent implements OnInit {
     if(this.vSub !== null){
       this.vSub.unsubscribe();
     }
+    if(this.rSub !== null){
+      this.rSub.unsubscribe();
+    }
+    if(this.aSub !== null){
+      this.aSub.unsubscribe();
+    }
   }
 
   Change(){
@@ -49,13 +58,13 @@ export class ChangeLoginComponent implements OnInit {
         login: this.user.login,
         password: this.password
       }
-      this.authService.Login(user).subscribe((data) => {
+      this.aSub = this.authService.Login(user).subscribe((data) => {
         if(data.token !== null){
             /*
               Ошибка была при вызове метода у сервиса, бэкенд принимает айди, а в объекте user его не было,
               теперь смена логина тоже работает
             */
-            this.authService.ChangeLogin({_id: this.user._id, login: this.login}).subscribe(data => {
+            this.rSub = this.authService.ChangeLogin({_id: this.user._id, login: this.login}).subscribe(data => {
               if(data.message === 'Login updated.'){
                 alert('Логин успешно обновлен, войдите повторно.');
                 localStorage.clear();

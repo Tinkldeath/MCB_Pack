@@ -14,21 +14,21 @@ export class ViewSubjectsComponent implements OnInit, OnDestroy {
   selectedSubject: string = null;
   sub: ISubject = null;
   cat: ICategory = null;
-  subjects: ISubject[] = [];
+  categories: ICategory[] = [];
   viewSubjects: ISubject[] = [];
 
-  sSub: Subscription = null;
   vSub: Subscription = null;
   cSub: Subscription = null;
   vsSub: Subscription = null;
+  vcSub: Subscription = null;
 
   constructor(
     private viewService: ViewService
   ) { }
 
   ngOnInit() {
-    this.sSub = this.viewService.allSubjects.subscribe((data) => {
-      this.subjects = data;
+    this.vcSub = this.viewService.currentCategories.subscribe((data) => {
+      this.categories = data;
     });
     this.vsSub = this.viewService.currentSubject.subscribe((data) => {
       this.viewSubjects = data;
@@ -46,7 +46,7 @@ export class ViewSubjectsComponent implements OnInit, OnDestroy {
       this.cat = data;
       if(this.cat !== null){
         let newArr = [];
-        this.subjects.forEach(subject => {
+        this.viewSubjects.forEach(subject => {
           if(subject.categoryName === this.cat.name){
             newArr.push(subject);
           }
@@ -57,16 +57,32 @@ export class ViewSubjectsComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    if(this.sSub !== null){
-      this.sSub.unsubscribe();
+    if(this.vsSub !== null){
+      this.vsSub.unsubscribe();
+    }
+    if(this.cSub !== null){
+      this.cSub.unsubscribe();
+    }
+    if(this.vcSub !== null){
+      this.vcSub.unsubscribe();
+    }
+    if(this.vSub !== null){
+      this.vSub.unsubscribe();
     }
   }
 
   SelectSubject(){
-    for(let subject of this.subjects){
+    for(let subject of this.viewSubjects){
       if(subject.name === this.selectedSubject){
         this.viewService.ChangeViewSubject(subject);
-        break;
+        if(this.cat === null){
+          for(let category of this.categories){
+            if(category.name === subject.categoryName){
+              this.viewService.ChangeViewCategory(category);
+              return;
+            }
+          }
+        }
       }
     }
   }

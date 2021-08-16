@@ -14,8 +14,11 @@ export class SubjectsComponent implements OnInit, OnDestroy {
   categories: ICategory[] = [];
   categoryName: string = '';
   subjectToEdit: ISubject = null;
+
   sSub: Subscription = null;
   cSub: Subscription = null;
+  dSub: Subscription = null;
+  rSub: Subscription = null;
 
   newName: string = '';
 
@@ -39,6 +42,12 @@ export class SubjectsComponent implements OnInit, OnDestroy {
     if(this.cSub !== null){
       this.cSub.unsubscribe();
     }
+    if(this.dSub !== null){
+      this.dSub.unsubscribe();
+    }
+    if(this.rSub !== null){
+      this.rSub.unsubscribe();
+    }
   }
 
   SelectSubject(subject: ISubject){
@@ -55,7 +64,7 @@ export class SubjectsComponent implements OnInit, OnDestroy {
       categoryName: subject.categoryName,
       name: subject.name
     }
-    this.reqService.DeleteSubject(delSubject).subscribe((data) => {
+    this.dSub = this.reqService.DeleteSubject(delSubject).subscribe((data) => {
       if(data.message === 'Deleted'){
         alert('Предмет удалён');
         this.ngOnInit();
@@ -80,7 +89,7 @@ export class SubjectsComponent implements OnInit, OnDestroy {
       categoryName: this.categoryName,
       name: this.newName
     };
-    this.reqService.ChangeSubject(subject).subscribe((data) => {
+    this.rSub = this.reqService.ChangeSubject(subject).subscribe((data) => {
       if(data.message === 'Updated'){
         alert('Предмет изменён');
         this.subjectToEdit = null;

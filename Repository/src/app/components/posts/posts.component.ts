@@ -13,9 +13,6 @@ export class PostsComponent implements OnInit, OnDestroy {
   posts: IPost[] = [];
   subjects: ISubject[] = [];
   categories: ICategory[] = [];
-  sSub: Subscription = null;
-  cSub: Subscription = null;
-  pSub: Subscription = null;
   postToEdit: IPost = null;
 
   newName: string = null;
@@ -28,6 +25,12 @@ export class PostsComponent implements OnInit, OnDestroy {
   newUniversity: string = null;
   newDescription: string = null;
   newFile: File = null;
+
+  sSub: Subscription = null;
+  cSub: Subscription = null;
+  pSub: Subscription = null;
+  rSub: Subscription = null;
+  dSub: Subscription = null;
 
   constructor(
     private reqService: RequestsService
@@ -55,6 +58,12 @@ export class PostsComponent implements OnInit, OnDestroy {
     if(this.sSub !== null){
       this.sSub.unsubscribe();
     }
+    if(this.rSub !== null){
+      this.rSub.unsubscribe();
+    }
+    if(this.dSub !== null){
+      this.dSub.unsubscribe();
+    }
   }
 
   onFileChange(fileChangeEvent){
@@ -77,7 +86,7 @@ export class PostsComponent implements OnInit, OnDestroy {
   }
 
   DeletePost(post: IPost){
-    this.reqService.DeletePost(post._id).subscribe((data) => {
+    this.dSub = this.reqService.DeletePost(post._id).subscribe((data) => {
       if(data.message === 'Deleted'){
         alert('Пост успешно удалён');
         this.postToEdit = null;
@@ -122,7 +131,7 @@ export class PostsComponent implements OnInit, OnDestroy {
     formData.append('author',this.newAuthor);
     formData.append('university',this.newUniversity);
     formData.append('description',this.newDescription);
-    this.reqService.ChangePost(formData).subscribe((data) => {
+    this.rSub = this.reqService.ChangePost(formData).subscribe((data) => {
       if(data.message === 'Updated'){
         alert('Публикация изменена');
         this.postToEdit = null;

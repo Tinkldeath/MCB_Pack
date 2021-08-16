@@ -1,6 +1,6 @@
 import { Subscription } from 'rxjs';
 import { ViewService } from 'src/app/shared/services/view.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { IPost } from 'src/app/shared/models/models';
 
 @Component({
@@ -8,11 +8,12 @@ import { IPost } from 'src/app/shared/models/models';
   templateUrl: './view-authors.component.html',
   styleUrls: ['./view-authors.component.scss'],
 })
-export class ViewAuthorsComponent implements OnInit {
+export class ViewAuthorsComponent implements OnInit, OnDestroy {
 
   selectedAuthor: string = null;
   authors: string[] = [];
   posts: IPost[] = [];
+
   pSub: Subscription = null;
   vSub: Subscription = null;
 
@@ -45,6 +46,15 @@ export class ViewAuthorsComponent implements OnInit {
         this.selectedAuthor = null;
       }
     });
+  }
+
+  ngOnDestroy(){
+    if(this.pSub !== null){
+      this.pSub.unsubscribe();
+    }
+    if(this.vSub !== null){
+      this.vSub.unsubscribe();
+    }
   }
 
   SelectAuthor(){

@@ -2,7 +2,6 @@ import { ICategory } from './../../shared/models/models';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { RequestsService } from 'src/app/shared/services/requests.service';
 import { Subscription } from 'rxjs';
-import { ViewService } from 'src/app/shared/services/view.service';
 
 
 @Component({
@@ -15,13 +14,13 @@ export class CategoriesComponent implements OnInit, OnDestroy {
   categories: ICategory[] = [];
   categoryToEdit: ICategory = null;
   cSub: Subscription = null;
+  rSub: Subscription = null;
 
   newName: string = null;
   newDescription: string = null;
 
   constructor(
     private reqService: RequestsService,
-    private viewServise: ViewService
   ) { }
 
   ngOnInit() {
@@ -34,6 +33,9 @@ export class CategoriesComponent implements OnInit, OnDestroy {
     if(this.cSub !== null){
       this.cSub.unsubscribe();
     }
+    if(this.rSub !== null){
+      this.rSub.unsubscribe();
+    }
   }
 
   EditCategory(category: ICategory){
@@ -45,7 +47,7 @@ export class CategoriesComponent implements OnInit, OnDestroy {
   }
 
   DeleteCategory(category: ICategory){
-    this.reqService.DeleteCategory(category).subscribe(data => {
+    this.rSub = this.reqService.DeleteCategory(category).subscribe(data => {
       if(data.message === 'Deleted'){
         alert('Категория удалена');
         this.ngOnInit();

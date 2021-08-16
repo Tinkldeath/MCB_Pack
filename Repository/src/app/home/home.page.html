@@ -10,11 +10,7 @@
               </ion-label>
           </ion-col>
           <ion-col>
-            <ion-searchbar color="light" 
-            placeholder="Поиск по документам"
-            id="searchbar" 
-            [(ngModel)]="searchbar"
-            animated></ion-searchbar>
+            <ion-searchbar color="light" placeholder="Поиск по документам" id="searchbar" [(ngModel)]="searchbar" animated (ionChange)="Searchbar()"></ion-searchbar>
           </ion-col>
           <ion-col>
               <ion-button *ngIf="user === null" fill="clear" size="medium" color="dark" class="Help" routerLink="/sign-in"> <u>Загрузить</u> </ion-button>
