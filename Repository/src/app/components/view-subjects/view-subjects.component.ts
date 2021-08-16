@@ -13,10 +13,12 @@ export class ViewSubjectsComponent implements OnInit, OnDestroy {
 
   selectedSubject: string = null;
   sub: ISubject = null;
+  allSubjects: ISubject[] = [];
   cat: ICategory = null;
   categories: ICategory[] = [];
   viewSubjects: ISubject[] = [];
 
+  aSub: Subscription = null;
   vSub: Subscription = null;
   cSub: Subscription = null;
   vsSub: Subscription = null;
@@ -27,6 +29,9 @@ export class ViewSubjectsComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit() {
+    this.aSub = this.viewService.allSubjects.subscribe((data) => {
+      this.allSubjects = data;
+    });
     this.vcSub = this.viewService.currentCategories.subscribe((data) => {
       this.categories = data;
     });
@@ -46,12 +51,15 @@ export class ViewSubjectsComponent implements OnInit, OnDestroy {
       this.cat = data;
       if(this.cat !== null){
         let newArr = [];
-        this.viewSubjects.forEach(subject => {
+        this.allSubjects.forEach(subject => {
           if(subject.categoryName === this.cat.name){
             newArr.push(subject);
           }
         });
         this.viewService.ChangeSubjects(newArr);
+      }
+      else{
+        this.viewService.ChangeSubjects(this.allSubjects);
       }
     });
   }
@@ -68,6 +76,9 @@ export class ViewSubjectsComponent implements OnInit, OnDestroy {
     }
     if(this.vSub !== null){
       this.vSub.unsubscribe();
+    }
+    if(this.aSub !== null){
+      this.aSub.unsubscribe();
     }
   }
 
