@@ -4,10 +4,14 @@ import { ViewAuthorsComponent } from './../components/view-authors/view-authors.
 import { ViewCategoriesComponent } from './../components/view-categories/view-categories.component';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { MainComponent } from '../components/main/main.component';
+import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   imports: [
+    CommonModule,
+    FormsModule,
     IonicModule,
     Ng2SearchPipeModule
   ],
