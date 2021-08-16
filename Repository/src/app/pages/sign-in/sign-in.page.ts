@@ -1,7 +1,7 @@
 import { Subscription } from 'rxjs';
-import { ViewService } from './../shared/services/view.service';
-import { DataService } from './../shared/services/data.service';
-import { AuthService } from './../shared/services/auth.service';
+import { ViewService } from '../../shared/services/view.service';
+import { DataService } from '../../shared/services/data.service';
+import { AuthService } from '../../shared/services/auth.service';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 @Component({

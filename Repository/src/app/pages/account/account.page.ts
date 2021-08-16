@@ -1,8 +1,8 @@
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { ViewService } from './../shared/services/view.service';
+import { ViewService } from '../../shared/services/view.service';
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ICategory, IUser, IPost } from './../shared/models/models';
+import { ICategory, IUser, IPost } from '../../shared/models/models';
 
 
 @Component({

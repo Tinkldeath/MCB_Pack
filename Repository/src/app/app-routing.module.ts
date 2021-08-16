@@ -4,7 +4,7 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   {
     path: 'home',
-    loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)
+    loadChildren: () => import('./pages/home/home.module').then( m => m.HomePageModule)
   },
   {
     path: '',
@@ -13,27 +13,27 @@ const routes: Routes = [
   },
   {
     path: 'register',
-    loadChildren: () => import('./register/register.module').then( m => m.RegisterPageModule)
+    loadChildren: () => import('./pages/register/register.module').then( m => m.RegisterPageModule)
   },
   {
     path: 'sign-in',
-    loadChildren: () => import('./sign-in/sign-in.module').then( m => m.SignInPageModule)
+    loadChildren: () => import('./pages/sign-in/sign-in.module').then( m => m.SignInPageModule)
   },
   {
     path: 'landing',
-    loadChildren: () => import('./landing/landing.module').then( m => m.LandingPageModule)
+    loadChildren: () => import('./pages/landing/landing.module').then( m => m.LandingPageModule)
   },
   {
     path: 'add-item',
-    loadChildren: () => import('./add-item/add-item.module').then( m => m.AddItemPageModule)
+    loadChildren: () => import('./pages/add-item/add-item.module').then( m => m.AddItemPageModule)
   },
   {
     path: 'favorite',
-    loadChildren: () => import('./favorite/favorite.module').then( m => m.FavoritePageModule)
+    loadChildren: () => import('./pages/favorite/favorite.module').then( m => m.FavoritePageModule)
   },
   {
     path: 'account',
-    loadChildren: () => import('./account/account.module').then( m => m.AccountPageModule)
+    loadChildren: () => import('./pages/account/account.module').then( m => m.AccountPageModule)
   },
 ];
 
