@@ -97,4 +97,22 @@ export class AddItemPage implements OnInit, OnDestroy {
       }
     });
   }
+
+  SelectCategory(){
+    for(let category of this.categories){
+      if(category.name === this.category){
+        this.viewService.ChangeViewCategory(category);
+        break;
+      }
+    }
+  }
+
+  SelectSubject(){
+    for(let subject of this.subjects){
+      if(subject.name === this.subject && subject.categoryName === this.category){
+        this.viewService.ChangeViewSubject(subject);
+      }
+    }
+  }
+
 }

@@ -1,13 +1,26 @@
 #Item{
     width: 80vw;
     margin-left: 15px;
-    margin-top: 20px;
+    margin-top: 15px;
+    margin-bottom: 5px;
     float: left;
     background-color:rgb(31, 31, 31);
     border-radius: 2px;
     border-color: rgb(80, 80, 80);
     border-width: 2px;
     border-style: solid;
+}
+
+#Post{
+  width: 80vw;
+  margin-left: 15px;
+  margin-top: 20px;
+  float: left;
+  background-color:rgb(31, 31, 31);
+  border-radius: 2px;
+  border-color: rgb(80, 80, 80);
+  border-width: 2px;
+  border-style: solid;
 }
 
 #openButton{
@@ -72,4 +85,30 @@ h2{
     margin-left: 10px;
     color: rgb(187, 185, 185);
     margin-bottom: 5px;
+}
+
+#postInformation{
+  color: rgb(219, 214, 214);
+  font-size: 15px;
+  margin-top: 7px;
+  margin-left: 15px;
+}
+
+#postDescription{
+  font-size: large;
+  margin-top: 10px;
+  margin-left: 15px;
+  margin-bottom: 5px;
+}
+
+#postName{
+  font-size: xx-large;
+  margin-left: 15px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+#postButton{
+  margin-left: 3px;
+  margin-bottom: 5px;
 }

@@ -16,6 +16,7 @@ export class MainComponent implements OnInit, OnDestroy {
   subject: ISubject = null; // Сохраняем выбор из других компонентов если он есть
   author: string = null;
   searchTerm: string = null;
+  viewPost: IPost = null;
 
   // Подписки для очистки памяти
   pSub: Subscription = null;
@@ -108,4 +109,9 @@ export class MainComponent implements OnInit, OnDestroy {
       this.viewServise.ChangePosts(newArr);
     }
   }
+
+  ViewPost(post: IPost){
+    this.viewPost = post;
+  }
+
 }

@@ -31,10 +31,10 @@
   <div id="Input">
     <ion-input [(ngModel)]="name" placeholder="Название" class="Input"></ion-input>
     <ion-input [(ngModel)]="theme" placeholder="Тема" class="Input"></ion-input>
-    <ion-select [(ngModel)]="category" placeholder="Категория" class="Input">
+    <ion-select [(ngModel)]="category" placeholder="Категория" class="Input" (ionChange)="SelectCategory()">
       <ion-select-option *ngFor="let category of categories">{{category.name}}</ion-select-option>
     </ion-select>
-    <ion-select [(ngModel)]="subject" placeholder="Предмет" class="Input">
+    <ion-select [(ngModel)]="subject" placeholder="Предмет" class="Input" (ionChange)="SelectSubject()">
       <ion-select-option *ngFor="let subject of subjects">{{subject.name}}</ion-select-option>
     </ion-select>
     <ion-input [(ngModel)]="courseNumber" placeholder="Курс/Класс" class="Input"></ion-input>
