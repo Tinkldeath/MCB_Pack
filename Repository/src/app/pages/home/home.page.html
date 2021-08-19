@@ -64,9 +64,9 @@
   </ion-header>
   <ion-grid *ngIf="searchCategories === true && showPosts === false">
     <ion-row no-padding >
-      <ion-col *ngFor="let category of categories">
+      <ion-col *ngFor="let category of categories" alt="category.name">
         <ion-card id="category" (click)="SelectCategory(category)">
-          <ion-card-title id="category-name"> {{category.name}} </ion-card-title>
+          <ion-card-title id="category-name" > {{category.name}} </ion-card-title>
           <ion-card-content>
             {{category.description}}
           </ion-card-content>
