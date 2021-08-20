@@ -154,6 +154,7 @@ export class HomePage implements OnInit, OnDestroy{
   }
 
   Searchbar(){
+    this.viewService.ChangePosts(this.posts);
     this.viewService.ChangeSearchTerm(this.searchbar);
     if(this.searchbar !== ''){
       this.showPosts = true;
@@ -166,6 +167,10 @@ export class HomePage implements OnInit, OnDestroy{
         this.showPosts = true;
       }
     }
+  }
+
+  SearchFilters(){
+    this.showPosts = true;
   }
 
 }

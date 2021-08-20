@@ -30,13 +30,13 @@
   <ion-grid>
       <ion-row>
         <ion-col class="SelectItem">
-          <app-view-categories></app-view-categories>
+          <app-view-categories (click)="SearchFilters()"></app-view-categories>
         </ion-col>
         <ion-col class="SelectItem">
-          <app-view-subjects></app-view-subjects>
+          <app-view-subjects (click)="SearchFilters()"></app-view-subjects>
         </ion-col>
         <ion-col class="SelectItem">
-          <app-view-authors></app-view-authors>
+          <app-view-authors (click)="SearchFilters()"></app-view-authors>
         </ion-col>
         <ion-col id="item">
           <ion-button class="ClearButton" fill="outline" size="small" color="dark" (click)="Reset()"> Очистить фильтры </ion-button>
