@@ -67,7 +67,8 @@ module.exports.register = async function(req,res){
             login: req.body.login,
             password: Bcrypt.hashSync(pas,salt),
             isAdmin: req.body.isAdmin,
-            isModer: req.body.isModer
+            isModer: req.body.isModer,
+            favorites: []
         });
         try {
             await user.save().then(() => {
