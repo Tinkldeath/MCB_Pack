@@ -26,7 +26,8 @@ module.exports.Update = async function(req,res){
         const reqId = req.body._id;
         const newAdmin = req.body.isAdmin;
         const newModer = req.body.isModer;
-        await User.findByIdAndUpdate(reqId,{isAdmin: newAdmin, isModer: newModer},(err) => {
+        const newFavs = req.body.favorites;
+        await User.findByIdAndUpdate(reqId,{isAdmin: newAdmin, isModer: newModer,favorites: newFavs},(err) => {
             if(err){
                 console.log(err);
                 res.json({

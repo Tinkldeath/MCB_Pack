@@ -72,7 +72,8 @@ export class UsersComponent implements OnInit, OnDestroy {
     const user = {
       _id: this.userToEdit._id,
       isAdmin: this.newIsAdmin,
-      isModer: this.newIsModer
+      isModer: this.newIsModer,
+      favorites: []
     }
 
     if(this.userToEdit.isAdmin === this.newIsAdmin && this.userToEdit.isModer === this.newIsModer){

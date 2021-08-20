@@ -84,7 +84,16 @@ export class HomePage implements OnInit, OnDestroy{
   }
 
   GoFavorite(){
-    this.router.navigateByUrl('favorite');
+    this.showPosts = true;
+    let newArr: IPost[] = [];
+    this.user.favorites.forEach(fav => {
+      this.posts.forEach(post => {
+        if(post._id === fav){
+          newArr.push(post);
+        }
+      });
+    });
+    this.viewService.ChangePosts(newArr);
   }
 
   GoAdd(){
@@ -93,9 +102,18 @@ export class HomePage implements OnInit, OnDestroy{
   }
 
   GoProfile(){
-    this.viewService.ChangeCategories(this.categories);
-    this.viewService.ChangeSubjects(this.subjects);
-    this.viewService.ChangePosts(this.posts);
+    if(this.user.isAdmin === false && this.user.isModer === false){
+      let posts = this.posts;
+      posts = posts.filter(post => post.ownerId === this.user._id);
+      console.log(posts);
+      this.viewService.ChangePosts([]);
+      this.viewService.ChangePosts(posts);
+    }
+    else{
+      this.viewService.ChangeCategories(this.categories);
+      this.viewService.ChangeSubjects(this.subjects);
+      this.viewService.ChangePosts(this.posts);
+    }
     this.router.navigateByUrl('account');
   }
 

@@ -24,7 +24,8 @@ export interface IUser{
   login: string,
   password: string,
   isAdmin: boolean,
-  isModer: boolean
+  isModer: boolean,
+  favorites: string[]
 }
 export interface LoggedIn{
     token: string,

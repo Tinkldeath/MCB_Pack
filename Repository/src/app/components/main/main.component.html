@@ -17,7 +17,8 @@
     </ion-row>
     <ion-row id="buttonsRow">
       <ion-col>
-        <ion-button id="favButton" fill="clear" size="medium" color="dark"> <ion-icon name="heart-outline"></ion-icon></ion-button>
+        <ion-button *ngIf="!CheckFavorite(post)" (click)="ChangeFavorite(post)" id="favButton" fill="clear" size="medium" color="dark"> <ion-icon name="heart-outline"></ion-icon></ion-button>
+        <ion-button *ngIf="CheckFavorite(post)" (click)="ChangeFavorite(post)" id="favButton" fill="clear" size="medium" color="dark"> <ion-icon name="heart"></ion-icon></ion-button>
       </ion-col>
       <ion-col>
         <ion-button id="openButton" fill="clear" size="small" color="dark" (click)="ViewPost(post)">Открыть</ion-button>
@@ -57,8 +58,9 @@
   <ion-row>
     <ion-col>
       <ion-button fill="clear" size="medium" color="dark" (click)="this.viewPost = null" id="postButton">Назад</ion-button>
-      <ion-button fill="clear" size="medium" color="dark">Скачать файл</ion-button>
-      <ion-button fill="clear" size="medium" color="dark"> <ion-icon name="heart-outline"></ion-icon></ion-button>
+      <ion-button fill="clear" size="medium" color="dark" (click)="ViewFile()">Открыть файл</ion-button>
+      <ion-button *ngIf="!CheckFavorite(this.viewPost)" (click)="ChangeFavorite(this.viewPost)" id="favButton" fill="clear" size="medium" color="dark"> <ion-icon name="heart-outline"></ion-icon></ion-button>
+      <ion-button *ngIf="CheckFavorite(this.viewPost)" (click)="ChangeFavorite(this.viewPost)" id="favButton" fill="clear" size="medium" color="dark"> <ion-icon name="heart"></ion-icon></ion-button>
     </ion-col>
   </ion-row>
 </div>

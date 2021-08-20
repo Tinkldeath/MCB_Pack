@@ -1,7 +1,9 @@
+import { RequestsService } from './../../shared/services/requests.service';
+import { DataService } from './../../shared/services/data.service';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { ViewService } from 'src/app/shared/services/view.service';
-import { IPost, ICategory, ISubject } from 'src/app/shared/models/models';
+import { IPost, ICategory, ISubject, IUser } from 'src/app/shared/models/models';
 
 @Component({
   selector: 'app-main',
@@ -12,6 +14,7 @@ export class MainComponent implements OnInit, OnDestroy {
 
   allPosts: IPost[] = []; // Храним все посты
   viewPosts: IPost[] = []; // Храним посты которые отображаем
+  user: IUser = null;
   category: ICategory = null; // Сохраняем выбор из других компонентов если он есть
   subject: ISubject = null; // Сохраняем выбор из других компонентов если он есть
   author: string = null;
@@ -24,10 +27,13 @@ export class MainComponent implements OnInit, OnDestroy {
   sSub: Subscription = null;
   aSub: Subscription = null;
   vSub: Subscription = null;
+  uSub: Subscription = null;
   searchSub: Subscription = null;
 
   constructor(
-    private viewServise: ViewService
+    private viewServise: ViewService,
+    private dataService: DataService,
+    private reqService: RequestsService
   ) { }
 
   ngOnInit() {
@@ -35,6 +41,7 @@ export class MainComponent implements OnInit, OnDestroy {
       А вот сейчас будет весело, как я и говорил, есть переменная allPosts и viewPosts.
       К allPosts мы обращаемся только чтобы забирать данные, но никак не фильтровать.
     */
+    this.user = this.dataService.DecryptUser();
     this.pSub = this.viewServise.allPosts.subscribe((data) => {
       this.allPosts = data;
     });
@@ -79,8 +86,51 @@ export class MainComponent implements OnInit, OnDestroy {
     }
   }
 
+  CheckFavorite(post: IPost){
+    if(this.user !== null){
+      let arr = this.user.favorites;
+      for(let fav of arr){
+        if(fav === post._id){
+          return true;
+        }
+      }
+    }
+    return false;
+  }
+
+  ChangeFavorite(post: IPost){
+    if(this.CheckFavorite(post)){
+      this.user.favorites = this.user.favorites.filter(item => item !== post._id);
+      this.viewServise.ChangeUser(this.user);
+      this.dataService.SetUser(this.user);
+      this.reqService.ChangeUser(this.user).subscribe((data) => {
+        if(data.message === 'Updated'){
+          alert('Пост удалён из избранного');
+        }
+        else{
+          alert('Сейчас невозможно убрать пост из избранного, попробуйте позже');
+        }
+      });
+    }
+    else{
+      this.user.favorites.push(post._id);
+      this.viewServise.ChangeUser(this.user);
+      this.dataService.SetUser(this.user);
+      this.reqService.ChangeUser(this.user).subscribe((data) => {
+        if(data.message === 'Updated'){
+          alert('Пост добавлен в избранное');
+        }
+        else{
+          alert('Сейчас невозможно убрать пост из избранного, попробуйте позже');
+        }
+      });
+    }
+  }
+
   private CheckFilter(){
-    this.viewPosts = this.allPosts;
+    if(this.viewPosts === null){
+      this.viewPosts = this.allPosts;
+    }
     if(this.category !== null){
       let newArr = [];
       this.viewPosts.forEach(post => {
@@ -108,6 +158,10 @@ export class MainComponent implements OnInit, OnDestroy {
       });
       this.viewServise.ChangePosts(newArr);
     }
+  }
+
+  ViewFile(){
+    window.open(`http://localhost:4000/${this.viewPost.fileUrl}`);
   }
 
   ViewPost(post: IPost){

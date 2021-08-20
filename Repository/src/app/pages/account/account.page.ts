@@ -1,3 +1,4 @@
+import { DataService } from './../../shared/services/data.service';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { ViewService } from '../../shared/services/view.service';
@@ -13,21 +14,18 @@ import { ICategory, IUser, IPost } from '../../shared/models/models';
 export class AccountPage implements OnInit, OnDestroy {
 
   selection: string = '';
-  categories: ICategory[] = [];
-  posts: IPost[] = [];
   user: IUser = null;
   vSub: Subscription = null;
   uSub: Subscription = null;
+  pSub: Subscription = null;
 
   constructor(
     private viewService: ViewService,
-    private router: Router
+    private router: Router,
+    private dataService: DataService
   ) {}
 
   ngOnInit() {
-    this.vSub = this.vSub = this.viewService.currentCategories.subscribe(data => {
-      this.categories = data;
-    })
     this.uSub = this.viewService.currentUser.subscribe(user => {
       this.user = user;
     });
@@ -46,6 +44,7 @@ export class AccountPage implements OnInit, OnDestroy {
     localStorage.clear();
     sessionStorage.clear();
     this.viewService.ChangeUser(null);
+    this.dataService.SetUser(null);
     this.router.navigateByUrl('home');
   }
 

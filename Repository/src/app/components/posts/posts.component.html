@@ -25,5 +25,5 @@
   <ion-input [(ngModel)]="newUniversity" placeholder="Учебное заведение" class="ChangeInput"></ion-input>
   <ion-input [(ngModel)]="newDescription" placeholder="Описание" class="ChangeInput"></ion-input>
   <ion-input type="file" placeholder="Новый файл" class="ChangeInput" (change)="onFileChange($event)"></ion-input>
-  <ion-button shape="round" color="dark" (click)="postToEdit = null">Отменить</ion-button><ion-button shape="round" color="dark" (click)="ChangePost()">Сохранить</ion-button>
+  <ion-button shape="round" size="small" color="dark" (click)="postToEdit = null">Отменить</ion-button><ion-button shape="round" color="dark" size="small" (click)="ChangePost()">Сохранить</ion-button>
 </div>

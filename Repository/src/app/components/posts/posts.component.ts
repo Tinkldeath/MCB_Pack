@@ -1,3 +1,4 @@
+import { ViewService } from './../../shared/services/view.service';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { RequestsService } from 'src/app/shared/services/requests.service';
 import { Subscription } from 'rxjs';
@@ -33,11 +34,12 @@ export class PostsComponent implements OnInit, OnDestroy {
   dSub: Subscription = null;
 
   constructor(
-    private reqService: RequestsService
+    private reqService: RequestsService,
+    private viewService: ViewService
   ) { }
 
   ngOnInit() {
-    this.pSub = this.reqService.GetPosts().subscribe((data) => {
+    this.pSub = this.viewService.currentPost.subscribe((data) => {
       this.posts = data;
     });
     this.cSub = this.reqService.GetCategories().subscribe((data) => {

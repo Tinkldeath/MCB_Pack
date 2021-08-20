@@ -46,7 +46,8 @@ export class SignInPage implements OnInit, OnDestroy {
             login: data.user.login,
             password: data.user.password,
             isAdmin: data.user.isAdmin,
-            isModer: data.user.isModer
+            isModer: data.user.isModer,
+            favorites: data.user.favorites
           }
           if(this.stay){
             this.dataService.SetUser(User);

@@ -87,14 +87,11 @@
           </ion-item>
           <app-add-subject></app-add-subject>
         </ion-col>
-        <ion-col id="col" class="Component" *ngIf="this.selection === '' ">
+        <ion-col class="Component" id="col" *ngIf="this.selection === '' ">
           <ion-item id="listheader">
             <h2> Посты </h2>
           </ion-item>
           <app-posts class="Component"></app-posts>
-        </ion-col>
-        <ion-col *ngIf="this.user.isAdmin === false && this.user.isModer === false">
-          <div id="popup"></div>
         </ion-col>
       </ion-row>
     </ion-grid>
