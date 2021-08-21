@@ -2,6 +2,7 @@ import { Subscription } from 'rxjs';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { IUser } from 'src/app/shared/models/models';
 import { RequestsService } from 'src/app/shared/services/requests.service';
+import { DataService } from 'src/app/shared/services/data.service';
 
 @Component({
   selector: 'app-users',
@@ -11,6 +12,7 @@ import { RequestsService } from 'src/app/shared/services/requests.service';
 export class UsersComponent implements OnInit, OnDestroy {
 
   users: IUser[] = [];
+  currentUser: IUser = null;
   newIsAdmin: boolean = null;
   newIsModer: boolean = null;
   userToEdit: IUser = null;
@@ -21,9 +23,11 @@ export class UsersComponent implements OnInit, OnDestroy {
 
   constructor(
     private reqService: RequestsService,
+    private dataService: DataService
   ) { }
 
   ngOnInit() {
+    this.currentUser = this.dataService.DecryptUser();
     this.reqService.GetUsers().subscribe((data) => {
       this.users = data;
     });
@@ -73,7 +77,7 @@ export class UsersComponent implements OnInit, OnDestroy {
       _id: this.userToEdit._id,
       isAdmin: this.newIsAdmin,
       isModer: this.newIsModer,
-      favorites: []
+      favorites: this.currentUser.favorites
     }
 
     if(this.userToEdit.isAdmin === this.newIsAdmin && this.userToEdit.isModer === this.newIsModer){

@@ -89,8 +89,8 @@ export class MainComponent implements OnInit, OnDestroy {
   CheckFavorite(post: IPost){
     if(this.user !== null){
       let arr = this.user.favorites;
-      for(let fav of arr){
-        if(fav === post._id){
+      for(let fav in arr){
+        if(arr[fav] === post._id){
           return true;
         }
       }
@@ -106,6 +106,11 @@ export class MainComponent implements OnInit, OnDestroy {
       this.reqService.ChangeUser(this.user).subscribe((data) => {
         if(data.message === 'Updated'){
           alert('Пост удалён из избранного');
+          let ind = this.viewPosts.indexOf(post);
+          if (ind >= 0) {
+            this.viewPosts.splice( ind, 1 );
+            this.viewServise.ChangePosts(this.viewPosts);
+          }
         }
         else{
           alert('Сейчас невозможно убрать пост из избранного, попробуйте позже');
@@ -133,7 +138,7 @@ export class MainComponent implements OnInit, OnDestroy {
     }
     if(this.category !== null){
       let newArr = [];
-      this.viewPosts.forEach(post => {
+      this.allPosts.forEach(post => {
         if(post.category === this.category.name){
           newArr.push(post);
         }

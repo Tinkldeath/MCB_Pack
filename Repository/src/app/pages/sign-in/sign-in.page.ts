@@ -40,6 +40,9 @@ export class SignInPage implements OnInit, OnDestroy {
         }
         else{
           alert('Успешный вход');
+          if(data.user.favorites === null){
+            data.user.favorites = [];
+          }
           const User = {
             token: data.token,
             _id: data.user._id,

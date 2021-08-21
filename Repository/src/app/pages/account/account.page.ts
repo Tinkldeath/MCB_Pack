@@ -42,9 +42,11 @@ export class AccountPage implements OnInit, OnDestroy {
 
   Logout(){
     localStorage.clear();
+    localStorage.clear();
     sessionStorage.clear();
     this.viewService.ChangeUser(null);
     this.dataService.SetUser(null);
+    this.dataService.Clear();
     this.router.navigateByUrl('home');
   }
 
