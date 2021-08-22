@@ -50,18 +50,27 @@ export class MainComponent implements OnInit, OnDestroy {
     });
     this.sSub = this.viewServise.selectedSubject.subscribe((data) => {
       this.subject = data;
-      this.CheckFilter();
+      if(data !== null){
+        this.CheckFilter();
+      }
     });
     this.cSub = this.viewServise.selectedCategory.subscribe((data) => {
       this.category = data;
-      this.CheckFilter();
+      if(data !== null){
+        this.CheckFilter();
+      }
     });
     this.aSub = this.viewServise.selectedAuthor.subscribe((data) => {
       this.author = data;
-      this.CheckFilter();
+      if(data !== null){
+        this.CheckFilter();
+      }
     });
     this.searchSub = this.viewServise.searchTermChange.subscribe((data) => {
       this.searchTerm = data;
+      if(data !== null){
+        this.CheckFilter();
+      }
     });
   }
 
