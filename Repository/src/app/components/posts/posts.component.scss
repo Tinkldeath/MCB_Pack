@@ -27,6 +27,20 @@ h2{
     height: 80px;
 }
 
+ion-label{
+  font-weight: bold;
+  padding-left: 5px;
+}
+
+ion-textarea{
+  padding-left: 5px;
+}
+
+p{
+  padding-left: 5px;
+  margin: 0;
+}
+
 .ChangeInput{
     width: 500px;
     border-style: solid;

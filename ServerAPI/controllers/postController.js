@@ -38,6 +38,7 @@ module.exports.addPost = async function(req,res){
     const reqCategory = req.body.category;
     const reqDescription = req.body.description;
     const reqFile = req.file;
+    const reqStatus = req.body.status;
 
     const post = new Post({
         ownerId: reqOwnerId,
@@ -50,7 +51,8 @@ module.exports.addPost = async function(req,res){
         subject: reqSubjectName,
         category: reqCategory,
         description: reqDescription,
-        fileUrl: reqFile.path
+        fileUrl: reqFile.path,
+        status: reqStatus
     });
 
     try {
@@ -99,6 +101,7 @@ module.exports.patchPost = async function (req,res) {
     const reqCategory = req.body.category;
     const reqDescription = req.body.description;
     const reqFile = req.file;
+    const reqStatus = req.body.status;
     try {
         await Post.findOne({_id: reqPostId},(err,doc) => {
             if(err){
@@ -130,7 +133,8 @@ module.exports.patchPost = async function (req,res) {
                 university: reqUniversity,
                 subject: reqSubjectName,
                 category: reqCategory,
-                description: reqDescription
+                description: reqDescription,
+                status: reqStatus
             }, (err) => {
                 if(err){
                     console.log(err);
@@ -157,6 +161,7 @@ module.exports.patchPost = async function (req,res) {
                 subject: reqSubjectName,
                 category: reqCategory,
                 description: reqDescription,
+                status: reqStatus,
                 fileUrl: reqFile.path}, (err) => {
                     if(err){
                         console.log(err);

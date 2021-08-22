@@ -1,10 +1,13 @@
-<div *ngIf="postToEdit === null">
+<div *ngIf="postToEdit === null && postToView === null">
   <ion-list class="CategoryItem" *ngFor="let post of posts">
     <ion-item class="CategoryItem" id="listitem">
       {{post.name}}
       <div id="Place">
-        <ion-button fill="clear" color="dark" class="CategoryButton" (click)="EditPost(post)">Ред.</ion-button>
-        <ion-button fill="clear" color="dark" class="CategoryButton" (click)="DeletePost(post)">Удалить</ion-button>
+        <ion-button fill="clear" color="dark" class="CategoryButton" (click)="ViewPost(post)">Открыть</ion-button>
+        <ion-button *ngIf="(post.status === null || post.status === undefined || post.status === 'Awaiting') && (this.user.isAdmin === true || this.user.isModer === true)" fill="clear" color="dark" class="CategoryButton" (click)="AcceptPost(post)">Подтв.</ion-button>
+        <ion-button *ngIf="(post.status === null || post.status === undefined || post.status === 'Awaiting') && (this.user.isAdmin === true || this.user.isModer === true)" fill="clear" color="dark" class="CategoryButton" (click)="EditPost(post)">Откл.</ion-button>
+        <ion-button *ngIf="(this.user.isAdmin === true) || post.ownerId === this.user._id" fill="clear" color="dark" class="CategoryButton" (click)="EditPost(post)">Ред.</ion-button>
+        <ion-button *ngIf="(this.user.isAdmin === true) || post.ownerId === this.user._id" fill="clear" color="dark" class="CategoryButton" (click)="DeletePost(post)">Удалить</ion-button>
       </div>
     </ion-item>
   </ion-list>
@@ -13,11 +16,11 @@
 <div id="Edit" *ngIf="postToEdit !== null">
   <ion-input [(ngModel)]="newName" placeholder="Название" class="ChangeInput"></ion-input>
   <ion-input [(ngModel)]="newTheme" placeholder="Тема" class="ChangeInput"></ion-input>
-    <ion-select [(ngModel)]="newCategory" placeholder="Категория" class="ChangeInput" interface="popover">
+    <ion-select [(ngModel)]="newCategory" placeholder="Категория" class="ChangeInput" interface="popover" (ionChange)="SelectCategory()">
       <ion-select-option *ngFor="let category of categories">{{category.name}}</ion-select-option>
     </ion-select>
-  <ion-select [(ngModel)]="newSubject" placeholder="Предмет" class="ChangeInput" interface="popover">
-    <ion-select-option *ngFor="let subject of subjects">{{subject.name}}</ion-select-option>
+  <ion-select [(ngModel)]="newSubject" placeholder="Предмет" class="ChangeInput" interface="popover" (ionChange)="SelectSubject()">
+    <ion-select-option *ngFor="let subject of viewSubjects">{{subject.name}}</ion-select-option>
   </ion-select>
   <ion-input [(ngModel)]="newCourseNumber" placeholder="Курс/Класс" class="ChangeInput"></ion-input>
   <ion-input [(ngModel)]="newAuthor" placeholder="Автор" class="ChangeInput"></ion-input>
@@ -26,4 +29,63 @@
   <ion-input [(ngModel)]="newDescription" placeholder="Описание" class="ChangeInput"></ion-input>
   <ion-input type="file" placeholder="Новый файл" class="ChangeInput" (change)="onFileChange($event)"></ion-input>
   <ion-button shape="round" size="small" color="dark" (click)="postToEdit = null">Отменить</ion-button><ion-button shape="round" color="dark" size="small" (click)="ChangePost()">Сохранить</ion-button>
+</div>
+
+<div id="Edit" *ngIf="postToView !== null">
+  <div class="ChangeInput">
+    <ion-label>Название:</ion-label>
+    <div>
+      <p>{{newName}}</p>
+    </div>
+  </div>
+  <div class="ChangeInput">
+    <ion-label>Тема:</ion-label>
+    <div>
+      <p>{{newTheme}}</p>
+    </div>
+  </div>
+  <div class="ChangeInput">
+    <ion-label>Категория:</ion-label>
+    <div>
+      <p>{{newCategory}}</p>
+    </div>
+  </div>
+  <div class="ChangeInput">
+    <ion-label>Предмет:</ion-label>
+    <div>
+      <p>{{newSubject}}</p>
+    </div>
+  </div>
+  <div class="ChangeInput">
+    <ion-label>Курс(класс):</ion-label>
+    <div>
+      <p>{{newCourseNumber}}</p>
+    </div>
+  </div>
+  <div class="ChangeInput">
+    <ion-label>Автор:</ion-label>
+    <div>
+      <p>{{newAuthor}}</p>
+    </div>
+  </div>
+  <div class="ChangeInput">
+    <ion-label>Год:</ion-label>
+    <div>
+      <p>{{newYear}}</p>
+    </div>
+  </div>
+  <div class="ChangeInput">
+    <ion-label>Учебное заведение:</ion-label>
+    <div>
+      <p>{{newUniversity}}</p>
+    </div>
+  </div>
+  <div class="ChangeInput">
+    <ion-label>Описание:</ion-label>
+    <div>
+      <ion-textarea padding-left:10px disabled="true">{{newDescription}}</ion-textarea>
+    </div>
+  </div>
+  <ion-button size="small" color="dark" (click)="OpenFile()">Открыть файл</ion-button>
+  <ion-button shape="round" size="small" color="dark" (click)="postToView = null">Назад</ion-button>
 </div>

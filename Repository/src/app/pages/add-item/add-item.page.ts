@@ -15,6 +15,9 @@ export class AddItemPage implements OnInit, OnDestroy {
   subjects: ISubject[] = [];
   user: IUser = null;
 
+  viewCategories: ICategory[] = [];
+  viewSubjects: ISubject[] = [];
+
   vSub: Subscription = null;
   uSub: Subscription = null;
   sSub: Subscription = null;
@@ -42,9 +45,11 @@ export class AddItemPage implements OnInit, OnDestroy {
   ngOnInit() {
     this.vSub = this.viewService.currentCategories.subscribe(data => {
       this.categories = data;
+      this.viewCategories = data;
     });
     this.sSub = this.reqServise.GetSubjects().subscribe(data => {
       this.subjects = data;
+      this.viewSubjects = data;
     });
     this.uSub = this.viewService.currentUser.subscribe(user => {
       this.user = user;
@@ -85,6 +90,7 @@ export class AddItemPage implements OnInit, OnDestroy {
     formData.append('year',this.year.toString());
     formData.append('university',this.university);
     formData.append('description',this.description);
+    formData.append('status','Awaiting');
     this.reqServise.AddPost(formData).subscribe((data) => {
       if(data.message === 'Created'){
         alert('Пост добавлен');
@@ -99,18 +105,15 @@ export class AddItemPage implements OnInit, OnDestroy {
   }
 
   SelectCategory(){
-    for(let category of this.categories){
-      if(category.name === this.category){
-        this.viewService.ChangeViewCategory(category);
-        break;
-      }
-    }
+    this.viewSubjects = this.subjects.filter(item => item.categoryName === this.category);
+    this.subject = null;
   }
 
   SelectSubject(){
-    for(let subject of this.subjects){
-      if(subject.name === this.subject && subject.categoryName === this.category){
-        this.viewService.ChangeViewSubject(subject);
+    for(let sub of this.subjects){
+      if(sub.name === this.subject){
+        this.category = sub.categoryName;
+        break;
       }
     }
   }

@@ -13,7 +13,8 @@ const postScheme = new Schema({
     category: String,
     subject: String,
     description: String,
-    fileUrl: String
+    fileUrl: String,
+    status: String // Accepted, Denied, Awaiting
 });
 
 module.exports = mongoose.model('Post', postScheme, 'posts');

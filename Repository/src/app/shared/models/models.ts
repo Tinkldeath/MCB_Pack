@@ -10,6 +10,7 @@ export interface IPost{
     subject: string,
     category: string,
     description: string,
+    status: string,
     fileUrl: string
 }
 

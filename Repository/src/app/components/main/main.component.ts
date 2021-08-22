@@ -133,6 +133,7 @@ export class MainComponent implements OnInit, OnDestroy {
   }
 
   private CheckFilter(){
+    this.viewPosts = this.allPosts;
     if(this.viewPosts === null){
       this.viewPosts = this.allPosts;
     }

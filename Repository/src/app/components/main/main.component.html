@@ -1,30 +1,32 @@
 <div *ngIf="this.viewPost === null">
-  <div *ngFor="let post of viewPosts | filter:searchTerm" id="Item">
-    <ion-row id="Place">
-      <ion-col id="left"> <ion-label>{{post.category}}</ion-label> </ion-col><ion-col>|</ion-col><ion-col id="center"> <ion-label>{{post.theme}}</ion-label> </ion-col><ion-col>|</ion-col><ion-col id="right"> {{post.year}}</ion-col>
-    </ion-row>
-    <ion-row id="name">
-      <h2>{{post.name}}</h2>
-    </ion-row>
-    <ion-row id="description">
-      Предмет: {{post.subject}}
-    </ion-row>
-    <ion-row id="description">
-      Автор: {{post.author}}
-    </ion-row>
-    <ion-row id="description">
-      {{post.description}}
-    </ion-row>
-    <ion-row id="buttonsRow">
-      <ion-col>
-        <ion-button *ngIf="!CheckFavorite(post)" (click)="ChangeFavorite(post)" id="favButton" fill="clear" size="medium" color="dark"> <ion-icon name="heart-outline"></ion-icon></ion-button>
-        <ion-button *ngIf="CheckFavorite(post)" (click)="ChangeFavorite(post)" id="favButton" fill="clear" size="medium" color="dark"> <ion-icon name="heart"></ion-icon></ion-button>
-      </ion-col>
-      <ion-col>
-        <ion-button id="openButton" fill="clear" size="small" color="dark" (click)="ViewPost(post)">Открыть</ion-button>
-      </ion-col>
-    </ion-row>
-  </div>
+    <div *ngFor="let post of viewPosts | filter:searchTerm" id="Item">
+      <div *ngIf="post.status === 'Accepted' ">
+        <ion-row id="Place">
+          <ion-col id="left"> <ion-label>{{post.category}}</ion-label> </ion-col><ion-col>|</ion-col><ion-col id="center"> <ion-label>{{post.theme}}</ion-label> </ion-col><ion-col>|</ion-col><ion-col id="right"> {{post.year}}</ion-col>
+        </ion-row>
+        <ion-row id="name">
+          <h2>{{post.name}}</h2>
+        </ion-row>
+        <ion-row id="description">
+          Предмет: {{post.subject}}
+        </ion-row>
+        <ion-row id="description">
+          Автор: {{post.author}}
+        </ion-row>
+        <ion-row id="description">
+          {{post.description}}
+        </ion-row>
+        <ion-row id="buttonsRow">
+          <ion-col>
+            <ion-button *ngIf="!CheckFavorite(post)" (click)="ChangeFavorite(post)" id="favButton" fill="clear" size="medium" color="dark"> <ion-icon name="heart-outline"></ion-icon></ion-button>
+            <ion-button *ngIf="CheckFavorite(post)" (click)="ChangeFavorite(post)" id="favButton" fill="clear" size="medium" color="dark"> <ion-icon name="heart"></ion-icon></ion-button>
+          </ion-col>
+          <ion-col>
+            <ion-button id="openButton" fill="clear" size="small" color="dark" (click)="ViewPost(post)">Открыть</ion-button>
+          </ion-col>
+        </ion-row>
+      </div>
+    </div>
 </div>
 
 <div *ngIf="this.viewPost !== null" id="Post">

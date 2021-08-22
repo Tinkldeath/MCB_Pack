@@ -2,7 +2,7 @@ import { ViewService } from './../../shared/services/view.service';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { RequestsService } from 'src/app/shared/services/requests.service';
 import { Subscription } from 'rxjs';
-import { ICategory, IPost, ISubject } from 'src/app/shared/models/models';
+import { ICategory, IPost, ISubject, IUser } from 'src/app/shared/models/models';
 
 @Component({
   selector: 'app-posts',
@@ -13,8 +13,12 @@ export class PostsComponent implements OnInit, OnDestroy {
 
   posts: IPost[] = [];
   subjects: ISubject[] = [];
+  viewSubjects: ISubject[] = [];
   categories: ICategory[] = [];
   postToEdit: IPost = null;
+  postToView: IPost = null;
+
+  user: IUser = null;
 
   newName: string = null;
   newTheme: string = null;
@@ -32,6 +36,7 @@ export class PostsComponent implements OnInit, OnDestroy {
   pSub: Subscription = null;
   rSub: Subscription = null;
   dSub: Subscription = null;
+  uSub: Subscription = null;
 
   constructor(
     private reqService: RequestsService,
@@ -39,14 +44,25 @@ export class PostsComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit() {
-    this.pSub = this.viewService.currentPost.subscribe((data) => {
-      this.posts = data;
+    this.uSub = this.viewService.currentUser.subscribe((data) => {
+      this.user = data;
+      if(this.user.isAdmin === true || this.user.isModer === true){
+        this.pSub = this.reqService.GetPosts().subscribe((data) => {
+          this.posts = data;
+        });
+      }
+      else{
+        this.pSub = this.viewService.currentPost.subscribe((data) => {
+          this.posts = data;
+        });
+      }
     });
     this.cSub = this.reqService.GetCategories().subscribe((data) => {
       this.categories = data;
     });
     this.sSub = this.reqService.GetSubjects().subscribe((data) => {
       this.subjects = data;
+      this.viewSubjects = data;
     });
   }
 
@@ -70,6 +86,39 @@ export class PostsComponent implements OnInit, OnDestroy {
 
   onFileChange(fileChangeEvent){
     this.newFile = fileChangeEvent.target.files[0];
+  }
+
+  OpenFile(){
+    window.open(`http://localhost:4000/${this.postToView.fileUrl}`);
+  }
+
+  SelectCategory(){
+    this.viewSubjects = this.subjects.filter(item => item.categoryName === this.newCategory);
+    this.newSubject = null;
+  }
+
+  SelectSubject(){
+    for(let sub of this.subjects){
+      if(sub.name === this.newSubject){
+        this.newCategory = sub.categoryName;
+        break;
+      }
+    }
+  }
+
+  ViewPost(post: IPost){
+    this.postToView = post;
+    if(this.postToView != null){
+      this.newName = this.postToView.name;
+      this.newTheme = this.postToView.theme;
+      this.newCategory = this.postToView.category;
+      this.newSubject = this.postToView.subject;
+      this.newYear = this.postToView.year;
+      this.newCourseNumber = this.postToView.courseNumber;
+      this.newAuthor = this.postToView.author;
+      this.newUniversity = this.postToView.university;
+      this.newDescription = this.postToView.description;
+    }
   }
 
   EditPost(post: IPost){
@@ -102,12 +151,80 @@ export class PostsComponent implements OnInit, OnDestroy {
     });
   }
 
+  AcceptPost(post: IPost){
+    let formData: FormData = new FormData();
+    formData.append('_id',post._id);
+    formData.append('ownerId',post.ownerId);
+    formData.append('file',null);
+    formData.append('name',post.name);
+    formData.append('theme',post.theme);
+    formData.append('courseNumber',post.courseNumber.toString());
+    formData.append('category',post.category);
+    formData.append('subject',post.subject);
+    formData.append('year',post.year.toString());
+    formData.append('author',post.author);
+    formData.append('university',post.university);
+    formData.append('description',post.description);
+    formData.append('status','Accepted');
+    if(this.rSub !== null){
+      this.rSub.unsubscribe();
+    }
+    this.rSub = this.reqService.ChangePost(formData).subscribe((data) => {
+      if(data.message === 'Updated'){
+        alert('Публикация принята');
+        this.postToEdit = null;
+        this.ngOnInit();
+      }
+      else{
+        alert('Ошибка на стороне серера, попробуйте позже');
+      }
+    });
+    post.status = 'Accepted';
+    this.viewService.ChangePosts(this.posts);
+  }
+
+  DenyPost(post: IPost){
+    let formData: FormData = new FormData();
+    formData.append('_id',post._id);
+    formData.append('ownerId',post.ownerId);
+    formData.append('file',null);
+    formData.append('name',post.name);
+    formData.append('theme',post.theme);
+    formData.append('courseNumber',post.courseNumber.toString());
+    formData.append('category',post.category);
+    formData.append('subject',post.subject);
+    formData.append('year',post.year.toString());
+    formData.append('author',post.author);
+    formData.append('university',post.university);
+    formData.append('description',post.description);
+    formData.append('status','Denied');
+    if(this.rSub !== null){
+      this.rSub.unsubscribe();
+    }
+    this.rSub = this.reqService.ChangePost(formData).subscribe((data) => {
+      if(data.message === 'Updated'){
+        alert('Публикация отклонена');
+        this.postToEdit = null;
+        this.ngOnInit();
+      }
+      else{
+        alert('Ошибка на стороне серера, попробуйте позже');
+      }
+    });
+    post.status = 'Denied';
+  }
+
   ChangePost(){
     if(this.newName === '' || this.newCategory === '' || this.newSubject === '' || this.newYear === null ||
      this.newCourseNumber === null || this.newAuthor === '' || this.newUniversity === '' || this.newDescription === ''){
       alert('Заполните все поля корректно!');
       return;
     }
+    else if(this.newName === null || this.newCategory === null || this.newSubject === null || this.newYear === null ||
+    this.newCourseNumber === null || this.newAuthor === null || this.newUniversity === null || this.newDescription === null){
+     alert('Заполните все поля корректно!');
+     return;
+   }
     else if(this.postToEdit.name === this.newName && this.postToEdit.theme === this.newTheme && this.postToEdit.category === this.newCategory && this.postToEdit.subject === this.newSubject
       && this.postToEdit.year === this.newYear && this.postToEdit.courseNumber === this.newCourseNumber && this.postToEdit.author === this.newAuthor
       && this.postToEdit.university === this.newUniversity && this.postToEdit.description === this.newDescription && this.newFile === null){
@@ -133,6 +250,12 @@ export class PostsComponent implements OnInit, OnDestroy {
     formData.append('author',this.newAuthor);
     formData.append('university',this.newUniversity);
     formData.append('description',this.newDescription);
+    if(this.user.isAdmin === true || this.user.isModer === true){
+      formData.append('status','Accepted');
+    }
+    else{
+      formData.append('status','Awaiting');
+    }
     this.rSub = this.reqService.ChangePost(formData).subscribe((data) => {
       if(data.message === 'Updated'){
         alert('Публикация изменена');
