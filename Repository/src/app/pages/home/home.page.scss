@@ -1,7 +1,7 @@
 #container {
   text-align: center;
 
-  // position: absolute;
+  position: absolute;
   left: 0;
   right: 0;
   top: 50%;
@@ -9,13 +9,13 @@
 }
 
 #container strong {
-  font-size: 20px;
-  line-height: 26px;
+  font-size: 1.25em;
+  line-height: 1.35vw;
 }
 
 #container p {
-  font-size: 16px;
-  line-height: 22px;
+  font-size: 1em;
+  line-height: 1.15vw;
 
   color: #8c8c8c;
 
@@ -78,23 +78,25 @@ u{
   text-align: center;
   left: 0;
   right: 0;
+  margin-left: 1%;
+  width: 98%;
 }
 
 #Select{
-  padding-left: 15px;
-  padding-right: 30px;
-  width: 900px;
+  padding-left: 0.78vw;
+  padding-right: 1.56vw;
+  width: 46.88vw;
 }
 
 #popup{
   height: 69vh;
-  margin: 20px;
-  margin-top: 15px;
+  margin: 1.04vw;
+  margin-top: 1.04vw;
   width: 30vh;
   float: right;
   border: 5px solid brown;
   background-color: white;
-  margin-left: -5px;
+  margin-left: -0.26vw;
 }
 
 #icon{
@@ -104,27 +106,27 @@ u{
 
 .SelectItem{
   width: 13.9vw;
-  margin-left: 15px;
+  margin-left: 1.04vw;
   margin-right: 0;
   padding: 0;
 }
 
 .SelectToggle{
   width: 20vw;
-  margin-left: 190px;
-  margin-right: 15px;
+  margin-left: 9.90vw;
+  margin-right: 0.78vw;
 }
 
 .Toggle{
-  margin-top: 10px;
+  margin-top: 0.57vw;
 }
 
 .ClearButton{
   width: 13.9vw;
-  margin-top: 15px;
+  margin-top: 0.78vw;
   width: 200px;
-  margin-top: 10px;
-  margin-left: 8px;
+  margin-top: 0.52vw;
+  margin-left: 0.52vw;
 }
 
 #item{
@@ -134,7 +136,7 @@ u{
 #category{
   width: 13.9vw;
   height: 27.2vh;
-  margin: 10px;
+  margin: 0.52vw;
   padding: 0;
 }
 
