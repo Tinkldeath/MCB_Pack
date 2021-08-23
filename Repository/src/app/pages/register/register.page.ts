@@ -41,26 +41,31 @@ export class RegisterPage implements OnInit, OnDestroy {
         isAdmin: false,
         isModer: false
       };
-      this.aSub = this.authService.Register(user).subscribe(data => {
-        if(data.message == 'Created'){
-          alert('Вы зарегистрированы и можете войти со своими данными');
-          this.router.navigateByUrl('sign-in');
-        }
-        else if(data.message == 'Conflict'){
-          alert('Пользователь с таким логином уже зарегистрирован');
-          return;
-        }
-        else{
-          alert('Ошибка сервера, попробуйте позже');
-          return;
-        }
-      }, (err) => {
-        if(err){
-          console.log(err);
-          alert('Ошибка сервера, попробуйте позже');
-          return;
-        }
-      });
+      try {
+        this.aSub = this.authService.Register(user).subscribe(data => {
+          if(data.message == 'Created'){
+            alert('Вы зарегистрированы и можете войти со своими данными');
+            this.router.navigateByUrl('sign-in');
+          }
+          else if(data.message == 'Conflict'){
+            alert('Пользователь с таким логином уже зарегистрирован');
+            return;
+          }
+          else{
+            alert('Ошибка сервера, попробуйте позже');
+            return;
+          }
+        }, (err) => {
+          if(err){
+            console.log(err);
+            alert('Ошибка сервера, попробуйте позже');
+            return;
+          }
+        });
+      } catch (err) {
+        console.log(err);
+        return;
+      }
     }
   }
 

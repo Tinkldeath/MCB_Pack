@@ -23,6 +23,16 @@ export class DataService {
     sessionStorage.setItem('user',encrypted);
   }
 
+  ChangeUser(inUser: IUser){
+    this.user = inUser;
+    if(localStorage.getItem('user') !== null){
+      this.SetUser(this.user);
+    }
+    else if(sessionStorage.getItem('user') !== null){
+      this.SetUserSession(this.user);
+    }
+  }
+
   DecryptUser(){
     if(localStorage.getItem('user') !== null && !this.user){
       const bytes  = crypto.AES.decrypt(localStorage.getItem('user'), 'secret key');
@@ -40,5 +50,6 @@ export class DataService {
   Clear(){
     this.user = null;
     localStorage.clear();
+    sessionStorage.clear();
   }
 }

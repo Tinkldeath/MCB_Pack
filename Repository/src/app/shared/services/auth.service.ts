@@ -1,7 +1,10 @@
+import { Router } from '@angular/router';
+import { DataService } from 'src/app/shared/services/data.service';
 import { IUser } from './../models/models';
-import { Observable } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { apiUrl } from 'src/assets/keys';
 
 @Injectable({
@@ -11,9 +14,35 @@ export class AuthService {
 
   constructor(
     private http : HttpClient,
+    private dataService: DataService,
+    private router: Router
   ) { }
 
+  private GetToken(){
+    const user: IUser = this.dataService.DecryptUser();
+    if(user === null || user === undefined){
+      return null;
+    }
+    else{
+      return user.token;
+    }
+  }
+
+  private HandleError(error: HttpErrorResponse){
+    if(error.status === 401){
+      alert('Необходимо заново войти в систему');
+      this.dataService.SetUser(null);
+      this.dataService.SetUserSession(null);
+      this.dataService.Clear();
+      this.router.navigateByUrl('sign-in');
+    }
+    else if(error.status === 404){
+      console.log('Bad request');
+    }
+  }
+
   Login(user: any) : Observable<{token: string, user: IUser}>{
+    let token = this.GetToken();
     return this.http.post<{token: string, user: IUser}>(`${apiUrl}/auth/login`,user);
   }
 
@@ -22,11 +51,23 @@ export class AuthService {
   }
 
   ChangePassword(user: any) : Observable<{message: string}>{
-    return this.http.patch<{message: string}>(`${apiUrl}/auth/changePassword`,user);
+    let token = this.GetToken();
+    return this.http.patch<{message: string}>(`${apiUrl}/auth/changePassword`,user,{headers: {['Authorization']: `${token}`}}).pipe(
+      catchError((err,src) => {
+        this.HandleError(err);
+        return throwError(err);
+      })
+    );
   }
 
   ChangeLogin(user: any) : Observable<{message: string}>{
-    return this.http.patch<{message: string}>(`${apiUrl}/auth/changeLogin`,user);
+    let token = this.GetToken();
+    return this.http.patch<{message: string}>(`${apiUrl}/auth/changeLogin`,user,{headers: {['Authorization']: `${token}`}}).pipe(
+      catchError((err,src) => {
+        this.HandleError(err);
+        return throwError(err);
+      })
+    );
   }
 
   /*

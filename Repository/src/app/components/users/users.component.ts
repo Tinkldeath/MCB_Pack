@@ -28,7 +28,7 @@ export class UsersComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.currentUser = this.dataService.DecryptUser();
-    this.reqService.GetUsers().subscribe((data) => {
+    this.uSub = this.reqService.GetUsers().subscribe((data) => {
       this.users = data;
     });
   }
@@ -49,6 +49,7 @@ export class UsersComponent implements OnInit, OnDestroy {
     this.dSub = this.reqService.DeleteUser(user).subscribe((data) =>{
       if(data.message === 'Deleted'){
         alert('Пользователь удален');
+        this.ngOnDestroy();
         this.ngOnInit();
       }
       else{
@@ -85,16 +86,27 @@ export class UsersComponent implements OnInit, OnDestroy {
       return;
     }
     else{
-      this.rSub = this.reqService.ChangeUser(user).subscribe((data) => {
-        if(data.message === 'Updated'){
-          alert('Пользователь обновлён');
-          this.userToEdit = null;
-          this.ngOnInit();
-        }
-        else{
-          alert('Ошибка на стороне серера, попробуйте позже');
-        }
-      });
+      try {
+        this.rSub = this.reqService.ChangeUser(user).subscribe((data) => {
+          if(data.message === 'Updated'){
+            alert('Пользователь обновлён');
+            this.userToEdit = null;
+            this.ngOnDestroy();
+            this.ngOnInit();
+            return;
+          }
+          else{
+            alert('Ошибка на стороне серера, попробуйте позже');
+            return;
+          }
+        }, (err) => {
+          console.log(err);
+          return;
+        });
+      } catch (err) {
+        console.log(err);
+        return;
+      }
     }
   }
 

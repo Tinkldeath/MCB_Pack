@@ -2,6 +2,7 @@ const express = require('express');
 const controller = require('./../controllers/subjectController');
 const router = express.Router();
 const bodyParser = require('../node_modules/body-parser');
+const passport = require('passport');
 
 
 router.use(bodyParser.urlencoded({extended:true}));
@@ -13,13 +14,13 @@ router.get('/all',controller.GetAll);
 router.get('/',controller.GetById);
 //localhost:port/api/subjects/
 
-router.post('/add',controller.Create);
+router.post('/add',passport.authenticate('jwt',{session: false}),controller.Create);
 //localhost:port/api/subjects/create
 
-router.patch('/update',controller.Update);
+router.patch('/update',passport.authenticate('jwt',{session: false}),controller.Update);
 //localhost:port/api/subjects/update
 
-router.delete('/delete/:id',controller.Delete);
+router.delete('/delete/:id',passport.authenticate('jwt',{session: false}),controller.Delete);
 //localhost:port/api/subjects/delete
 
 

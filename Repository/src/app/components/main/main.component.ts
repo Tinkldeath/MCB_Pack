@@ -110,34 +110,45 @@ export class MainComponent implements OnInit, OnDestroy {
   ChangeFavorite(post: IPost){
     if(this.CheckFavorite(post)){
       this.user.favorites = this.user.favorites.filter(item => item !== post._id);
-      this.viewServise.ChangeUser(this.user);
-      this.dataService.SetUser(this.user);
-      this.reqService.ChangeUser(this.user).subscribe((data) => {
-        if(data.message === 'Updated'){
-          alert('Пост удалён из избранного');
-          let ind = this.viewPosts.indexOf(post);
-          if (ind >= 0) {
-            this.viewPosts.splice( ind, 1 );
-            this.viewServise.ChangePosts(this.viewPosts);
+      this.dataService.ChangeUser(this.user);
+      try {
+        this.reqService.ChangeUser(this.user).subscribe((data) => {
+          if(data.message === 'Updated'){
+            alert('Пост удалён из избранного');
+            let ind = this.viewPosts.indexOf(post);
+            if (ind >= 0) {
+              this.viewPosts.splice( ind, 1 );
+              this.viewServise.ChangePosts(this.viewPosts);
+            }
           }
-        }
-        else{
-          alert('Сейчас невозможно убрать пост из избранного, попробуйте позже');
-        }
-      });
+          else{
+            alert('Сейчас невозможно убрать пост из избранного, попробуйте позже');
+            return;
+          }
+        });
+      } catch (err) {
+        console.log(err);
+        return;
+      }
     }
     else{
       this.user.favorites.push(post._id);
-      this.viewServise.ChangeUser(this.user);
-      this.dataService.SetUser(this.user);
-      this.reqService.ChangeUser(this.user).subscribe((data) => {
-        if(data.message === 'Updated'){
-          alert('Пост добавлен в избранное');
-        }
-        else{
-          alert('Сейчас невозможно убрать пост из избранного, попробуйте позже');
-        }
-      });
+      this.dataService.ChangeUser(this.user);
+      try {
+        this.reqService.ChangeUser(this.user).subscribe((data) => {
+          if(data.message === 'Updated'){
+            alert('Пост добавлен в избранное');
+            return;
+          }
+          else{
+            alert('Сейчас невозможно убрать пост из избранного, попробуйте позже');
+            return;
+          }
+        });
+      } catch (err) {
+        console.log(err);
+        return;
+      }
     }
   }
 

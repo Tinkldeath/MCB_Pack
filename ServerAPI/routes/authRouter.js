@@ -2,6 +2,7 @@ const express = require('express');
 const controller = require('./../controllers/authController');
 const router = express.Router();
 const bodyParser = require('../node_modules/body-parser');
+const passport = require('passport');
 
 
 router.use(bodyParser.urlencoded({extended:true}));
@@ -13,10 +14,10 @@ router.post('/login',controller.login);
 router.post('/register',controller.register);
 //localhost:port/api/auth/register
 
-router.patch('/changePassword',controller.changePassword);
+router.patch('/changePassword',passport.authenticate('jwt',{session: false}),controller.changePassword);
 //localhost:port/api/auth/changePassword
 
-router.patch('/changeLogin',controller.changeLogin);
+router.patch('/changeLogin',passport.authenticate('jwt',{session: false}),controller.changeLogin);
 //localhost:port/api/auth/changeLogin
 
 module.exports = router;

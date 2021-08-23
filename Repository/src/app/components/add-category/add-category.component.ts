@@ -31,17 +31,28 @@ export class AddCategoryComponent implements OnInit, OnDestroy {
         name: this.name,
         description: this.description
       };
-      this.rSub = this.reqService.AddCategory(newCategory).subscribe(data => {
-        if(data.message === 'Created'){
-          alert('Категория создана');
-        }
-        else if(data.message === 'Conflict'){
-          alert('Такая категория уже существует');
-        }
-        else{
-          alert('Ошибка на стороне сервера, попробуйте позже');
-        }
-      });
+      try {
+        this.rSub = this.reqService.AddCategory(newCategory).subscribe(data => {
+          if(data.message === 'Created'){
+            alert('Категория создана');
+            return;
+          }
+          else if(data.message === 'Conflict'){
+            alert('Такая категория уже существует');
+            return;
+          }
+          else{
+            alert('Ошибка на стороне сервера, попробуйте позже');
+            return;
+          }
+        }, (err) => {
+          console.log(err);
+          return;
+        });
+      } catch (err) {
+        console.log(err);
+        return;
+      }
     }
     else{
       alert('Заполните все поля!');

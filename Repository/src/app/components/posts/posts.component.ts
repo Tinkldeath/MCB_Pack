@@ -1,3 +1,4 @@
+import { DataService } from 'src/app/shared/services/data.service';
 import { ViewService } from './../../shared/services/view.service';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { RequestsService } from 'src/app/shared/services/requests.service';
@@ -36,27 +37,91 @@ export class PostsComponent implements OnInit, OnDestroy {
   pSub: Subscription = null;
   rSub: Subscription = null;
   dSub: Subscription = null;
-  uSub: Subscription = null;
 
   constructor(
     private reqService: RequestsService,
-    private viewService: ViewService
+    private viewService: ViewService,
+    private dataService: DataService
   ) { }
 
+  private SetFormData(){
+    let formData: FormData = new FormData();
+    formData.append('_id',this.postToEdit._id);
+    formData.append('ownerId',this.postToEdit.ownerId);
+    if(this.newFile !== null){
+      formData.append('file',this.newFile,this.newFile.name);
+    }
+    else{
+      formData.append('file',null);
+    }
+    formData.append('ownerId',this.postToEdit.ownerId);
+    formData.append('name',this.newName);
+    formData.append('theme',this.newTheme);
+    formData.append('courseNumber',this.newCourseNumber.toString());
+    formData.append('category',this.newCategory);
+    formData.append('subject',this.newSubject);
+    formData.append('year',this.newYear.toString());
+    formData.append('author',this.newAuthor);
+    formData.append('university',this.newUniversity);
+    formData.append('description',this.newDescription);
+    if(this.user.isAdmin === true || this.user.isModer === true){
+      formData.append('status','Accepted');
+    }
+    else{
+      formData.append('status','Awaiting');
+    }
+    return formData;
+  }
+
+  private SetFormDataAcceptDeny(message: string, post: IPost){
+    if(message === 'accept'){
+      let formData: FormData = new FormData();
+      formData.append('_id',post._id);
+      formData.append('ownerId',post.ownerId);
+      formData.append('file',null);
+      formData.append('name',post.name);
+      formData.append('theme',post.theme);
+      formData.append('courseNumber',post.courseNumber.toString());
+      formData.append('category',post.category);
+      formData.append('subject',post.subject);
+      formData.append('year',post.year.toString());
+      formData.append('author',post.author);
+      formData.append('university',post.university);
+      formData.append('description',post.description);
+      formData.append('status','Accepted');
+      return formData;
+    }
+    else if(message === 'deny'){
+      let formData: FormData = new FormData();
+      formData.append('_id',post._id);
+      formData.append('ownerId',post.ownerId);
+      formData.append('file',null);
+      formData.append('name',post.name);
+      formData.append('theme',post.theme);
+      formData.append('courseNumber',post.courseNumber.toString());
+      formData.append('category',post.category);
+      formData.append('subject',post.subject);
+      formData.append('year',post.year.toString());
+      formData.append('author',post.author);
+      formData.append('university',post.university);
+      formData.append('description',post.description);
+      formData.append('status','Denied');
+      return formData;
+    }
+  }
+
   ngOnInit() {
-    this.uSub = this.viewService.currentUser.subscribe((data) => {
-      this.user = data;
-      if(this.user.isAdmin === true || this.user.isModer === true){
-        this.pSub = this.reqService.GetPosts().subscribe((data) => {
-          this.posts = data;
-        });
-      }
-      else{
-        this.pSub = this.viewService.currentPost.subscribe((data) => {
-          this.posts = data;
-        });
-      }
-    });
+    this.user = this.dataService.DecryptUser();
+    if(this.user.isAdmin === true || this.user.isModer === true){
+      this.pSub = this.reqService.GetPosts().subscribe((data) => {
+        this.posts = data;
+      });
+    }
+    else{
+      this.pSub = this.viewService.currentPost.subscribe((data) => {
+        this.posts = data;
+      });
+    }
     this.cSub = this.reqService.GetCategories().subscribe((data) => {
       this.categories = data;
     });
@@ -137,81 +202,75 @@ export class PostsComponent implements OnInit, OnDestroy {
   }
 
   DeletePost(post: IPost){
-    this.dSub = this.reqService.DeletePost(post._id).subscribe((data) => {
-      if(data.message === 'Deleted'){
-        alert('Пост успешно удалён');
-        this.postToEdit = null;
-        this.ngOnInit();
+      try {
+        this.dSub = this.reqService.DeletePost(post._id).subscribe((data) => {
+          console.log(data);
+          if(data.message === 'Deleted'){
+            alert('Пост успешно удалён');
+            this.postToEdit = null;
+            this.ngOnInit();
+          }
+          else{
+            alert('Ошибка на стороне сервера');
+            this.postToEdit = null;
+            this.ngOnInit();
+          }
+        });
+      } catch (err) {
+        return;
       }
-      else{
-        alert('Ошибка на стороне сервера');
-        this.postToEdit = null;
-        this.ngOnInit();
-      }
-    });
   }
 
   AcceptPost(post: IPost){
-    let formData: FormData = new FormData();
-    formData.append('_id',post._id);
-    formData.append('ownerId',post.ownerId);
-    formData.append('file',null);
-    formData.append('name',post.name);
-    formData.append('theme',post.theme);
-    formData.append('courseNumber',post.courseNumber.toString());
-    formData.append('category',post.category);
-    formData.append('subject',post.subject);
-    formData.append('year',post.year.toString());
-    formData.append('author',post.author);
-    formData.append('university',post.university);
-    formData.append('description',post.description);
-    formData.append('status','Accepted');
+    let formData = this.SetFormDataAcceptDeny('accept',post);
     if(this.rSub !== null){
       this.rSub.unsubscribe();
     }
-    this.rSub = this.reqService.ChangePost(formData).subscribe((data) => {
-      if(data.message === 'Updated'){
-        alert('Публикация принята');
-        this.postToEdit = null;
-        this.ngOnInit();
-      }
-      else{
-        alert('Ошибка на стороне серера, попробуйте позже');
-      }
-    });
-    post.status = 'Accepted';
-    this.viewService.ChangePosts(this.posts);
+    try {
+      this.rSub = this.reqService.ChangePost(formData).subscribe((data) => {
+        if(data.message === 'Updated'){
+          alert('Публикация принята');
+          this.postToEdit = null;
+          this.ngOnInit();
+          post.status = 'Accepted';
+          this.viewService.ChangePosts(this.posts);
+        }
+        else{
+          alert('Ошибка на стороне серера, попробуйте позже');
+          return;
+        }
+      });
+    } catch (err) {
+      console.log(err);
+      return;
+    }
   }
 
   DenyPost(post: IPost){
-    let formData: FormData = new FormData();
-    formData.append('_id',post._id);
-    formData.append('ownerId',post.ownerId);
-    formData.append('file',null);
-    formData.append('name',post.name);
-    formData.append('theme',post.theme);
-    formData.append('courseNumber',post.courseNumber.toString());
-    formData.append('category',post.category);
-    formData.append('subject',post.subject);
-    formData.append('year',post.year.toString());
-    formData.append('author',post.author);
-    formData.append('university',post.university);
-    formData.append('description',post.description);
-    formData.append('status','Denied');
+    let formData = this.SetFormDataAcceptDeny('deny',post);
     if(this.rSub !== null){
       this.rSub.unsubscribe();
     }
-    this.rSub = this.reqService.ChangePost(formData).subscribe((data) => {
-      if(data.message === 'Updated'){
-        alert('Публикация отклонена');
-        this.postToEdit = null;
-        this.ngOnInit();
-      }
-      else{
-        alert('Ошибка на стороне серера, попробуйте позже');
-      }
-    });
-    post.status = 'Denied';
+    try {
+      this.rSub = this.reqService.ChangePost(formData).subscribe((data) => {
+        if(data.message === 'Updated'){
+          alert('Публикация отклонена');
+          this.postToEdit = null;
+          this.ngOnInit();
+          post.status = 'Denied';
+        }
+        else{
+          alert('Ошибка на стороне серера, попробуйте позже');
+          return;
+        }
+      }, (err) => {
+        console.log(err);
+        return;
+      });
+    } catch (err) {
+      console.log(err);
+      return;
+    }
   }
 
   ChangePost(){
@@ -231,40 +290,25 @@ export class PostsComponent implements OnInit, OnDestroy {
       alert('Вы ничего не изменили!');
       return;
     }
-    let formData: FormData = new FormData();
-    formData.append('_id',this.postToEdit._id);
-    formData.append('ownerId',this.postToEdit.ownerId);
-    if(this.newFile !== null){
-      formData.append('file',this.newFile,this.newFile.name);
+    let formData = this.SetFormData();
+    try {
+      this.rSub = this.reqService.ChangePost(formData).subscribe((data) => {
+        if(data.message === 'Updated'){
+          alert('Публикация изменена');
+          this.postToEdit = null;
+          this.ngOnInit();
+        }
+        else{
+          alert('Ошибка на стороне серера, попробуйте позже');
+          return;
+        }
+      }, (err) => {
+        console.log(err);
+        return;
+      });
+    } catch (err) {
+      console.log(err);
+      return;
     }
-    else{
-      formData.append('file',null);
-    }
-    formData.append('ownerId',this.postToEdit.ownerId);
-    formData.append('name',this.newName);
-    formData.append('theme',this.newTheme);
-    formData.append('courseNumber',this.newCourseNumber.toString());
-    formData.append('category',this.newCategory);
-    formData.append('subject',this.newSubject);
-    formData.append('year',this.newYear.toString());
-    formData.append('author',this.newAuthor);
-    formData.append('university',this.newUniversity);
-    formData.append('description',this.newDescription);
-    if(this.user.isAdmin === true || this.user.isModer === true){
-      formData.append('status','Accepted');
-    }
-    else{
-      formData.append('status','Awaiting');
-    }
-    this.rSub = this.reqService.ChangePost(formData).subscribe((data) => {
-      if(data.message === 'Updated'){
-        alert('Публикация изменена');
-        this.postToEdit = null;
-        this.ngOnInit();
-      }
-      else{
-        alert('Ошибка на стороне серера, попробуйте позже');
-      }
-    });
   }
 }

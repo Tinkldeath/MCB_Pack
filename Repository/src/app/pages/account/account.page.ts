@@ -11,40 +11,24 @@ import { ICategory, IUser, IPost } from '../../shared/models/models';
   templateUrl: './account.page.html',
   styleUrls: ['./account.page.scss'],
 })
-export class AccountPage implements OnInit, OnDestroy {
+export class AccountPage implements OnInit {
 
   selection: string = '';
   user: IUser = null;
-  vSub: Subscription = null;
-  uSub: Subscription = null;
-  pSub: Subscription = null;
 
   constructor(
-    private viewService: ViewService,
     private router: Router,
     private dataService: DataService
   ) {}
 
   ngOnInit() {
-    this.uSub = this.viewService.currentUser.subscribe(user => {
-      this.user = user;
-    });
-  }
-
-  ngOnDestroy(){
-    if(this.vSub !== null){
-      this.vSub.unsubscribe();
-    }
-    if(this.uSub !== null){
-      this.uSub.unsubscribe();
-    }
+    this.user = this.dataService.DecryptUser();
   }
 
   Logout(){
     localStorage.clear();
     localStorage.clear();
     sessionStorage.clear();
-    this.viewService.ChangeUser(null);
     this.dataService.SetUser(null);
     this.dataService.Clear();
     this.router.navigateByUrl('home');

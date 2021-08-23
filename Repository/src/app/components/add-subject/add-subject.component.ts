@@ -43,17 +43,28 @@ export class AddSubjectComponent implements OnInit, OnDestroy {
       categoryName: this.selectedCategory,
       name: this.name
     };
-    this.rSub = this.reqService.AddSubject(newSubject).subscribe(data => {
-      if(data.message === 'Created'){
-        alert('Предмет добавлен');
-      }
-      else if(data.message === 'Conflict'){
-        alert('Такой предмет уже существует');
-      }
-      else{
-        alert('Ошибка на стороне сервера, попробуйте позже');
-      }
-    });
+    try {
+      this.rSub = this.reqService.AddSubject(newSubject).subscribe(data => {
+        if(data.message === 'Created'){
+          alert('Предмет добавлен');
+          return;
+        }
+        else if(data.message === 'Conflict'){
+          alert('Такой предмет уже существует');
+          return;
+        }
+        else{
+          alert('Ошибка на стороне сервера, попробуйте позже');
+          return;
+        }
+      }, (err) => {
+        console.log(err);
+        return;
+      });
+    } catch (err) {
+      console.log(err);
+      return;
+    }
   }
 
 }

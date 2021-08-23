@@ -16,7 +16,6 @@ export class ChangeLoginComponent implements OnInit, OnDestroy {
   login: string = null;
   password: string = null;
 
-  vSub: Subscription = null;
   rSub: Subscription = null;
   aSub: Subscription = null;
 
@@ -25,20 +24,14 @@ export class ChangeLoginComponent implements OnInit, OnDestroy {
   constructor(
     private dataService: DataService,
     private authService: AuthService,
-    private viewService: ViewService,
     private router: Router
   ) { }
 
   ngOnInit() {
-    this.vSub = this.viewService.currentUser.subscribe((data) => {
-      this.user = data;
-    });
+    this.user = this.dataService.DecryptUser();
   }
 
   ngOnDestroy(){
-    if(this.vSub !== null){
-      this.vSub.unsubscribe();
-    }
     if(this.rSub !== null){
       this.rSub.unsubscribe();
     }
@@ -67,10 +60,7 @@ export class ChangeLoginComponent implements OnInit, OnDestroy {
             this.rSub = this.authService.ChangeLogin({_id: this.user._id, login: this.login}).subscribe(data => {
               if(data.message === 'Login updated.'){
                 alert('Логин успешно обновлен, войдите повторно.');
-                localStorage.clear();
-                sessionStorage.clear();
                 this.dataService.Clear();
-                this.viewService.ChangeUser(null);
                 this.router.navigateByUrl('sign-in');
               }
               else if(data.message === 'Conflict'){

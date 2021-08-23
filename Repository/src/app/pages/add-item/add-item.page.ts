@@ -1,3 +1,4 @@
+import { DataService } from './../../shared/services/data.service';
 import { Subscription } from 'rxjs';
 import { ViewService } from '../../shared/services/view.service';
 import { ICategory, ISubject, IUser } from '../../shared/models/models';
@@ -19,7 +20,6 @@ export class AddItemPage implements OnInit, OnDestroy {
   viewSubjects: ISubject[] = [];
 
   vSub: Subscription = null;
-  uSub: Subscription = null;
   sSub: Subscription = null;
 
   name: string = '';
@@ -34,16 +34,33 @@ export class AddItemPage implements OnInit, OnDestroy {
   file: File = null;
 
   constructor(
-    private viewService: ViewService,
-    private reqServise: RequestsService
+    private reqServise: RequestsService,
+    private dataService: DataService
   ) {}
+
+  private SetFormData(){
+    let formData: FormData = new FormData();
+    formData.append('file',this.file,this.file.name);
+    formData.append('name',this.name);
+    formData.append('theme',this.theme);
+    formData.append('ownerId',this.user._id);
+    formData.append('category',this.category);
+    formData.append('subject',this.subject);
+    formData.append('courseNumber',this.courseNumber.toString());
+    formData.append('author',this.author);
+    formData.append('year',this.year.toString());
+    formData.append('university',this.university);
+    formData.append('description',this.description);
+    formData.append('status','Awaiting');
+    return formData;
+  }
 
   onFileChange(fileChangeEvent){
     this.file = fileChangeEvent.target.files[0];
   }
 
   ngOnInit() {
-    this.vSub = this.viewService.currentCategories.subscribe(data => {
+    this.vSub = this.reqServise.GetCategories().subscribe(data => {
       this.categories = data;
       this.viewCategories = data;
     });
@@ -51,17 +68,12 @@ export class AddItemPage implements OnInit, OnDestroy {
       this.subjects = data;
       this.viewSubjects = data;
     });
-    this.uSub = this.viewService.currentUser.subscribe(user => {
-      this.user = user;
-    });
+    this.user = this.dataService.DecryptUser();
   }
 
   ngOnDestroy(){
     if(this.vSub !== null){
       this.vSub.unsubscribe();
-    }
-    if(this.uSub !== null){
-      this.uSub.unsubscribe();
     }
     if(this.sSub !== null){
       this.sSub.unsubscribe();
@@ -78,30 +90,29 @@ export class AddItemPage implements OnInit, OnDestroy {
       alert('Выберите файл!');
       return;
     }
-    let formData: FormData = new FormData();
-    formData.append('file',this.file,this.file.name);
-    formData.append('name',this.name);
-    formData.append('theme',this.theme);
-    formData.append('ownerId',this.user._id);
-    formData.append('category',this.category);
-    formData.append('subject',this.subject);
-    formData.append('courseNumber',this.courseNumber.toString());
-    formData.append('author',this.author);
-    formData.append('year',this.year.toString());
-    formData.append('university',this.university);
-    formData.append('description',this.description);
-    formData.append('status','Awaiting');
-    this.reqServise.AddPost(formData).subscribe((data) => {
-      if(data.message === 'Created'){
-        alert('Пост добавлен');
-      }
-      else if(data.message === 'Conflict'){
-        alert('Такой пост уже есть');
-      }
-      else{
-        alert('Ошибка');
-      }
-    });
+    let formData = this.SetFormData();
+    try {
+      this.reqServise.AddPost(formData).subscribe((data) => {
+        if(data.message === 'Created'){
+          alert('Пост добавлен');
+          return;
+        }
+        else if(data.message === 'Conflict'){
+          alert('Такой пост уже есть');
+          return;
+        }
+        else{
+          alert('Ошибка на стороне сервера, попробуйте позже');
+          return;
+        }
+      }, (err) => {
+        console.log(err);
+        return;
+      });
+    } catch (err) {
+      console.log(err);
+      return;
+    }
   }
 
   SelectCategory(){

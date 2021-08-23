@@ -47,15 +47,20 @@ export class CategoriesComponent implements OnInit, OnDestroy {
   }
 
   DeleteCategory(category: ICategory){
-    this.rSub = this.reqService.DeleteCategory(category).subscribe(data => {
-      if(data.message === 'Deleted'){
-        alert('Категория удалена');
-        this.ngOnInit();
-      }
-      else{
-        alert('Ошибка на стороне серера, попробуйте позже');
-      }
-    });
+    try {
+      this.rSub = this.reqService.DeleteCategory(category).subscribe(data => {
+        if(data.message === 'Deleted'){
+          alert('Категория удалена');
+          this.ngOnInit();
+        }
+        else{
+          alert('Ошибка на стороне серера, попробуйте позже');
+        }
+      });
+    } catch (err) {
+      console.log(err);
+      return;
+    }
   }
 
   ChangeCategory(){
@@ -72,15 +77,26 @@ export class CategoriesComponent implements OnInit, OnDestroy {
       name: this.newName,
       description: this.newDescription
     }
-    this.reqService.ChangeCategory(category).subscribe((data) => {
-      if(data.message === 'Updated'){
-        alert('Категория изменена');
-        this.categoryToEdit = null;
-        this.ngOnInit();
-      }
-      else{
-        alert('Ошибка на стороне серера, попробуйте позже');
-      }
-    });
+    try {
+      this.reqService.ChangeCategory(category).subscribe((data) => {
+        if(data.message === 'Updated'){
+          alert('Категория изменена');
+          this.categoryToEdit = null;
+          this.ngOnDestroy();
+          this.ngOnInit();
+          return;
+        }
+        else{
+          alert('Ошибка на стороне серера, попробуйте позже');
+          return;
+        }
+      }, (err) => {
+        console.log(err);
+        return;
+      });
+    } catch (err) {
+      console.log(err);
+      return;
+    }
   }
 }

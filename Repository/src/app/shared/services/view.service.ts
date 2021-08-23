@@ -25,7 +25,6 @@ export class ViewService {
   private messageSource = new BehaviorSubject(null);
   private categorySource = new BehaviorSubject(null);
   private subjectSource = new BehaviorSubject(null);
-  private userSource = new BehaviorSubject(null);
   private postSource = new BehaviorSubject(null);
   private categoryToEditSource = new BehaviorSubject(null);
   private searchTermSource = new BehaviorSubject(null);
@@ -50,7 +49,6 @@ export class ViewService {
   // data observables
   currentMessage = this.messageSource.asObservable();
   currentCategories = this.categorySource.asObservable();
-  currentUser = this.userSource.asObservable();
   currentSubject = this.subjectSource.asObservable();
   currentPost = this.postSource.asObservable();
   categoryToChange = this.categoryToEditSource.asObservable();
@@ -91,10 +89,6 @@ export class ViewService {
 
   ChangeCategories(message: ICategory[]){
     this.categorySource.next(message);
-  }
-
-  ChangeUser(message: IUser){
-    this.userSource.next(message);
   }
 
   ChangeSubjects(message: ISubject[]){

@@ -1,6 +1,7 @@
 // App define
 const express = require('express');
 const cors = require('cors');
+const passport = require('passport');
 const app = express();
 const bodyParser = require('./node_modules/body-parser');
 const mongoose = require('mongoose');
@@ -46,6 +47,10 @@ app.use(bodyParser.json());
 
 // For Multer
 app.use('/uploads', express.static('uploads'));
+
+//Passport
+app.use(passport.initialize());
+require('./middleware/passport')(passport);
 
 // Mongoose and db
 mongoose.connect(keys.mongoUrl,{ useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false}, function (err){

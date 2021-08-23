@@ -64,15 +64,26 @@ export class SubjectsComponent implements OnInit, OnDestroy {
       categoryName: subject.categoryName,
       name: subject.name
     }
-    this.dSub = this.reqService.DeleteSubject(delSubject).subscribe((data) => {
-      if(data.message === 'Deleted'){
-        alert('Предмет удалён');
-        this.ngOnInit();
-      }
-      else{
-        alert('Ошибка на стороне серера, попробуйте позже');
-      }
-    });
+    try {
+      this.dSub = this.reqService.DeleteSubject(delSubject).subscribe((data) => {
+        if(data.message === 'Deleted'){
+          alert('Предмет удалён');
+          this.ngOnDestroy();
+          this.ngOnInit();
+          return;
+        }
+        else{
+          alert('Ошибка на стороне серера, попробуйте позже');
+          return;
+        }
+      }, (err) => {
+        console.log(err);
+        return;
+      });
+    } catch (err) {
+      console.log(err);
+      return;
+    }
   }
 
   ChangeSubject(){
@@ -94,6 +105,7 @@ export class SubjectsComponent implements OnInit, OnDestroy {
         alert('Предмет изменён');
         this.subjectToEdit = null;
         this.newName = '';
+        this.ngOnDestroy();
         this.ngOnInit();
       }
       else{

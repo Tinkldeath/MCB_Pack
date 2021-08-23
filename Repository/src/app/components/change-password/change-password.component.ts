@@ -1,6 +1,5 @@
 import { DataService } from './../../shared/services/data.service';
 import { IUser } from './../../shared/models/models';
-import { ViewService } from './../../shared/services/view.service';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/shared/services/auth.service';
@@ -15,7 +14,6 @@ import { Subscription } from 'rxjs';
 })
 export class ChangePasswordComponent implements OnInit, OnDestroy {
 
-  vSub: Subscription = null;
   rSub: Subscription = null;
   aSub: Subscription = null;
   /*
@@ -33,23 +31,17 @@ export class ChangePasswordComponent implements OnInit, OnDestroy {
     // Не забываем импортировать всё нужное через конструктор
     private dataService: DataService,
     private authService: AuthService,
-    private viewService: ViewService,
     private router: Router
     ) { }
 
   ngOnInit() {
     // При инициализации компонента сразу забираем из сервиса данные о пользователе,
     // из них будем доставать логин
-    this.vSub = this.viewService.currentUser.subscribe((data) => {
-      this.user = data;
-    });
+    this.user = this.dataService.DecryptUser();
   }
 
   ngOnDestroy(){
     // Не забываем чистить память
-    if(this.vSub !== null){
-      this.vSub.unsubscribe();
-    }
     if(this.rSub !== null){
       this.rSub.unsubscribe();
     }
@@ -99,11 +91,8 @@ export class ChangePasswordComponent implements OnInit, OnDestroy {
                 всё убрать за собой и только после этого перенаправить на home page
               */
               alert('Пароль успешно изменён, вы можете войти с новыми данными');
-              localStorage.clear();
-              sessionStorage.clear();
               this.dataService.Clear();
-              this.viewService.ChangeUser(null);
-              this.router.navigateByUrl('home');
+              this.router.navigateByUrl('sign-in');
             }
             else{
               alert('Ошибка на стороне сервера, попробуйте позже');

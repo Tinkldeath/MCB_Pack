@@ -40,9 +40,6 @@ export class HomePage implements OnInit, OnDestroy{
     private router: Router
     ) {
       this.user = this.dataService.DecryptUser();
-      this.vSub = this.viewService.currentUser.subscribe(user => {
-        this.user = user;
-      });
     }
 
   ngOnInit(){
@@ -62,7 +59,6 @@ export class HomePage implements OnInit, OnDestroy{
       this.viewService.SetAllPosts(data);
     });
     this.user = this.dataService.DecryptUser();
-    this.viewService.ChangeUser(this.user);
     if(this.user === null){
       localStorage.clear();
     }

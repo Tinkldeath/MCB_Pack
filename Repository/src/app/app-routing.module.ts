@@ -28,10 +28,6 @@ const routes: Routes = [
     loadChildren: () => import('./pages/add-item/add-item.module').then( m => m.AddItemPageModule)
   },
   {
-    path: 'favorite',
-    loadChildren: () => import('./pages/favorite/favorite.module').then( m => m.FavoritePageModule)
-  },
-  {
     path: 'account',
     loadChildren: () => import('./pages/account/account.module').then( m => m.AccountPageModule)
   },
