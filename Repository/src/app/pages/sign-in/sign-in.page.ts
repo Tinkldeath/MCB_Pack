@@ -1,3 +1,4 @@
+import { ViewService } from 'src/app/shared/services/view.service';
 import { Subscription } from 'rxjs';
 import { DataService } from '../../shared/services/data.service';
 import { AuthService } from '../../shared/services/auth.service';
@@ -18,7 +19,8 @@ export class SignInPage implements OnInit, OnDestroy {
   constructor(
     private auth : AuthService,
     private router: Router,
-    private dataService: DataService
+    private dataService: DataService,
+    private viewService: ViewService
   ) {}
 
   ngOnInit() {}
@@ -59,6 +61,7 @@ export class SignInPage implements OnInit, OnDestroy {
             else{
               this.dataService.SetUserSession(User);
             }
+            this.viewService.ChangeMessage(User);
             this.router.navigateByUrl('home');
           }
         }, (err) => {

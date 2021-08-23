@@ -31,7 +31,7 @@ export class HomePage implements OnInit, OnDestroy{
   cSub: Subscription = null;
   sSub: Subscription = null;
   pSub: Subscription = null;
-
+  mSub: Subscription = null;
 
   constructor(
     private reqService: RequestsService,
@@ -58,10 +58,10 @@ export class HomePage implements OnInit, OnDestroy{
       this.viewService.ChangePosts(data);
       this.viewService.SetAllPosts(data);
     });
+    this.mSub = this.viewService.currentMessage.subscribe((data) => {
+      this.user = data;
+    });
     this.user = this.dataService.DecryptUser();
-    if(this.user === null){
-      localStorage.clear();
-    }
   }
 
   ngOnDestroy(){

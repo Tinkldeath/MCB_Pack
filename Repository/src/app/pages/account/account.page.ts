@@ -1,9 +1,8 @@
+import { ViewService } from 'src/app/shared/services/view.service';
 import { DataService } from './../../shared/services/data.service';
 import { Router } from '@angular/router';
-import { Subscription } from 'rxjs';
-import { ViewService } from '../../shared/services/view.service';
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ICategory, IUser, IPost } from '../../shared/models/models';
+import { Component, OnInit } from '@angular/core';
+import { IUser} from '../../shared/models/models';
 
 
 @Component({
@@ -18,7 +17,8 @@ export class AccountPage implements OnInit {
 
   constructor(
     private router: Router,
-    private dataService: DataService
+    private dataService: DataService,
+    private viewService: ViewService
   ) {}
 
   ngOnInit() {
@@ -31,6 +31,7 @@ export class AccountPage implements OnInit {
     sessionStorage.clear();
     this.dataService.SetUser(null);
     this.dataService.Clear();
+    this.viewService.ChangeMessage(null);
     this.router.navigateByUrl('home');
   }
 

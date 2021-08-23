@@ -1,6 +1,5 @@
 import { DataService } from './../../shared/services/data.service';
 import { Subscription } from 'rxjs';
-import { ViewService } from '../../shared/services/view.service';
 import { ICategory, ISubject, IUser } from '../../shared/models/models';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { RequestsService } from '../../shared/services/requests.service';
