@@ -5,57 +5,49 @@
   }
 
   .Sup{
-    padding-bottom: 100px;
+    padding-bottom: 5.21vw;
     background-color: rgb(64, 169, 255);
     color: white;
     font-weight: normal;
     font-size: medium;
     padding: 0;
-    padding-left: 10px;
-    padding-right: 10px;
-    border-radius: 35px;
+    padding-left: 0.52vw;
+    padding-right: 0.52vw;
+    border-radius: 1.82vw;
   }
 
   .Help{
-    margin: 10px;
-    margin-left: 80px;
-    padding-top: 10px;
+    margin: 0.52vw;
+    padding-top: 0.52vw;
   }
-
+  
   .EnterButton{
     font-weight: bold;
-    margin: 10px;
-    padding-top: 10px;
-    padding-left: 15px;
-  }
-
-  #searchbar{
-    margin-top: 8px;
-    margin-left: -240px;
-    width: 700px;
-    text-align: center;
+    margin: 0.52vw;
+    padding-top: 0.52vw;
+    padding-left: 0.78vw;
   }
 
   #rectangle{
     text-align: center;
     line-height: 550px;
     font-size: large;
-    width:550px;
-    height:550px;
+    width:75.75757575757575vh;
+    height:75.75757575757575vh;
     border-style: dashed;
     border-width: 3px;
     border-radius: 5px;
     border-color: rgb(243, 157, 123);
-    margin-top: 40px;
-    margin-left: 75px;
+    margin-top: 2.08vw;
+    margin-left: 3.91vw;
     float:left;
 }
 
 #Input{
-    width: 450px;
+    width: 23.44vw;
     float: left;
-    margin-top: 40px;
-    margin-left: 25px;
+    margin-top: 2.08vw;
+    margin-left: 1.30vw;
 }
 
 #fileInput{
@@ -63,27 +55,26 @@
 }
 
 .Input{
-  width: 650px;
-  height: 40px;
+  width: 89.53168044077135vh;
+  height: 5.509vh;
   border-style: solid;
   border-width: 2px;
   border-color: rgb(80, 80, 80);
   border-radius: 5px;
-  margin-bottom: 25px;
+  margin-bottom: 3.443526170798898vh;
 }
 
 .Input:hover{
-  width: 650px;
-  height: 40px;
+  width: 89.53168044077135vh;
+  height: 5.509vh;
   border-style: solid;
   border-width: 3px;
   border-color: rgb(243, 157, 123);
   border-radius: 5px;
-  // margin-bottom: 30px;
 }
 
 .UploadButton{
-  margin-top: -5px;
+  margin-top: -0.689vh;
   --ripple-color: rgb(243, 157, 123);
 }
 

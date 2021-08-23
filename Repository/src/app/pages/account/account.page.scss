@@ -5,34 +5,27 @@
   }
 
   .Sup{
-    padding-bottom: 100px;
+    padding-bottom: 5.21vw;
     background-color: rgb(64, 169, 255);
     color: white;
     font-weight: normal;
     font-size: medium;
     padding: 0;
-    padding-left: 10px;
-    padding-right: 10px;
-    border-radius: 35px;
+    padding-left: 0.52vw;
+    padding-right: 0.52vw;
+    border-radius: 1.82vw;
   }
 
   .Help{
-    margin: 10px;
-    padding-top: 10px;
+    margin: 0.52vw;
+    padding-top: 0.52vw;
   }
-
+  
   .EnterButton{
     font-weight: bold;
-    margin: 10px;
-    padding-top: 10px;
-    padding-left: 15px;
-  }
-
-  #searchbar{
-    margin-top: 8px;
-    margin-left: -240px;
-    width: 700px;
-    text-align: center;
+    margin: 0.52vw;
+    padding-top: 0.52vw;
+    padding-left: 0.78vw;
   }
 
   #sidemenu{
@@ -50,7 +43,7 @@
   }
 
   ion-button{
-    height: 38px;
+    height: 5.2341vh;
     font-weight: normal;
   }
 
@@ -92,16 +85,16 @@
 
   #popup{
     height: 69vh;
-    margin: 20px;
+    margin: 1.04vw;
     width: 30vh;
     float: right;
     border: 5px solid brown;
     background-color: white;
-    margin-left: -5px;
+    margin-left: -0.26vw;
   }
 
 p{
     float: left;
-    margin-left: 25px;
-    margin-top: -70px;
+    margin-left: 1.30vw;
+    margin-top: -3.65vw;
 }
