@@ -1,11 +1,11 @@
 .CategoryItem{
     width: 82vw;
     float: right;
-    height: 55px;
+    height: 7.576vh;
 }
 
 .CategoryButton{
-    width: 70px;
+    width: 4.56vw;
 }
 
 #Place{
@@ -13,7 +13,7 @@
 }
 
 #listheader{
-    height: 57px;
+    height: 7.851vh;
     border-bottom: 1px solid;
     border-color: gray;
 }
@@ -24,7 +24,7 @@ h2{
 }
 
 #foot{
-    height: 80px;
+    height: 11.02vh;
 }
 
 ion-label{
@@ -33,24 +33,24 @@ ion-label{
 }
 
 ion-textarea{
-  padding-left: 5px;
+  padding-left: 0.69vh;
 }
 
 p{
-  padding-left: 5px;
+  padding-left: 0.69vh;
   margin: 0;
 }
 
 .ChangeInput{
-    width: 500px;
+    width: 32.552vw;
     border-style: solid;
     border-width: 2px;
     border-color: rgb(80, 80, 80);
-    border-radius: 5px;
-    margin-bottom: 10px;
+    border-radius: 0.69vh;
+    margin-bottom: 1.28vh;
   }
 
 #Edit{
-    margin-left: 10px;
-    margin-top: 10px;
+    margin-left: 1.28vh;
+    margin-top: 1.28vh;
 }

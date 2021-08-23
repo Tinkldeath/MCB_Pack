@@ -3,9 +3,9 @@
     <ion-item class="CategoryItem" id="listitem">
       {{post.name}}
       <div id="Place">
-        <ion-button fill="clear" color="dark" class="CategoryButton" (click)="ViewPost(post)">Открыть</ion-button>
         <ion-button *ngIf="(post.status === null || post.status === undefined || post.status === 'Awaiting') && (this.user.isAdmin === true || this.user.isModer === true)" fill="clear" color="dark" class="CategoryButton" (click)="AcceptPost(post)">Подтв.</ion-button>
         <ion-button *ngIf="(post.status === null || post.status === undefined || post.status === 'Awaiting') && (this.user.isAdmin === true || this.user.isModer === true)" fill="clear" color="dark" class="CategoryButton" (click)="EditPost(post)">Откл.</ion-button>
+        <ion-button fill="clear" color="dark" class="CategoryButton" (click)="ViewPost(post)">Открыть</ion-button>
         <ion-button *ngIf="(this.user.isAdmin === true) || post.ownerId === this.user._id" fill="clear" color="dark" class="CategoryButton" (click)="EditPost(post)">Ред.</ion-button>
         <ion-button *ngIf="(this.user.isAdmin === true) || post.ownerId === this.user._id" fill="clear" color="dark" class="CategoryButton" (click)="DeletePost(post)">Удалить</ion-button>
       </div>
