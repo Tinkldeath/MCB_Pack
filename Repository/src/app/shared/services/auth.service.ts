@@ -1,3 +1,4 @@
+import { ViewService } from './view.service';
 import { Router } from '@angular/router';
 import { DataService } from 'src/app/shared/services/data.service';
 import { IUser } from './../models/models';
@@ -15,7 +16,8 @@ export class AuthService {
   constructor(
     private http : HttpClient,
     private dataService: DataService,
-    private router: Router
+    private router: Router,
+    private viewService: ViewService
   ) { }
 
   private GetToken(){
@@ -34,6 +36,7 @@ export class AuthService {
       this.dataService.SetUser(null);
       this.dataService.SetUserSession(null);
       this.dataService.Clear();
+      this.viewService.ChangeMessage(null);
       this.router.navigateByUrl('sign-in');
     }
     else if(error.status === 404){
@@ -42,7 +45,6 @@ export class AuthService {
   }
 
   Login(user: any) : Observable<{token: string, user: IUser}>{
-    let token = this.GetToken();
     return this.http.post<{token: string, user: IUser}>(`${apiUrl}/auth/login`,user);
   }
 

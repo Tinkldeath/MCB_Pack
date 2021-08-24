@@ -38,9 +38,7 @@ export class HomePage implements OnInit, OnDestroy{
     private viewService: ViewService,
     private dataService: DataService,
     private router: Router
-    ) {
-      this.user = this.dataService.DecryptUser();
-    }
+    ) {}
 
   ngOnInit(){
     this.cSub = this.reqService.GetCategories().subscribe((data) => {
@@ -59,9 +57,13 @@ export class HomePage implements OnInit, OnDestroy{
       this.viewService.SetAllPosts(data);
     });
     this.mSub = this.viewService.currentMessage.subscribe((data) => {
-      this.user = data;
+      if(data !== null){
+        this.user = data;
+      }
+      else{
+        this.user = this.dataService.DecryptUser();
+      }
     });
-    this.user = this.dataService.DecryptUser();
   }
 
   ngOnDestroy(){
