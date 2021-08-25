@@ -74,7 +74,7 @@ u{
   font-weight: bold;
 }
 
-#Slide{
+.Slide{
   text-align: center;
   left: 0;
   right: 0;
@@ -92,7 +92,7 @@ u{
   height: 69vh;
   margin: 1.04vw;
   margin-top: 1.04vw;
-  width: 30vh;
+  width: 29vh;
   float: right;
   border: 5px solid brown;
   background-color: white;
@@ -148,7 +148,28 @@ u{
 
 #searchbar{
   margin-top: 0.42vw;
-  margin-left: 0.52vw;
+  margin-left: 1.52vw;
   width: 46.7vw;
   text-align: center;
+}
+
+@media only screen and (min-width: 400px){
+  #title_m{
+    width: 3vw;
+    font-size: large;
+  }
+
+  #searchbar{
+    margin-left: 1.52vw;
+    width: 100.0vw;
+    text-align: center;
+  }
+
+  #buttons_m{
+    margin-top: -18vw;
+    margin-left: 30vw;
+  }
+
+
+
 }
