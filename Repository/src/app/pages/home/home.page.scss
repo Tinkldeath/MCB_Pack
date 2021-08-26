@@ -149,26 +149,48 @@ u{
 #searchbar{
   margin-top: 0.42vw;
   margin-left: 1.52vw;
+  display: inline-block;
   width: 46.7vw;
   text-align: center;
 }
 
-@media only screen and (min-width: 400px){
+#buttons_m{
+  display: inline-block;
+}
+
+@media screen and (max-width: 411px){
   #title_m{
-    width: 3vw;
-    font-size: large;
+    font-size:calc(20px + (50 - 20) * ((100vw - 320px)/(1920 - 320)));
+  }
+
+  .Slide{
+    display: none;
   }
 
   #searchbar{
-    margin-left: 1.52vw;
-    width: 100.0vw;
-    text-align: center;
+    display: flex;
+    width: 100vw;
   }
 
-  #buttons_m{
-    margin-top: -18vw;
-    margin-left: 30vw;
+  .EnterButton{
+    margin-top: -65vw;
+    margin-left: -25vw;
   }
+
+  .Help{
+    justify-content: space-between;
+  }
+
+  .SelectItem{
+    width: 50vw;
+  }
+
+  #change_m{
+    display: inline-block;
+    width: 100vw;
+  }
+
+  
 
 
 
