@@ -21,7 +21,7 @@
               <ion-button *ngIf="user === null" fill="clear" size="medium" color="dark" class="Help" routerLink="/sign-in"> <u>Избранное</u> </ion-button>
               <ion-button *ngIf="user !== null" fill="clear" size="medium" color="dark" class="Help" (click)="GoFavorite()"> <u>Избранное</u> </ion-button>
               <ion-button *ngIf="user === null" size="medium" color="dark" class="EnterButton" shape="round" fill="outline" routerLink="/sign-in"> Войти </ion-button>
-              <ion-button *ngIf="user !== null" size="medium" color="dark" class="EnterButton" shape="round" fill="outline" (click)="GoProfile()"> <ion-label>{{user.login}}</ion-label> </ion-button>
+              <ion-button *ngIf="user !== null" size="medium" color="dark" class="EnterButton" shape="round" fill="outline" (click)="GoProfile()">{{user.login}}</ion-button>
           </ion-col>
         </ion-row>
       </ion-grid>
@@ -32,17 +32,15 @@
 
   <ion-grid>
       <ion-row id="change_m">
-        <div class="SelectItem">
-        <!-- <ion-col "> -->
+        <ion-col class="SelectItem">
           <app-view-categories (click)="SearchFilters()"></app-view-categories>
-        <!-- </ion-col> -->
-        <!-- <ion-col class="SelectItem"> -->
+        </ion-col>
+        <ion-col class="SelectItem">
           <app-view-subjects (click)="SearchFilters()"></app-view-subjects>
-        <!-- </ion-col> -->
-        <!-- <ion-col class="SelectItem"> -->
+        </ion-col>
+        <ion-col class="SelectItem">
           <app-view-authors (click)="SearchFilters()"></app-view-authors>
-        <!-- </ion-col> -->
-        </div>
+        </ion-col>
         <ion-col id="item">
           <ion-button class="ClearButton" fill="outline" size="small" color="dark" (click)="Reset()"> Очистить фильтры </ion-button>
         </ion-col>

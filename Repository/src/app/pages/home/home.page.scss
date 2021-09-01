@@ -58,6 +58,7 @@
 .EnterButton{
   font-weight: bold;
   margin: 0.52vw;
+  width: 9vw;
   padding-top: 0.52vw;
   padding-left: 0.78vw;
 }
@@ -148,7 +149,7 @@ u{
 
 #searchbar{
   margin-top: 0.42vw;
-  margin-left: 1.52vw;
+  margin-left: -15vw;
   display: inline-block;
   width: 46.7vw;
   text-align: center;
@@ -158,40 +159,40 @@ u{
   display: inline-block;
 }
 
-@media screen and (max-width: 411px){
-  #title_m{
-    font-size:calc(20px + (50 - 20) * ((100vw - 320px)/(1920 - 320)));
-  }
+// @media screen and (max-width: 411px){
+//   #title_m{
+//     font-size:calc(20px + (50 - 20) * ((100vw - 320px)/(1920 - 320)));
+//   }
 
-  .Slide{
-    display: none;
-  }
+//   .Slide{
+//     display: none;
+//   }
 
-  #searchbar{
-    display: flex;
-    width: 100vw;
-  }
+//   #searchbar{
+//     display: flex;
+//     width: 100vw;
+//   }
 
-  .EnterButton{
-    margin-top: -65vw;
-    margin-left: -25vw;
-  }
+//   .EnterButton{
+//     margin-top: -65vw;
+//     margin-left: -25vw;
+//   }
 
-  .Help{
-    justify-content: space-between;
-  }
+//   .Help{
+//     justify-content: space-between;
+//   }
 
-  .SelectItem{
-    width: 50vw;
-  }
+//   .SelectItem{
+//     width: 50vw;
+//   }
 
-  #change_m{
-    display: inline-block;
-    width: 100vw;
-  }
-
-  
+//   #change_m{
+//     display: inline-block;
+//     width: 100vw;
+//   }
 
 
 
-}
+
+
+// }

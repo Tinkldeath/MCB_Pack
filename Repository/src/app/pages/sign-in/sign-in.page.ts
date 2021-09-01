@@ -64,12 +64,6 @@ export class SignInPage implements OnInit, OnDestroy {
             this.viewService.ChangeMessage(User);
             this.router.navigateByUrl('home');
           }
-        }, (err) => {
-          if(err){
-            alert('Произошла ошибка при логине');
-            console.log(err);
-            return;
-          }
         });
       } catch (err) {
         console.log(err);
