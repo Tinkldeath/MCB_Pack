@@ -45,8 +45,8 @@
                 <ion-button disabled="true" fill="clear" size="medium" color="dark" expand="full" id="menulabel"></ion-button>
                 <ion-button disabled="true" fill="clear" size="medium" color="dark" expand="full" id="menulabel"></ion-button>
                 <ion-button disabled="true" fill="clear" size="medium" color="dark" expand="full" id="menulabel"></ion-button>
-                <ion-button *ngIf="this.user.isModer === false" disabled="true" fill="clear" size="medium" color="dark" expand="full" id="menulabel"></ion-button>
-                <ion-button *ngIf="this.user.isModer === false" disabled="true" fill="clear" size="medium" color="dark" expand="full" id="menulabel"></ion-button>
+                <!-- <ion-button *ngIf="this.user.isModer === false && this.user.isAdmin === true" disabled="true" fill="clear" size="medium" color="dark" expand="full" id="menulabel"></ion-button>
+                <ion-button *ngIf="this.user.isModer === false && this.user.isAdmin === true" disabled="true" fill="clear" size="medium" color="dark" expand="full" id="menulabel"></ion-button> -->
                 <ion-button fill="clear" size="medium" color="dark" expand="full" id="menulabel" (click)="Logout()">Выйти</ion-button>
             </ion-list>
         <ion-col id="col" class="Component" *ngIf="this.user.isAdmin === true && this.selection === 'users' ">

@@ -27,8 +27,8 @@ export class AccountPage implements OnInit {
 
   Logout(){
     localStorage.clear();
-    localStorage.clear();
     sessionStorage.clear();
+    this.user = null;
     this.dataService.SetUser(null);
     this.dataService.Clear();
     this.viewService.ChangeMessage(null);
