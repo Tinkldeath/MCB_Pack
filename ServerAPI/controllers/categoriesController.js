@@ -1,4 +1,5 @@
 const Category = require('./../models/categoriesModel');
+const Subject = require('./../models/subjectModel');
 
 module.exports.getAll = async function(req,res){
     await Category.find({},function(err,docs){
@@ -55,6 +56,17 @@ module.exports.addCategory = async function(req,res){
 module.exports.removeCategory = async function(req,res){
     const reqId = req.params.id;
     try {
+        let doc = await Category.findById(reqId);
+        if(doc){
+            await Subject.deleteMany({categoryName: doc.name},(err) => {
+                if(err){
+                    console.log(err);
+                }
+                else{
+                    console.log('Linked subjects deleted');
+                }
+            });
+        };
         await Category.findByIdAndDelete(reqId,(err) => {
             if(err){
                 console.log(err);

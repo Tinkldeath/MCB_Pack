@@ -35,6 +35,8 @@ export class AddCategoryComponent implements OnInit, OnDestroy {
         this.rSub = this.reqService.AddCategory(newCategory).subscribe(data => {
           if(data.message === 'Created'){
             alert('Категория создана');
+            this.ngOnDestroy();
+            this.ngOnInit();
             return;
           }
           else if(data.message === 'Conflict'){

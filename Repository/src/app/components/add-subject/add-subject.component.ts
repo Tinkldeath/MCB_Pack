@@ -47,6 +47,8 @@ export class AddSubjectComponent implements OnInit, OnDestroy {
       this.rSub = this.reqService.AddSubject(newSubject).subscribe(data => {
         if(data.message === 'Created'){
           alert('Предмет добавлен');
+          this.ngOnDestroy();
+          this.ngOnInit();
           return;
         }
         else if(data.message === 'Conflict'){

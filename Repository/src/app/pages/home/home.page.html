@@ -27,7 +27,7 @@
       </ion-grid>
     </ion-title>
     <div class="Slide" id="slide_m">
-      <ion-range color="dark" dualKnobs="true" min="1993" max="2021" step="1" pin="true" snaps="true"></ion-range>
+      <ion-range color="dark" dualKnobs="true" min="1993" max="2021" step="1" pin="true" snaps="true" [(ngModel)]="dualValue" (ionChange)="ChangeRange()"></ion-range>
   </div>
 
   <ion-grid>

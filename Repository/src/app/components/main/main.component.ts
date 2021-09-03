@@ -20,6 +20,7 @@ export class MainComponent implements OnInit, OnDestroy {
   author: string = null;
   searchTerm: string = null;
   viewPost: IPost = null;
+  date: {lower: number, upper: number} = null;
 
   // Подписки для очистки памяти
   pSub: Subscription = null;
@@ -29,6 +30,7 @@ export class MainComponent implements OnInit, OnDestroy {
   vSub: Subscription = null;
   uSub: Subscription = null;
   searchSub: Subscription = null;
+  dSub: Subscription = null;
 
   constructor(
     private viewServise: ViewService,
@@ -72,6 +74,13 @@ export class MainComponent implements OnInit, OnDestroy {
         this.CheckFilter();
       }
     });
+    this.dSub = this.viewServise.currentDate.subscribe((data) => {
+      this.date = data;
+      if(data !== null){
+        this.CheckFilter();
+      }
+    });
+
   }
 
   ngOnDestroy(){
@@ -157,9 +166,19 @@ export class MainComponent implements OnInit, OnDestroy {
     if(this.viewPosts === null){
       this.viewPosts = this.allPosts;
     }
+    if(this.date !== null){
+      let newArr = [];
+      this.viewPosts.forEach(el => {
+        if(el.year >= this.date.lower && el.year <= this.date.upper){
+          newArr.push(el);
+        }
+      });
+      this.viewServise.ChangePosts(newArr);
+      return;
+    }
     if(this.category !== null){
       let newArr = [];
-      this.allPosts.forEach(post => {
+      this.viewPosts.forEach(post => {
         if(post.category === this.category.name){
           newArr.push(post);
         }

@@ -1,6 +1,6 @@
 <div class="CategoryItem">
   <ion-select [(ngModel)]="selectedCategory" class="ChangeInput" interface="popover" placeholder="Категория">
-    <ion-select-option *ngFor="let category of categories"> {{category.name}} </ion-select-option>
+    <ion-select-option *ngFor="let category of categories">{{category.name}}</ion-select-option>
   </ion-select>
   <ion-input [(ngModel)]="name" class="ChangeInput" placeholder="Наименование предмета"></ion-input>
   <ion-button  shape="round" color="dark" class="AddButton" (click)="AddSubject()"> Добавить </ion-button>

@@ -28,6 +28,7 @@ export class ViewService {
   private postSource = new BehaviorSubject(null);
   private categoryToEditSource = new BehaviorSubject(null);
   private searchTermSource = new BehaviorSubject(null);
+  private dateSource = new BehaviorSubject(null);
 
   // view sources
   /*
@@ -58,6 +59,10 @@ export class ViewService {
   selectedAuthor = this.viewAuthorSource.asObservable();
   selectedCategory = this.viewCategorySource.asObservable();
   selectedSubject = this.viewSubjectSource.asObservable();
+
+  // date observables
+  currentDate = this.dateSource.asObservable();
+
 
   constructor() { }
 
@@ -105,6 +110,10 @@ export class ViewService {
 
   ChangeSearchTerm(message: string){
     this.searchTermSource.next(message);
+  }
+
+  ChangeDate(message: {lower: number, upper: number}){
+    this.dateSource.next(message);
   }
   //=====================================================================================
 

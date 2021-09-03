@@ -33,6 +33,9 @@ export class HomePage implements OnInit, OnDestroy{
   pSub: Subscription = null;
   mSub: Subscription = null;
 
+  // Date values
+  dualValue: {lower: number, upper: number} = null;
+
   constructor(
     private reqService: RequestsService,
     private viewService: ViewService,
@@ -48,6 +51,7 @@ export class HomePage implements OnInit, OnDestroy{
     });
     this.sSub = this.reqService.GetSubjects().subscribe((data) => {
       this.subjects = data;
+      console.log(this.subjects);
       this.viewService.ChangeSubjects(data);
       this.viewService.SetAllSubjects(data);
     });
@@ -138,6 +142,7 @@ export class HomePage implements OnInit, OnDestroy{
     this.viewService.ChangeViewCategory(null);
     this.viewService.ChangeViewSubject(null);
     this.viewService.ChangeViewAuthor(null);
+    this.viewService.ChangeDate(null);
 
     // А тут возвращаем отображение, т.к. отображение постов на компоненте зависит от этих методов
     this.viewService.ChangeCategories(this.categories);
@@ -169,6 +174,11 @@ export class HomePage implements OnInit, OnDestroy{
 
   SearchFilters(){
     this.showPosts = true;
+  }
+
+  ChangeRange(){
+    this.showPosts = true;
+    this.viewService.ChangeDate(this.dualValue);
   }
 
 }
