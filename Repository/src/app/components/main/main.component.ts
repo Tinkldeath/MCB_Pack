@@ -124,11 +124,6 @@ export class MainComponent implements OnInit, OnDestroy {
         this.reqService.ChangeUser(this.user).subscribe((data) => {
           if(data.message === 'Updated'){
             alert('Пост удалён из избранного');
-            let ind = this.viewPosts.indexOf(post);
-            if (ind >= 0) {
-              this.viewPosts.splice( ind, 1 );
-              this.viewServise.ChangePosts(this.viewPosts);
-            }
           }
           else{
             alert('Сейчас невозможно убрать пост из избранного, попробуйте позже');
