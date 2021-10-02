@@ -23,7 +23,7 @@ module.exports.login = async function(req,res){
                 _id: found._id,
                 login: found.login,
                 isAdmin: found.isAdmin 
-            }, Keys.jwt, {expiresIn: 60*60});
+            }, Keys.jwt, {expiresIn: 60*60*24});
             // Отправляем сгенерированный токен
             res.status(200).json({
                 token: `Bearer ${resToken}`,
