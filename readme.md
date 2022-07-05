@@ -2,7 +2,6 @@
 ---------------
 Components:
 ---------------
-Express js API
-Ioinc framework timetable app
-Ionic framework web repository app
----------------
+1. Express js API
+2. Ioinc framework timetable app
+3. Ionic framework web repository app
